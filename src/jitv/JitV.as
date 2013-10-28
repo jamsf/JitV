@@ -17,6 +17,7 @@ package jitv
 		override public function init():void
 		{
 			super.init();
+			FP.world = new JVExampleMenuWorld();
 		}
 		
 		override public function update():void
