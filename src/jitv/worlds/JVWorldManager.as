@@ -1,5 +1,7 @@
 package jitv.worlds 
 {
+	import net.extendedpunk.ext.EXTWorld;
+	
 	/**
 	 * JVWorldManager
 	 * Manages transitions between game worlds
@@ -36,7 +38,27 @@ package jitv.worlds
 		}
 		
 		/**
+		 * Update either the current world or the transition between worlds
+		 */
+		public function update():void
+		{
+			
+		}
+		
+		/**
 		 * Private
+		 * 
+		 * Current world in play
+		 */
+		private var _currentGameWorld:EXTWorld = null;
+		 
+		/**
+		 * Helper for assigning uints to worlds
+		 */
+		//TODO - fcole - Create psuedo-enum for world type? Or probably better would be a data model class.
+		private static var _worldTypeCount:uint = 0;
+		
+		/**
 		 * For singleton guarding
 		 */
 		private static var _created:Boolean = false;
@@ -47,11 +69,5 @@ package jitv.worlds
 			else
 				throw new Error("JVWorldManager is a singleton - should only be created once");
 		}
-		
-		/**
-		 * Helper for assigning uints to worlds
-		 */
-		//TODO - fcole - Create psuedo-enum for world type? Or probably better would be a data model class.
-		private static var _worldTypeCount:uint = 0;
 	}
 }
