@@ -3,6 +3,7 @@ package jitv
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
 	import net.extendedpunk.ext.EXTConsole;
+	import jitv.worlds.*;
 	
 	[SWF(frameRate=60,width="620",height="380")]
 	public class JitV extends Engine

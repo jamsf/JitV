@@ -1,4 +1,4 @@
-package jitv
+package jitv.worlds
 {
 	import flash.geom.Point;
 	import net.flashpunk.graphics.Image;
@@ -7,6 +7,8 @@ package jitv
 	import net.extendedpunk.ext.EXTUtility;
 	import net.extendedpunk.ext.EXTWorld;
 	import net.extendedpunk.ui.UILabel;
+	import jitv.ui.*;
+	import jitv.Assets;
 	
 	public class JVExampleMenuWorld extends EXTWorld
 	{

@@ -1,8 +1,9 @@
-package jitv
+package jitv.ui
 {
 	import flash.geom.Point;
 	import net.flashpunk.graphics.Text;
 	import net.extendedpunk.ui.UISmartStretchButton;
+	import jitv.Assets;
 	
 	public class JVExampleMenuButton extends UISmartStretchButton
 	{

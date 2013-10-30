@@ -1,4 +1,4 @@
-package jitv
+package jitv.ui
 {
 	import flash.geom.Point;
 	import net.flashpunk.graphics.Image;
@@ -6,6 +6,7 @@ package jitv
 	import net.extendedpunk.ext.EXTUtility;
 	import net.extendedpunk.ui.UIImageView;
 	import net.extendedpunk.ui.UIView;
+	import jitv.Assets;
 	
 	public class JVExampleDialog extends UIView
 	{
