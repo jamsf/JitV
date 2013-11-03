@@ -1,7 +1,9 @@
 package jitv.worlds 
 {
-	import jitv.datamodel.JVLevel;
+	import flash.system.System;
+	import net.flashpunk.FP;
 	import net.extendedpunk.ext.EXTWorld;
+	import jitv.datamodel.JVLevel;
 	
 	/**
 	 * JVWorldManager
@@ -21,7 +23,12 @@ package jitv.worlds
 		 */
 		public function goToWorldForCombatLevel(level:JVLevel):void
 		{
-			//TODO
+			FP.world = null;
+			_currentGameWorld = null;
+			System.gc();
+			
+			//TODO - fcole - Combat worlds
+			_currentGameWorld = new EXTWorld();
 		}
 		
 		/**
@@ -29,7 +36,10 @@ package jitv.worlds
 		 */
 		public function goToLevelSelectWorld():void
 		{
-			//TODO
+			FP.world = null;
+			_currentGameWorld = null;
+			System.gc();
+			_currentGameWorld = new JVLevelSelectWorld();
 		}
 		
 		/**
@@ -37,7 +47,10 @@ package jitv.worlds
 		 */
 		public function goToMainMenuWorld():void
 		{
-			//TODO
+			FP.world = null;
+			_currentGameWorld = null;
+			System.gc();
+			_currentGameWorld = new JVMainMenuWorld();
 		}
 		
 		/**
@@ -45,7 +58,9 @@ package jitv.worlds
 		 */
 		public function update():void
 		{
-			//TODO
+			//TODO - fcole - World transitions
+			if (FP.world != _currentGameWorld)
+				FP.world = _currentGameWorld;
 		}
 		
 		/**

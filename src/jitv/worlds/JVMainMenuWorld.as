@@ -10,9 +10,9 @@ package jitv.worlds
 	import jitv.ui.*;
 	import jitv.Assets;
 	
-	public class JVExampleMenuWorld extends EXTWorld
+	public class JVMainMenuWorld extends EXTWorld
 	{
-		public function JVExampleMenuWorld()
+		public function JVMainMenuWorld()
 		{
 			super();
 		}
@@ -45,7 +45,7 @@ package jitv.worlds
 			button1.selectable = true;
 			menuDialog.addSubview(button1);
 			
-			button2 = new JVExampleMenuButton(new Point(0, button1.position.y + button1.size.y + 15), "play", null, null);
+			button2 = new JVExampleMenuButton(new Point(0, button1.position.y + button1.size.y + 15), "play", buttonCallback, "button2");
 			button2.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 			button2.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 			button2.enabled = false;
@@ -59,6 +59,8 @@ package jitv.worlds
 		{
 			if (buttonName == "button1")
 				button2.enabled = !button2.enabled;
+			else if (buttonName == "button2")
+				JVWorldManager.sharedInstance.goToLevelSelectWorld();
 		}
 		
 		/**

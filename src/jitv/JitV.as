@@ -18,12 +18,14 @@ package jitv
 		override public function init():void
 		{
 			super.init();
-			FP.world = new JVExampleMenuWorld();
+			JVWorldManager.sharedInstance.goToMainMenuWorld();
 		}
 		
 		override public function update():void
 		{
 			super.update();
+			
+			JVWorldManager.sharedInstance.update();
 			
 CONFIG::debug
 {
