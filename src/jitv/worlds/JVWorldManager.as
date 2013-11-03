@@ -1,5 +1,6 @@
 package jitv.worlds 
 {
+	import jitv.datamodel.JVLevel;
 	import net.extendedpunk.ext.EXTWorld;
 	
 	/**
@@ -22,19 +23,28 @@ package jitv.worlds
 		public static const EXAMPLE_COMBAT_WORLD:uint = ++_worldTypeCount;
 		
 		/**
-		 * Send us to another game world
+		 * Create a world for a combat level, and go to it.
+		 * @param	level	The data for the level, with which to generate a game world.
 		 */
-		public function goToWorld(newWorld:uint)
+		public function goToWorldForCombatLevel(level:JVLevel):void
 		{
-			switch (newWorld)
-			{
-				case EXAMPLE_MENU_WORLD:
-					break;
-				case EXAMPLE_COMBAT_WORLD:
-					break;
-				default:
-					throw new Error("JVWorldManager - Invalid world type");
-			}
+			//TODO
+		}
+		
+		/**
+		 * Create the level select world and go to it.
+		 */
+		public function goToLevelSelectWorld():void
+		{
+			//TODO
+		}
+		
+		/**
+		 * Create the main menu world and go to it.
+		 */
+		public function goToMainMenuWorld():void
+		{
+			//TODO
 		}
 		
 		/**
@@ -42,7 +52,7 @@ package jitv.worlds
 		 */
 		public function update():void
 		{
-			
+			//TODO
 		}
 		
 		/**
