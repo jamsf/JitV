@@ -16,13 +16,6 @@ package jitv.worlds
 		public static const sharedInstance:JVWorldManager = new JVWorldManager();
 		
 		/**
-		 * Labels for referring to world types
-		 */
-		//TODO - fcole - Create psuedo-enum for world type? Or probably better would be a data model class.
-		public static const EXAMPLE_MENU_WORLD:uint = ++_worldTypeCount;
-		public static const EXAMPLE_COMBAT_WORLD:uint = ++_worldTypeCount;
-		
-		/**
 		 * Create a world for a combat level, and go to it.
 		 * @param	level	The data for the level, with which to generate a game world.
 		 */
@@ -61,12 +54,6 @@ package jitv.worlds
 		 * Current world in play
 		 */
 		private var _currentGameWorld:EXTWorld = null;
-		 
-		/**
-		 * Helper for assigning uints to worlds
-		 */
-		//TODO - fcole - Create psuedo-enum for world type? Or probably better would be a data model class.
-		private static var _worldTypeCount:uint = 0;
 		
 		/**
 		 * For singleton guarding
