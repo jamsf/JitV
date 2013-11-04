@@ -26,9 +26,7 @@ package jitv.worlds
 			FP.world = null;
 			_currentGameWorld = null;
 			System.gc();
-			
-			//TODO - fcole - Combat worlds
-			_currentGameWorld = new EXTWorld();
+			_currentGameWorld = new JVCombatWorld(level);
 		}
 		
 		/**

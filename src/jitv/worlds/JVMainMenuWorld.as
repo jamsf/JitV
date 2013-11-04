@@ -39,34 +39,38 @@ package jitv.worlds
 			var menuDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(200, 220));
 			menuDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 			
-			button1 = new JVExampleMenuButton(new Point(0, 35), "toggle", buttonCallback, "button1");
-			button1.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
-			button1.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-			button1.selectable = true;
-			menuDialog.addSubview(button1);
+			// Toggle button
+			toggleButton = new JVExampleMenuButton(new Point(0, 35), "toggle", toggleButtonCallback);
+			toggleButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+			toggleButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+			toggleButton.selectable = true;
+			menuDialog.addSubview(toggleButton);
 			
-			button2 = new JVExampleMenuButton(new Point(0, button1.position.y + button1.size.y + 15), "play", buttonCallback, "button2");
-			button2.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
-			button2.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-			button2.enabled = false;
-			menuDialog.addSubview(button2);
+			// Play button
+			playButton = new JVExampleMenuButton(new Point(0, toggleButton.position.y + toggleButton.size.y + 15), "play", playButtonCallback);
+			playButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+			playButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+			playButton.enabled = false;
+			menuDialog.addSubview(playButton);
 			
 			this.staticUiController.rootView.addSubview(titleDialog);
 			this.staticUiController.rootView.addSubview(menuDialog);
 		}
 		
-		public function buttonCallback(buttonName:String):void
+		public function toggleButtonCallback():void
 		{
-			if (buttonName == "button1")
-				button2.enabled = !button2.enabled;
-			else if (buttonName == "button2")
-				JVWorldManager.sharedInstance.goToLevelSelectWorld();
+			playButton.enabled = !playButton.enabled;
+		}
+		
+		public function playButtonCallback():void
+		{
+			JVWorldManager.sharedInstance.goToLevelSelectWorld();
 		}
 		
 		/**
 		 * Protected
 		 */
-		protected var button1:JVExampleMenuButton;
-		protected var button2:JVExampleMenuButton;
+		protected var toggleButton:JVExampleMenuButton;
+		protected var playButton:JVExampleMenuButton;
 	}
 }

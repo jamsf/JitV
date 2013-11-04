@@ -1,6 +1,9 @@
 package jitv.worlds 
 {
+	import flash.geom.Point;
+	import jitv.datamodel.JVLevel;
 	import net.extendedpunk.ext.EXTWorld;
+	import net.extendedpunk.ext.EXTOffsetType;
 	import net.extendedpunk.ext.EXTUtility;
 	import jitv.ui.JVExampleMenuButton;
 	
@@ -18,14 +21,27 @@ package jitv.worlds
 		
 		override public function begin():void
 		{
-			var goBackButton:JVExampleMenuButton = new JVExampleMenuButton(EXTUtility.ZERO_POINT, "go back", buttonCallback, "go_back_button");
+			var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, -10), "start level", buttonCallback, START_LEVEL_NAME);
+			startLevelButton.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
+			var goBackButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 10), "go back", buttonCallback, BACK_BUTTON_NAME);
+			goBackButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+			
+			this.staticUiController.rootView.addSubview(startLevelButton);
 			this.staticUiController.rootView.addSubview(goBackButton);
 		}
 		
 		public function buttonCallback(buttonName:String):void
 		{
-			if (buttonName == "go_back_button")
+			if (buttonName == START_LEVEL_NAME)
+				JVWorldManager.sharedInstance.goToWorldForCombatLevel(new JVLevel());
+			else if (buttonName == BACK_BUTTON_NAME)
 				JVWorldManager.sharedInstance.goToMainMenuWorld();
 		}
+		
+		/**
+		 * Private
+		 */
+		private var START_LEVEL_NAME:String = "start_level";
+		private var BACK_BUTTON_NAME:String = "back_button";
 	}
 }
