@@ -20,6 +20,9 @@ package jitv
 		// Backgrounds
 		[Embed(source = "../../assets/images/backgrounds/menu_background_1.jpg")] public static const BG_MENU_1:Class;
 		
+		// Entities
+		[Embed(source = "../../assets/images/entities/player_ship_entity.png")] public static const PLAYER_SHIP_ENTITY:Class;
+		
 		/**
 		 * For real
 		 */
@@ -27,5 +30,7 @@ package jitv
 		// UI
 		
 		// Backgrounds
+		
+		// Entities
 	}
 }

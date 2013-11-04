@@ -10,7 +10,7 @@ package jitv
 	{
 		public function JitV()
 		{
-			super(620, 380, 60, true);
+			super(620, 380, JVConstants.FPS, true);
 			FP.screen.color = 0xff7777;
 			EXTConsole.initializeConsole();
 		}

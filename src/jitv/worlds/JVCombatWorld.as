@@ -1,5 +1,6 @@
 package jitv.worlds 
 {
+	import jitv.entities.JVPlayerShipEntity;
 	import net.extendedpunk.ext.EXTWorld;
 	import jitv.ui.JVHudView;
 	import jitv.datamodel.JVLevel;
@@ -15,6 +16,12 @@ package jitv.worlds
 		public function JVCombatWorld(level:JVLevel) 
 		{
 			this.staticUiController.rootView.addSubview(new JVHudView());
+			
+			var playerShip:JVPlayerShipEntity = new JVPlayerShipEntity();
+			playerShip.x = 320;
+			playerShip.y = 240;
+			this.add(playerShip);
+			
 		}
 	}
 }
