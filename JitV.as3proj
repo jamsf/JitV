@@ -18,6 +18,7 @@
     <class path="src" />
     <class path="libraries\ExtendedFlashpunk\src" />
     <class path="libraries\ExtendedFlashpunk\FlashPunk" />
+    <class path="libraries\ExtendedFlashpunk\as3-controller-input\src" />
   </classpaths>
   <!-- Build options -->
   <build>
