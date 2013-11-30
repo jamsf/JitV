@@ -1,14 +1,18 @@
 package jitv.entities 
 {
 	import flash.geom.Point;
-	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Image;
-	import net.flashpunk.utils.Input;
-	import net.flashpunk.FP;
-	import net.flashpunk.utils.Key;
-	import net.extendedpunk.ext.EXTKey;
+	
 	import jitv.Assets;
 	import jitv.JVConstants;
+	
+	import net.extendedpunk.ext.EXTKey;
+	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
+	import net.flashpunk.masks.Hitbox;
+	import net.flashpunk.masks.Pixelmask;
+	import net.flashpunk.utils.Input;
+	import net.flashpunk.utils.Key;
 	
 	/**
 	 * JVPlayerShipEntity
@@ -20,9 +24,16 @@ package jitv.entities
 		public function JVPlayerShipEntity() 
 		{
 			super();
+			
 			var image:Image = new Image(Assets.PLAYER_SHIP_ENTITY);
 			image.centerOrigin();
 			this.graphic = image;
+			
+			this.mask = new Hitbox(12, 12, -6, -6);
+			
+			this.type = "player";
+			this.width = 12;
+			this.height = 12;
 		}
 	
 		override public function update():void

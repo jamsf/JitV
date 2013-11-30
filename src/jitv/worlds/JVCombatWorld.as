@@ -2,10 +2,12 @@ package jitv.worlds
 {
 	import jitv.Assets;
 	import jitv.datamodel.JVLevel;
+	import jitv.entities.JVEnemyEntity;
 	import jitv.entities.JVPlayerShipEntity;
 	import jitv.ui.JVHudView;
 	
 	import net.extendedpunk.ext.EXTConsole;
+	import net.extendedpunk.ext.EXTOffsetType;
 	import net.extendedpunk.ext.EXTWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -25,16 +27,21 @@ package jitv.worlds
 			this.staticUiController.rootView.addSubview(new JVHudView());
 			this.addWaves();
 			
-			var playerShip:JVPlayerShipEntity = new JVPlayerShipEntity();
-			playerShip.x = 320;
-			playerShip.y = 240;
-			this.add(playerShip);
+			_playerShip = new JVPlayerShipEntity();
+			_playerShip.x = 320;
+			_playerShip.y = 240;
+			this.add(_playerShip);
+			
+//			this.worldCamera.zoomWithAnchor(0.25, this.worldCamera.currentPosition(EXTOffsetType.CENTER, true), EXTOffsetType.CENTER);
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			
+			++_time;
+			
+			// Update background waves
 			for (var i:Number = 0; i < _waveMaps.length; ++i)
 			{
 				var map:Spritemap = _waveMaps[i];
@@ -42,12 +49,35 @@ package jitv.worlds
 				if (map.y > 32)
 					map.y = 0;
 			}
+			
+			// Spawn enemies
+			if (_time % 100 == 0)
+			{
+				var enemyShip:JVEnemyEntity = new JVEnemyEntity();
+				enemyShip.x = Math.random() * FP.screen.width;
+				enemyShip.y = -32;
+				this.add(enemyShip);
+			}
+			
+			// Check collisions
+			if (_playerShip != null)
+			{
+				var collidedEnemy:Entity = _playerShip.collide("enemy", _playerShip.x, _playerShip.y);
+				if (collidedEnemy != null)
+				{
+					this.remove(collidedEnemy);
+					this.remove(_playerShip);
+					_playerShip = null;
+				}
+			}
 		}
 		
 		/**
 		 * Private
 		 */
+		private var _time:int;
 		private var _waveMaps:Vector.<Spritemap> = new Vector.<Spritemap>();
+		private var _playerShip:JVPlayerShipEntity;
 		
 		private function addWaves():void
 		{
