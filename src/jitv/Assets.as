@@ -22,6 +22,7 @@ package jitv
 		
 		// Entities
 		[Embed(source = "../../assets/images/entities/player_ship_entity.png")] public static const PLAYER_SHIP_ENTITY:Class;
+		[Embed(source = "../../assets/images/entities/waves.png")] public static const WAVES_ENTITY:Class;
 		
 		/**
 		 * For real

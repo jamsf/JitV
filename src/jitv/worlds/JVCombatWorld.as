@@ -1,9 +1,16 @@
 package jitv.worlds 
 {
-	import jitv.entities.JVPlayerShipEntity;
-	import net.extendedpunk.ext.EXTWorld;
-	import jitv.ui.JVHudView;
+	import jitv.Assets;
 	import jitv.datamodel.JVLevel;
+	import jitv.entities.JVPlayerShipEntity;
+	import jitv.ui.JVHudView;
+	
+	import net.extendedpunk.ext.EXTConsole;
+	import net.extendedpunk.ext.EXTWorld;
+	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Anim;
+	import net.flashpunk.graphics.Spritemap;
 	
 	/**
 	 * JVCombatWorld
@@ -16,12 +23,48 @@ package jitv.worlds
 		public function JVCombatWorld(level:JVLevel) 
 		{
 			this.staticUiController.rootView.addSubview(new JVHudView());
+			this.addWaves();
 			
 			var playerShip:JVPlayerShipEntity = new JVPlayerShipEntity();
 			playerShip.x = 320;
 			playerShip.y = 240;
 			this.add(playerShip);
+		}
+		
+		override public function update():void
+		{
+			super.update();
 			
+			for (var i:Number = 0; i < _waveMaps.length; ++i)
+			{
+				var map:Spritemap = _waveMaps[i];
+				map.y += 1;
+				if (map.y > 32)
+					map.y = 0;
+			}
+		}
+		
+		/**
+		 * Private
+		 */
+		private var _waveMaps:Vector.<Spritemap> = new Vector.<Spritemap>();
+		
+		private function addWaves():void
+		{
+			var indexArray:Array = new Array(0, 1, 2, 3);
+			
+			for (var i:Number = 0; i * 32 < FP.screen.width; ++i)
+			{
+				for (var j:Number = 0; j * 32 < FP.screen.height + 32; ++j)
+				{
+					var wavesMap:Spritemap = new Spritemap(Assets.WAVES_ENTITY, 32, 32);
+					wavesMap.add("animate", indexArray, 0.05);
+					wavesMap.play("animate");
+					var waveEntity:Entity = new Entity(i * 32, j * 32 - 32, wavesMap);
+					this.add(waveEntity);
+					_waveMaps.push(wavesMap);
+				}
+			}
 		}
 	}
 }
