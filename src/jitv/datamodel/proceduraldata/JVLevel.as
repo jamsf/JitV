@@ -1,5 +1,7 @@
-package jitv.datamodel 
+package jitv.datamodel.proceduraldata 
 {
+	import jitv.datamodel.JVDataObject;
+
 	/**
 	 * JVLevel
 	 * A data model class representing data for a combat level in the game.

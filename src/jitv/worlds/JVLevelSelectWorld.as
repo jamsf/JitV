@@ -1,7 +1,7 @@
 package jitv.worlds 
 {
 	import flash.geom.Point;
-	import jitv.datamodel.JVLevel;
+	import jitv.datamodel.proceduraldata.JVLevel;
 	import net.extendedpunk.ext.EXTWorld;
 	import net.extendedpunk.ext.EXTOffsetType;
 	import net.extendedpunk.ext.EXTUtility;

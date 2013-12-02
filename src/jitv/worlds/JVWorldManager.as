@@ -3,7 +3,7 @@ package jitv.worlds
 	import flash.system.System;
 	import net.flashpunk.FP;
 	import net.extendedpunk.ext.EXTWorld;
-	import jitv.datamodel.JVLevel;
+	import jitv.datamodel.proceduraldata.JVLevel;
 	
 	/**
 	 * JVWorldManager
