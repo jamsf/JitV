@@ -1,3 +1,0 @@
-[submodule "libraries/ExtendedFlashpunk"]
-	path = libraries/ExtendedFlashpunk
-	url = git@github.com:DrSkipper/ExtendedFlashpunk.git
