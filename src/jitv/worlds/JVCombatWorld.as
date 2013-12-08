@@ -2,6 +2,7 @@ package jitv.worlds
 {
 	import jitv.Assets;
 	import jitv.datamodel.proceduraldata.JVLevel;
+	import jitv.entities.JVBulletEntity;
 	import jitv.entities.JVEnemyEntity;
 	import jitv.entities.JVPlayerShipEntity;
 	import jitv.ui.JVHudView;

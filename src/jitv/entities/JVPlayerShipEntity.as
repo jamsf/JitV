@@ -38,6 +38,7 @@ package jitv.entities
 	
 		override public function update():void
 		{
+			// Movement
 			var movementMagnitude:Number = JVConstants.BASE_SHIP_MOVEMENT_SPEED * FP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 			
 			var horizontalMovement:Boolean = false;
@@ -74,6 +75,15 @@ package jitv.entities
 				this.x += xMultiplier * movementMagnitude;
 			if (verticalMovement)
 				this.y += yMultiplier * movementMagnitude;
+				
+			// Primary Fire
+			if (Input.check(Key.SPACE))
+			{
+				var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y);
+				FP.world.add(bullet);
+			}
+				
+				
 		}
 	}
 }
