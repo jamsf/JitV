@@ -70,6 +70,15 @@ package jitv.worlds
 					_playerShip = null;
 				}
 			}
+			
+			// Check if enemies have left the bottom of the screen and remove them
+			for (i = 0; i < _entities.length; ++i)
+			{
+				if (_entities[i].y > FP.screen.height && _entities[i].type == "enemy")
+				{
+					this.remove(_entities[i]);
+				}
+			}
 		}
 		
 		/**
