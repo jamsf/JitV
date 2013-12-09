@@ -2,17 +2,13 @@ package jitv.worlds
 {
 	import jitv.Assets;
 	import jitv.datamodel.proceduraldata.JVLevel;
-	import jitv.entities.JVBulletEntity;
 	import jitv.entities.JVEnemyEntity;
 	import jitv.entities.JVPlayerShipEntity;
 	import jitv.ui.JVHudView;
 	
-	import net.extendedpunk.ext.EXTConsole;
-	import net.extendedpunk.ext.EXTOffsetType;
 	import net.extendedpunk.ext.EXTWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
-	import net.flashpunk.graphics.Anim;
 	import net.flashpunk.graphics.Spritemap;
 	
 	/**

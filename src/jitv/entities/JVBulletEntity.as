@@ -1,18 +1,12 @@
 package jitv.entities 
 {
-	import flash.geom.Point;
-	
 	import jitv.Assets;
 	import jitv.JVConstants;
 	
-	import net.extendedpunk.ext.EXTKey;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
-	import net.flashpunk.masks.Hitbox;
 	import net.flashpunk.masks.Pixelmask;
-	import net.flashpunk.utils.Input;
-	import net.flashpunk.utils.Key;
 	
 	/**
 	 * JVPlayerShipEntity
