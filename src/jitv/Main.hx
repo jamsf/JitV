@@ -2,10 +2,12 @@ package jitv;
 
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
+import extendedhxpunk.ext.EXTConsole;
+import jitv.scenes.JVSceneManager;
 
 /**
- * Main class for JitV
- * @author Fletcher
+ * Main class for JitV's HaXe project
+ * Created by Fletcher 12/8/2013
  */
 class Main extends Engine 
 {
@@ -18,24 +20,27 @@ class Main extends Engine
 
 	function new()
 	{
-		super(kScreenWidth, kScreenHeight, JVConstants.FPS, true);	
+		super(kScreenWidth, kScreenHeight, JVConstants.FPS, true);
 	}
 
 	override public function init()
 	{
-#if debug
-	#if flash
-		if (flash.system.Capabilities.isDebugger)
-	#end
-		{
-			HXP.console.enable();
-		}
-#end
+		EXTConsole.initializeConsole();
 		HXP.screen.color = kClearColor;
 		HXP.screen.scale = 1;
-//		HXP.world = new YourWorld();
+		
+		JVSceneManager.sharedInstance().goToMainMenuScene();
 	}
-
+	
+	override public function update():Void
+	{
+		super.update();
+		JVSceneManager.sharedInstance().update();
+#if debug
+		EXTConsole.update();
+#end
+	}
+	
 	public static function main()
 	{
 		var app = new Main();
