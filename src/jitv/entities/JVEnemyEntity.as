@@ -10,6 +10,8 @@ package jitv.entities
 	
 	public class JVEnemyEntity extends Entity
 	{
+		protected var health:int = 100;
+		
 		public function JVEnemyEntity()
 		{
 			super();
@@ -30,9 +32,18 @@ package jitv.entities
 		{
 			this.y += 2;
 			
-			// Check if offscreen
+			// Check if offscreen and remove
 			if (this.y > FP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
 				FP.world.remove(this);
+				
+
+			var collidedEntity:Entity = this.collide("playerbullet", this.x, this.y);
+			if (collidedEntity != null)
+			{
+				FP.world.remove(this);
+				FP.world.remove(collidedEntity);
+			}
+
 		}
 	}
 }
