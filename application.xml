@@ -8,7 +8,7 @@
 
 	<!--<window fps="30" orientation="portrait" background="0x333333" />-->
 	<window fps="60" orientation="landscape" resizable="true" background="0x333333" hardware="true" />
-	<window width="640" height="480" resizable="false" unless="mobile" />
+	<window width="640" height="380" resizable="false" unless="mobile" />
 	<window fullscreen="true" if="mobile" />
 	<window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
 
