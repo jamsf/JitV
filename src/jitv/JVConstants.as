@@ -9,5 +9,6 @@ package jitv
 		public static const FPS:Number = 60.0;
 		public static const ASSUMED_FPS_FOR_PHYSICS:Number = 60.0;
 		public static const BASE_SHIP_MOVEMENT_SPEED:Number = 4.0;
+		public static const OFFSCREEN_DELETION_BUFFER:Number = 32.0;
 	}
 }

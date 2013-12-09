@@ -52,6 +52,10 @@ package jitv.entities
 			//if (verticalMovement)
 			
 			this.y -= 1 * movementMagnitude;	
+			
+			// Check if offscreen
+			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
+				FP.world.remove(this);
 		}
 	}
 
