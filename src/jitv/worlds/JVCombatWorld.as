@@ -52,7 +52,7 @@ package jitv.worlds
 			{
 				var enemyShip:JVEnemyEntity = new JVEnemyEntity();
 				enemyShip.x = Math.random() * FP.screen.width;
-				enemyShip.y = -32;
+				enemyShip.y = -enemyShip.height - 2 - 1;
 				this.add(enemyShip);
 			}
 			
