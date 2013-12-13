@@ -20,6 +20,14 @@
 	<haxelib name="openfl-bitfive" if="html5" />
 	<haxelib name="HaxePunk" />
 	<haxelib name="nme" />
+	<haxelib name="openfl-nme-compatibility" />
+	<!-- <haxelib name="hxlibc" />
+	<haxelib name="openfl-native" />
+	<haxelib name="hxtools" />
+	<haxelib name="hxcpp" />
+	<haxelib name="openfl-html5-dom" />
+	<haxelib name="openfl-tools" />
+	<haxelib name="openfl-samples" /> -->
 
 	<!-- assets -->	
 	<icon path="assets/icon.svg" />

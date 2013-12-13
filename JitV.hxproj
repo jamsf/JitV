@@ -2,7 +2,7 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="application.xml" />
     <movie fps="60" />
@@ -22,17 +22,19 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="nme4=1&#xA;tools=1&#xA;nme_ver=4.0.2&#xA;nme&#xA;nme_install_tool=1&#xA;display&#xA;web" />
+    <option directives="nme4=1&#xA;tools=1&#xA;nme&#xA;nme_ver=4.0.2&#xA;nme_install_tool=1&#xA;display&#xA;web" />
     <option flashStrict="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;-swf-version 11" />
+    <option additional="--no-output&#xA;--remap browser:nme&#xA;--remap native:nme&#xA;-swf-version 11" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
     <library name="openfl" />
     <library name="HaxePunk" />
     <library name="nme" />
+    <library name="openfl-nme-compatibility" />
+    <library name="openfl" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -47,7 +49,7 @@
     <!-- example: <hidden path="..." /> -->
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>$(CompilerPath)\openfl.bat test -debug $(ProjectDir)\application.xml flash</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
