@@ -2,7 +2,7 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="application.xml" />
     <movie fps="60" />
@@ -17,24 +17,22 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="libraries\ExtendedHaxePunk\src" />
-    <class path="bin\flash\haxe" />
+    <class path="libraries/ExtendedHaxePunk/src" />
+    <class path="bin/flash/haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="tools=1.2.1&#xA;nme&#xA;openfl=1.2&#xA;nme_install_tool&#xA;display&#xA;web" />
+    <option directives="nme4=1&#xA;tools=1&#xA;nme&#xA;nme_ver=4.0.2&#xA;nme_install_tool=1&#xA;display&#xA;web" />
     <option flashStrict="False" />
-    <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;--remap browser:nme&#xA;--remap native:nme&#xA;-swf-version 11.2&#xA;#--remap nme:flash" />
+    <option additional="--no-output&#xA;--remap browser:nme&#xA;--remap native:nme&#xA;-swf-version 11" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
     <library name="openfl" />
     <library name="HaxePunk" />
-    <library name="openfl-nme-compatibility" />
-    <library name="openfl" />
+    <library name="nme" />
     <library name="openfl-nme-compatibility" />
     <library name="openfl" />
   </haxelib>
@@ -48,10 +46,10 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="obj" />
+    <!-- example: <hidden path="..." /> -->
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>$(CompilerPath)\openfl.bat test -debug $(ProjectDir)\application.xml flash</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
