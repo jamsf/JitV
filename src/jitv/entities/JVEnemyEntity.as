@@ -36,12 +36,15 @@ package jitv.entities
 			if (this.y > FP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
 				FP.world.remove(this);
 				
-
 			var collidedEntity:Entity = this.collide("playerbullet", this.x, this.y);
 			if (collidedEntity != null)
 			{
-				FP.world.remove(this);
+				this.health -= 20;
 				FP.world.remove(collidedEntity);
+				if (this.health <= 0)
+				{
+					FP.world.remove(this);
+				}
 			}
 
 		}
