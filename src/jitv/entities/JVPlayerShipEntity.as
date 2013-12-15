@@ -21,10 +21,10 @@ package jitv.entities
 	 */
 	public class JVPlayerShipEntity extends Entity 
 	{	
-		var lastBulletFired:int;
-		var cooldown:Boolean;
-		var firingRate:int = 10;
-		var time:int = 0;
+		private var lastBulletFired:int;
+		private var cooldown:Boolean;
+		private var firingRate:int = 10;
+		private var time:int = 0;
 		
 		public function JVPlayerShipEntity() 
 		{
@@ -85,7 +85,7 @@ package jitv.entities
 			// Primary Fire
 			if (Input.check(Key.SPACE) && cooldown == false)
 			{
-				var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y);
+				var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
 				FP.world.add(bullet);
 				cooldown = true;
 				lastBulletFired = time;

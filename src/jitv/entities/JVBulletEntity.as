@@ -16,7 +16,7 @@ package jitv.entities
 	public class JVBulletEntity extends Entity
 	{
 		
-		public function JVBulletEntity(x:int, y:int) 
+		public function JVBulletEntity(x:int, y:int, type:String) 
 		{
 			super();
 			
@@ -29,7 +29,7 @@ package jitv.entities
 			var mask:Pixelmask = new Pixelmask(Assets.BULLET_0_ENTITY, -4, -4);
 			this.mask = mask;
 			
-			this.type = "playerbullet";
+			this.type = type;
 			this.width = 8;
 			this.height = 8;
 			this.x = x;
@@ -38,7 +38,16 @@ package jitv.entities
 		
 		override public function update():void
 		{	
-			this.y -= 6	
+			// If "player" bullet travel up, if "enemy bullet" travel down
+			if (type == "player")
+			{
+				this.y -= 6;	
+			}
+			else if(type == "enemy")
+			{
+				this.y += 6;
+			}
+			
 			
 			// Check if offscreen and remove
 			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
