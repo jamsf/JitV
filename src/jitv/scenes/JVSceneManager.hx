@@ -30,6 +30,15 @@ class JVSceneManager
 	}
 	
 	/**
+	 * Create the level select world and go to it.
+	 */
+	public function goToLevelSelectScene():Void
+	{
+		clearScene();
+		_currentGameScene = new JVLevelSelectScene();
+	}
+	
+	/**
 	 * Update either the current world or the transition between worlds
 	 */
 	public function update():Void

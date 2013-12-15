@@ -63,16 +63,14 @@ class JVMainMenuScene extends EXTScene
 		this.staticUiController.rootView.addSubview(menuDialog);
 	}
 	
-	public function toggleButtonCallback(args:Array<Dynamic>):Dynamic
+	public function toggleButtonCallback(args:Array<Dynamic>):Void
 	{
 		_playButton.enabled = !_playButton.enabled;
-		return true;
 	}
 	
-	public function playButtonCallback(args:Array<Dynamic>):Dynamic
+	public function playButtonCallback(args:Array<Dynamic>):Void
 	{
-		//JVSceneManager.sharedInstance.goToLevelSelectScene();
-		return true;
+		JVSceneManager.sharedInstance().goToLevelSelectScene();
 	}
 	
 	/**

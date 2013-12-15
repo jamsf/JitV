@@ -11,7 +11,7 @@ import com.haxepunk.graphics.Text;
  */
 class JVExampleMenuButton extends UISmartStretchButton
 {
-	public function new(position:Point, textString:String = null, cb:Array<Dynamic>->Dynamic = null, cbArgs:Array<Dynamic> = null) 
+	public function new(position:Point, textString:String = null, cb:Array<Dynamic>->Void = null, cbArgs:Array<Dynamic> = null) 
 	{
 		var basicSize:Point = new Point(100, 30);
 		var enabledText:Text = new Text(textString, 0, 0, { "size" : 16, "color" : 0x101010 });
