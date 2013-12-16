@@ -46,7 +46,7 @@ class JVSceneManager
 	public function goToSceneForCombatLevel(level:JVLevel):Void
 	{
 		clearScene();
-		//_currentGameScene = new JVCombatScene(level);
+		_currentGameScene = new JVCombatScene(level);
 	}
 	
 	/**
