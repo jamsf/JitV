@@ -2,6 +2,7 @@ package jitv.scenes;
 
 import com.haxepunk.HXP;
 import extendedhxpunk.ext.EXTScene;
+import jitv.datamodel.proceduraldata.JVLevel;
 
 /**
  * JVWorldManager
@@ -36,6 +37,16 @@ class JVSceneManager
 	{
 		clearScene();
 		_currentGameScene = new JVLevelSelectScene();
+	}
+	
+	/**
+	 * Create a scene for a combat level, and go to it.
+	 * @param	level	The data for the level, with which to generate a game scene.
+	 */
+	public function goToSceneForCombatLevel(level:JVLevel):Void
+	{
+		clearScene();
+		//_currentGameScene = new JVCombatScene(level);
 	}
 	
 	/**
