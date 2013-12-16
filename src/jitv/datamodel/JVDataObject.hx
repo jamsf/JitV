@@ -1,6 +1,5 @@
 package jitv.datamodel;
 
-import flash.utils.Dictionary;
 import jitv.datamodel.staticdata.*;
 
 /**
@@ -14,11 +13,11 @@ class JVDataObject
 	public var name:String;
 	
 	// Fake database until we get sqlite or something set up
-	public static var fakeDB:Dictionary;
+	public static var fakeDB:Map<String, Map<Int, JVDataObject>>;
 	public static function setupFakeDB():Void
 	{
-		fakeDB = new Dictionary();
-		//JVEnemy.setupFakeDB();
+		fakeDB = new Map();
+		JVEnemy.setupFakeDB();
 		//JVEnemyPattern.setupFakeDB();
 		//JVEnemyWave.setupFakeDB();
 	}

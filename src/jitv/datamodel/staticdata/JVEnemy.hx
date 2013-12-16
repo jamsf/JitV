@@ -1,6 +1,5 @@
 package jitv.datamodel.staticdata;
 
-import flash.utils.Dictionary;
 import jitv.datamodel.JVDataObject;
 
 /**
@@ -19,21 +18,23 @@ class JVEnemy extends JVDataObject
 	 * Private
 	 */
 	private static inline var DATA_TYPE_NAME:String = "enemy";
+	public function new() { }
 	
 	// Fake database setup
 	public static function setupFakeDB():Void
 	{
-		var dataDictionary:Dictionary = new Dictionary();
+		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
-		for (var i:uint = 0; i < 10; ++i)
+		for (i in 0...10)
 		{
 			var enemy:JVEnemy = new JVEnemy();
+			enemy.id = i;
 			enemy.type = "";
 			enemy.difficulty = 0;
 			enemy.patternId = 0;
 			enemy.imageName = "ENEMY_0_ENTITY";
-			dataDictionary[i] = enemy;
+			dataDictionary[i] = cast enemy;
 		}
 	}
 }
