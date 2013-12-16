@@ -69,7 +69,7 @@ class JVSceneManager
 		HXP.scene = null;
 		_currentGameScene = null;
 #if flash
-		nme.system.System.gc();
+		flash.system.System.gc();
 #elseif windows
 		cpp.vm.Gc.run(true);
 #end

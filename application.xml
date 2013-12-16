@@ -20,8 +20,8 @@
 	<haxelib name="openfl-bitfive" if="html5" />
 	<haxelib name="HaxePunk" />
 	
-	<!-- Necessary for FlashDevelop for some reason... -->
-	<haxelib name="nme" />
+	<!-- Necessary for FlashDevelop for some reason... 
+	<haxelib name="nme" />-->
 
 	<!-- assets -->	
 	<icon path="assets/icon.svg" />
