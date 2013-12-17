@@ -5,6 +5,7 @@ import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
 import jitv.ui.JVExampleMenuButton;
+import jitv.datamodel.proceduraldata.JVLevel;
 
 /**
  * JVLevelSelectWorld
@@ -32,9 +33,9 @@ class JVLevelSelectScene extends EXTScene
 	public function buttonCallback(args:Array<Dynamic>):Void
 	{
 		var buttonName:String = args[0];
-		//if (buttonName == START_LEVEL_NAME)
-			//JVWorldManager.sharedInstance.goToWorldForCombatLevel(new JVLevel());
-		//else 
+		if (buttonName == START_LEVEL_NAME)
+			JVSceneManager.sharedInstance().goToSceneForCombatLevel(new JVLevel());
+		else 
 		if (buttonName == BACK_BUTTON_NAME)
 			JVSceneManager.sharedInstance().goToMainMenuScene();
 	}

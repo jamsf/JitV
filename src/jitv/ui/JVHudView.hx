@@ -24,7 +24,7 @@ class JVHudView extends UIView
 		this.addSubview(backButton);
 	}
 	
-	public function backButtonCallback():Void
+	public function backButtonCallback(args:Array<Dynamic>):Void
 	{
 		JVSceneManager.sharedInstance().goToLevelSelectScene();
 	}

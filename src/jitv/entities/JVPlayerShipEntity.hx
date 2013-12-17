@@ -24,7 +24,7 @@ class JVPlayerShipEntity extends Entity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/ui/player_ship_entity.png");
+		var image:Image = new Image("gfx/entities/player_ship_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
 		

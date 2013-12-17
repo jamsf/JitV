@@ -17,11 +17,11 @@ class JVBulletEntity extends Entity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/ui/bullet_0_entity.png");
+		var image:Image = new Image("gfx/entities/bullet_0_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/ui/bullet_0_entity.png", -image.width / 2, -image.width / 2);
+		var mask:Pixelmask = new Pixelmask("gfx/entities/bullet_0_entity.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
 		this.mask = mask;
 		
 		this.type = "player";

@@ -17,11 +17,11 @@ class JVEnemyEntity extends Entity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/ui/enemy_0_entity.png");
+		var image:Image = new Image("gfx/entities/enemy_0_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/ui/enemy_0_entity.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
+		var mask:Pixelmask = new Pixelmask("gfx/entities/enemy_0_entity.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.mask = mask;
 		
 		this.type = "enemy";

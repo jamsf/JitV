@@ -41,7 +41,6 @@ class JVCombatScene extends EXTScene
 		// Update background waves
 		for (map in _waveMaps)
 		{
-			var map:Spritemap = _waveMaps[i];
 			map.y += 1;
 			if (map.y > 32)
 				map.y = 0;
@@ -51,7 +50,7 @@ class JVCombatScene extends EXTScene
 		if (_time % 100 == 0)
 		{
 			var enemyShip:JVEnemyEntity = new JVEnemyEntity();
-			enemyShip.x = Math.random() * FP.screen.width;
+			enemyShip.x = Math.random() * HXP.screen.width;
 			enemyShip.y = -enemyShip.height - 2 - 1;
 			this.add(enemyShip);
 		}
@@ -73,18 +72,19 @@ class JVCombatScene extends EXTScene
 	 * Private
 	 */
 	private var _time:UInt;
-	private var _waveMaps:Array<Spritemap> = new Array();
+	private var _waveMaps:Array<Spritemap>;
 	private var _playerShip:JVPlayerShipEntity;
 	
 	private function addWaves():Void
 	{
-		var indexArray:Array = new Array(0, 1, 2, 3);
+		_waveMaps = new Array();
+		var indexArray:Array<Int> = [0, 1, 2, 3];
 		
-		for (i in 0...FP.screen.width)
-		//for (var i:Number = 0; i * 32 < FP.screen.width; ++i)
+		var i:Int = 0;
+		while (i * 32 < HXP.screen.width)
 		{
-			for (j in 0...FP.screen.height)
-			//for (var j:Number = 0; j * 32 < FP.screen.height + 32; ++j)
+			var j:Int = 0;
+			while (j * 32 < HXP.screen.height + 32)
 			{
 				var wavesMap:Spritemap = new Spritemap("gfx/misc/waves.png", 32, 32);
 				wavesMap.add("animate", indexArray, 0.05);
@@ -92,7 +92,11 @@ class JVCombatScene extends EXTScene
 				var waveEntity:Entity = new Entity(i * 32, j * 32 - 32, wavesMap);
 				this.add(waveEntity);
 				_waveMaps.push(wavesMap);
+				
+				++j;
 			}
+			
+			++i;
 		}
 	}
 }
