@@ -31,10 +31,37 @@ class JVEnemyEntity extends Entity
 	
 	override public function update():Void
 	{
+		++_time;
+		
+		// Move down
 		this.y += 2;
 		
-		// Check if offscreen
+		// Fire a bullet
+		if (_time % 70 == 0)
+		{
+			var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
+			HXP.scene.add(bullet);
+		}
+		
+		// Check for collisions
+		var collidedEntity:Entity = this.collide("player", this.x, this.y);
+		if (collidedEntity != null)
+		{
+			_health -= 25;
+			HXP.scene.remove(collidedEntity);
+			
+			if (_health <= 0)
+				HXP.scene.remove(this);
+		}
+		
+		// Check if offscreen and remove
 		if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
-			HXP.world.remove(this);
+			HXP.scene.remove(this);
 	}
+	
+	/**
+	 * Private
+	 */
+	private var _health:Int = 100;
+	private var _time:Int;
 }

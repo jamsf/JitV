@@ -13,7 +13,7 @@ import jitv.JVConstants;
  */
 class JVBulletEntity extends Entity
 {
-	public function new(x:Float, y:Float) 
+	public function new(x:Float, y:Float, type:String) 
 	{
 		super();
 		
@@ -24,7 +24,7 @@ class JVBulletEntity extends Entity
 		var mask:Pixelmask = new Pixelmask("gfx/entities/bullet_0_entity.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
 		this.mask = mask;
 		
-		this.type = "player";
+		this.type = type;
 		this.width = image.width;
 		this.height = image.height;
 		this.x = x;
@@ -33,17 +33,13 @@ class JVBulletEntity extends Entity
 	
 	override public function update():Void
 	{
-		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		if (type == "player")
+			this.y -= 6;
+		else if (type == "enemy")
+			this.y += 6;
 		
-		// only travels vertically for now
-		//if (horizontalMovement)
-		//	this.x += xMultiplier * movementMagnitude;
-		//if (verticalMovement)
-		
-		this.y -= 1 * movementMagnitude;	
-		
-		// Check if offscreen
+		// Check if offscreen and remove
 		if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
-			HXP.world.remove(this);
+			HXP.scene.remove(this);
 	}
 }

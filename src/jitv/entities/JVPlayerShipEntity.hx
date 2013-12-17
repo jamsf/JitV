@@ -37,6 +37,8 @@ class JVPlayerShipEntity extends Entity
 	
 	override public function update():Void
 	{
+		++_time;
+		
 		// Movement
 		var movementMagnitude:Float = JVConstants.BASE_SHIP_MOVEMENT_SPEED * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
@@ -76,10 +78,25 @@ class JVPlayerShipEntity extends Entity
 			this.y += yMultiplier * movementMagnitude;
 			
 		// Primary Fire
-		if (Input.check(Key.SPACE))
+		if (Input.check(Key.SPACE) && _cooldown == false)
 		{
-			var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y);
-			HXP.world.add(bullet);
+			var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
+			HXP.scene.add(bullet);
+			_cooldown = true;
+			_lastBulletFired = _time;
+		}
+		if (_cooldown == true)
+		{
+			if (_time - _lastBulletFired > FIRING_RATE)
+				_cooldown = false;
 		}
 	}
+	
+	/**
+	 * Private
+	 */
+	private var _lastBulletFired:Int;
+	private var _cooldown:Bool;
+	private var _time:Int;
+	private static inline var FIRING_RATE:Int = 10;
 }
