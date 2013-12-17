@@ -34,12 +34,18 @@ class JVBulletEntity extends Entity
 	override public function update():Void
 	{
 		if (type == "player")
+		{
 			this.y -= 6;
+			
+			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
+				HXP.scene.remove(this);
+		}
 		else if (type == "enemy")
+		{
 			this.y += 6;
-		
-		// Check if offscreen and remove
-		if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
-			HXP.scene.remove(this);
+			
+			if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
+				HXP.scene.remove(this);
+		}
 	}
 }
