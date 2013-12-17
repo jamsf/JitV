@@ -16,7 +16,7 @@ package jitv.entities
 	public class JVBulletEntity extends Entity
 	{
 		
-		public function JVBulletEntity(x:int, y:int) 
+		public function JVBulletEntity(x:int, y:int, type:String) 
 		{
 			super();
 			
@@ -26,10 +26,10 @@ package jitv.entities
 			
 			// TODO: Pixelmask or Hitbox???!?!?
 			//this.mask = new Hitbox(12, 12, -6, -6);
-			var mask:Pixelmask = new Pixelmask(Assets.BULLET_0_ENTITY, -16, -16);
+			var mask:Pixelmask = new Pixelmask(Assets.BULLET_0_ENTITY, -4, -4);
 			this.mask = mask;
 			
-			this.type = "player";
+			this.type = type;
 			this.width = 8;
 			this.height = 8;
 			this.x = x;
@@ -37,17 +37,19 @@ package jitv.entities
 		}
 		
 		override public function update():void
-		{
-			var movementMagnitude:Number = 6 * FP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		{	
+			// If "player" bullet travel up, if "enemy bullet" travel down
+			if (type == "player")
+			{
+				this.y -= 6;	
+			}
+			else if(type == "enemy")
+			{
+				this.y += 6;
+			}
 			
-			// only travels vertically for now
-			//if (horizontalMovement)
-			//	this.x += xMultiplier * movementMagnitude;
-			//if (verticalMovement)
 			
-			this.y -= 1 * movementMagnitude;	
-			
-			// Check if offscreen
+			// Check if offscreen and remove
 			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
 				FP.world.remove(this);
 		}

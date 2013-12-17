@@ -20,7 +20,12 @@ package jitv.entities
 	 * Created by Fletcher, 11/3/13
 	 */
 	public class JVPlayerShipEntity extends Entity 
-	{
+	{	
+		private var lastBulletFired:int;
+		private var cooldown:Boolean;
+		private var firingRate:int = 10;
+		private var time:int = 0;
+		
 		public function JVPlayerShipEntity() 
 		{
 			super();
@@ -39,6 +44,7 @@ package jitv.entities
 		override public function update():void
 		{
 			// Movement
+			time++;
 			var movementMagnitude:Number = JVConstants.BASE_SHIP_MOVEMENT_SPEED * FP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 			
 			var horizontalMovement:Boolean = false;
@@ -75,15 +81,25 @@ package jitv.entities
 				this.x += xMultiplier * movementMagnitude;
 			if (verticalMovement)
 				this.y += yMultiplier * movementMagnitude;
-				
+			
 			// Primary Fire
-			if (Input.check(Key.SPACE))
+			if (Input.check(Key.SPACE) && cooldown == false)
 			{
-				var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y);
+				var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
 				FP.world.add(bullet);
+				cooldown = true;
+				lastBulletFired = time;
 			}
-				
-				
+			if (cooldown == true)
+			{
+				if (firingRate < time - lastBulletFired)
+				{
+					cooldown = false;
+				}
+			}
+			
+			
+			
 		}
 	}
 }
