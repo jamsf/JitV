@@ -87,7 +87,7 @@ class JVCombatScene extends EXTScene
 			while (j * 32 < HXP.screen.height + 32)
 			{
 				var wavesMap:Spritemap = new Spritemap("gfx/misc/waves.png", 32, 32);
-				wavesMap.add("animate", indexArray, 0.05);
+				wavesMap.add("animate", indexArray, 1.0);
 				wavesMap.play("animate");
 				var waveEntity:Entity = new Entity(i * 32, j * 32 - 32, wavesMap);
 				this.add(waveEntity);
