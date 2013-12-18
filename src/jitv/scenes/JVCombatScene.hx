@@ -4,6 +4,8 @@ import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Spritemap;
 import extendedhxpunk.ext.EXTScene;
+import extendedhxpunk.ext.EXTOffsetType;
+import extendedhxpunk.ext.EXTUtility;
 import jitv.datamodel.proceduraldata.JVLevel;
 import jitv.entities.JVEnemyEntity;
 import jitv.entities.JVPlayerShipEntity;
@@ -21,15 +23,18 @@ class JVCombatScene extends EXTScene
 	{
 		super();
 		
-		this.staticUiController.rootView.addSubview(new JVHudView());
+		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
 		this.addWaves();
 		
 		_playerShip = new JVPlayerShipEntity();
 		_playerShip.x = 320;
 		_playerShip.y = 240;
 		this.add(_playerShip);
-		
-//			this.worldCamera.zoomWithAnchor(0.25, this.worldCamera.currentPosition(EXTOffsetType.CENTER, true), EXTOffsetType.CENTER);
+	}
+	
+	override public function begin():Void
+	{
+		HXP.screen.color = 0x26B0E9;
 	}
 	
 	override public function update():Void

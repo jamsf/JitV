@@ -5,6 +5,7 @@ import com.haxepunk.HXP;
 import extendedhxpunk.ui.UIView;
 import extendedhxpunk.ext.EXTUtility;
 import extendedhxpunk.ext.EXTOffsetType;
+import extendedhxpunk.ext.EXTCamera;
 import jitv.scenes.JVSceneManager;
 
 /**
@@ -14,18 +15,46 @@ import jitv.scenes.JVSceneManager;
  */
 class JVHudView extends UIView
 {
-	public function new() 
+	public function new(camera:EXTCamera) 
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
+		
+		_camera = camera;
 		
 		var backButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10, 10), "abort level", backButtonCallback);
 		backButton.offsetAlignmentForSelf = EXTOffsetType.TOP_LEFT;
 		backButton.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
+		
+		var zoomInButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10, 10), "zoom in", zoomInButtonCallback);
+		zoomInButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
+		zoomInButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
+		
+		var zoomOutButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10, 50), "zoom out", zoomOutButtonCallback);
+		zoomOutButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
+		zoomOutButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
+		
 		this.addSubview(backButton);
+		this.addSubview(zoomInButton);
+		this.addSubview(zoomOutButton);
 	}
 	
 	public function backButtonCallback(args:Array<Dynamic>):Void
 	{
 		JVSceneManager.sharedInstance().goToLevelSelectScene();
 	}
+	
+	public function zoomInButtonCallback(args:Array<Dynamic>):Void
+	{
+		_camera.zoomWithAnchor(0.1, EXTUtility.ZERO_POINT, EXTOffsetType.CENTER);
+	}
+	
+	public function zoomOutButtonCallback(args:Array<Dynamic>):Void
+	{
+		_camera.zoomWithAnchor(-0.1, EXTUtility.ZERO_POINT, EXTOffsetType.CENTER);
+	}
+	
+	/**
+	 * Private
+	 */
+	private var _camera:EXTCamera;
 }
