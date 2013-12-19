@@ -10,6 +10,7 @@ import jitv.datamodel.proceduraldata.JVLevel;
 import jitv.entities.JVEnemyEntity;
 import jitv.entities.JVPlayerShipEntity;
 import jitv.ui.JVHudView;
+import jitv.JVConstants;
 
 /**
  * JVCombatWorld
@@ -25,16 +26,16 @@ class JVCombatScene extends EXTScene
 		
 		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
 		this.addWaves();
-		
-		_playerShip = new JVPlayerShipEntity();
-		_playerShip.x = 320;
-		_playerShip.y = 240;
-		this.add(_playerShip);
 	}
 	
 	override public function begin():Void
 	{
 		HXP.screen.color = 0x26B0E9;
+		
+		_playerShip = new JVPlayerShipEntity();
+		_playerShip.x = 320;
+		_playerShip.y = 240;
+		this.add(_playerShip);
 	}
 	
 	override public function update():Void
@@ -44,9 +45,10 @@ class JVCombatScene extends EXTScene
 		++_time;
 		
 		// Update background waves
+		var mapMovement:Float = 1.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		for (map in _waveMaps)
 		{
-			map.y += 1;
+			map.y += mapMovement;
 			if (map.y > 32)
 				map.y = 0;
 		}

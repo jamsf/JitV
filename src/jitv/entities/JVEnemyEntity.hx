@@ -4,6 +4,7 @@ import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
+import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
 
 /**
@@ -27,21 +28,16 @@ class JVEnemyEntity extends Entity
 		this.type = "enemy";
 		this.width = image.width;
 		this.height = image.height;
+		
+		_cooldownTimer = EXTTimer.createTimer(1.167, true, fireBullet);
 	}
 	
 	override public function update():Void
 	{
-		++_time;
+		var movementMagnitude:Float = 2.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
 		// Move down
-		this.y += 2;
-		
-		// Fire a bullet
-		if (_time % 70 == 0)
-		{
-			var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
-			HXP.scene.add(bullet);
-		}
+		this.y += movementMagnitude;
 		
 		// Check for collisions
 		var collidedEntity:Entity = this.collide("player", this.x, this.y);
@@ -59,9 +55,20 @@ class JVEnemyEntity extends Entity
 			HXP.scene.remove(this);
 	}
 	
+	public function fireBullet(timer:EXTTimer):Void
+	{
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
+		HXP.scene.add(bullet);
+	}
+	
+	override public function removed():Void
+	{
+		_cooldownTimer.invalidate();
+	}
+	
 	/**
 	 * Private
 	 */
 	private var _health:Int = 100;
-	private var _time:Int;
+	private var _cooldownTimer:EXTTimer;
 }

@@ -7,7 +7,11 @@ package jitv;
  */
 class JVConstants
 {
+#if flash
 	public static inline var FPS:Int = 60;
+#else
+	public static inline var FPS:Int = 60;
+#end
 	public static inline var ASSUMED_FPS_FOR_PHYSICS:Int = 60;
 	public static inline var BASE_SHIP_MOVEMENT_SPEED:Float = 4.0;
 	public static inline var OFFSCREEN_DELETION_BUFFER:Int = 32;

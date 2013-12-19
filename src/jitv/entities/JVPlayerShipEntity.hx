@@ -2,15 +2,15 @@ package jitv.entities;
 
 import flash.geom.Point;
 import com.haxepunk.Entity;
-import extendedhxpunk.ext.EXTKey;
-import extendedhxpunk.ext.EXTMath;
-import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Hitbox;
 import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import extendedhxpunk.ext.EXTKey;
+import extendedhxpunk.ext.EXTMath;
+import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
 
 /**
@@ -33,12 +33,13 @@ class JVPlayerShipEntity extends Entity
 		this.type = "player";
 		this.width = 12;
 		this.height = 12;
+		
+		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
+		_cooldownTimer.paused = true;
 	}
 	
 	override public function update():Void
 	{
-		++_time;
-		
 		// Movement
 		var movementMagnitude:Float = JVConstants.BASE_SHIP_MOVEMENT_SPEED * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
@@ -80,23 +81,33 @@ class JVPlayerShipEntity extends Entity
 		// Primary Fire
 		if (Input.check(Key.SPACE) && _cooldown == false)
 		{
-			var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
-			HXP.scene.add(bullet);
-			_cooldown = true;
-			_lastBulletFired = _time;
+			fireBullet();
 		}
-		if (_cooldown == true)
-		{
-			if (_time - _lastBulletFired > FIRING_RATE)
-				_cooldown = false;
-		}
+	}
+	
+	public function resetBulletCooldown(timer:EXTTimer):Void
+	{
+		_cooldown = false;
+		_cooldownTimer.paused = true;
+	}
+	
+	override public function removed():Void
+	{
+		_cooldownTimer.invalidate();
 	}
 	
 	/**
 	 * Private
 	 */
-	private var _lastBulletFired:Int;
+	private var _cooldownTimer:EXTTimer;
 	private var _cooldown:Bool;
-	private var _time:Int;
-	private static inline var FIRING_RATE:Int = 10;
+	private static inline var FIRING_RATE:Float = 0.167;
+	
+	private function fireBullet():Void
+	{
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
+		HXP.scene.add(bullet);
+		_cooldown = true;
+		_cooldownTimer.paused = false;
+	}
 }

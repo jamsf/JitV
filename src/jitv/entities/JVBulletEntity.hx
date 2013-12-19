@@ -33,16 +33,18 @@ class JVBulletEntity extends Entity
 	
 	override public function update():Void
 	{
+		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		
 		if (type == "player")
 		{
-			this.y -= 6;
+			this.y -= movementMagnitude;
 			
 			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
 				HXP.scene.remove(this);
 		}
 		else if (type == "enemy")
 		{
-			this.y += 6;
+			this.y += movementMagnitude;
 			
 			if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
 				HXP.scene.remove(this);
