@@ -81,7 +81,7 @@ class JVSceneManager
 		_currentGameScene = null;
 #if flash
 		flash.system.System.gc();
-#elseif windows
+#elseif windows || mac
 		cpp.vm.Gc.run(true);
 #end
 	}
