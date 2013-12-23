@@ -5,7 +5,7 @@ import extendedhxpunk.ext.EXTScene;
 import jitv.datamodel.proceduraldata.JVLevel;
 
 /**
- * JVWorldManager
+ * JVSceneManager
  * Manages transitions between game scenes
  * Created by Fletcher 10/30/13, Ported by Fletcher 12/8/2013
  */
