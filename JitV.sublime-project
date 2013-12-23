@@ -1,0 +1,32 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	},
+	"build_systems":
+	[
+		{
+			"name": "OpenFL Flash Debug Build",
+			"shell_cmd": "haxelib run openfl build application.xml flash -debug"
+		},
+		{
+			"name": "OpenFL Flash Debug Test",
+			"shell_cmd": "haxelib run openfl test application.xml flash -debug"
+		},
+		{
+			"name": "OpenFL OSX Debug Build",
+			"shell_cmd": "haxelib run openfl build application.xml mac -debug"
+		},
+		{
+			"name": "OpenFL OSX Debug Test",
+			"shell_cmd": "haxelib run openfl test application.xml mac -debug"
+		}
+	]
+}
