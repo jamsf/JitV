@@ -14,19 +14,19 @@
 	[
 		{
 			"name": "OpenFL Flash Debug Build",
-			"shell_cmd": "haxelib run openfl build application.xml flash -debug"
+			"shell_cmd": "haxelib run openfl build $project_path/application.xml flash -debug"
 		},
 		{
 			"name": "OpenFL Flash Debug Test",
-			"shell_cmd": "haxelib run openfl test application.xml flash -debug"
+			"shell_cmd": "haxelib run openfl test $project_path/application.xml flash -debug"
 		},
 		{
 			"name": "OpenFL OSX Debug Build",
-			"shell_cmd": "haxelib run openfl build application.xml mac -debug"
+			"shell_cmd": "haxelib run openfl build $project_path/application.xml mac -debug"
 		},
 		{
 			"name": "OpenFL OSX Debug Test",
-			"shell_cmd": "haxelib run openfl test application.xml mac -debug"
+			"shell_cmd": "haxelib run openfl test $project_path/application.xml mac -debug"
 		}
 	]
 }
