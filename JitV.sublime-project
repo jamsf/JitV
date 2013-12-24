@@ -2,12 +2,38 @@
 	"folders":
 	[
 		{
+			"name": "Project Files",
 			"follow_symlinks": true,
-			"path": "."
+			"path": ".",
+			"file_exclude_patterns": ["*.hxproj", ".gitmodules"],
+			"folder_exclude_patterns": ["bin", "bin-debug", ".settings", "uml", "libraries", "src", "assets"]
+		},
+		{
+			"name": "Source",
+			"follow_symlinks": true,
+			"path": "src"
+		},
+		{
+			"name": "ExtendedHaxepunk",
+			"follow_symlinks": true,
+			"path": "libraries/ExtendedHaxepunk/src"
+		},
+		{
+			"name": "HaxePunk",
+			"follow_symlinks": true,
+			"path": "libraries/ExtendedHaxepunk/HaxePunk",
+			"file_exclude_patterns": [".git", ".gitignore"],
+			"folder_exclude_patterns": ["assets", "examples", "template", "tests", "doc", "tools"]
+		},
+		{
+			"name": "Assets",
+			"follow_symlinks": true,
+			"path": "assets"
 		}
 	],
 	"settings":
 	{
+		"auto_indent": true,
 		"tab_size": 4
 	},
 	"build_systems":
