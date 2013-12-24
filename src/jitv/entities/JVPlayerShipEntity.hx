@@ -28,11 +28,10 @@ class JVPlayerShipEntity extends Entity
 		image.centerOrigin();
 		this.graphic = image;
 		
-		this.mask = new Hitbox(12, 12, -6, -6);
-		
+		this.mask = new Pixelmask("gfx/masks/player_ship_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.type = "player";
-		this.width = 12;
-		this.height = 12;
+		// this.width = 12;
+		// this.height = 12;
 		
 		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
 		_cooldownTimer.paused = true;
