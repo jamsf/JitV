@@ -18,10 +18,11 @@
 
 	<haxelib name="openfl" />
 	<haxelib name="openfl-bitfive" if="html5" />
-	<haxelib name="HaxePunk" />
-	
-	<!-- Necessary for FlashDevelop for some reason... 
-	<haxelib name="nme" />-->
+
+	<!-- Choose the source path line below to use our HaxePunk, or choose the haxelib line 
+	     (and run 'haxelib upgrade') to use the last released version -->
+	<source path="libraries/ExtendedHaxePunk/HaxePunk" />
+	<!-- <haxelib name="HaxePunk" /> -->
 
 	<!-- assets -->	
 	<icon path="assets/icon.svg" />
