@@ -23,14 +23,14 @@ class JVCombatScene extends EXTScene
 	public function new(level:JVLevel) 
 	{
 		super();
-		
-		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
-		this.addWaves();
 	}
 	
 	override public function begin():Void
 	{
 		HXP.screen.color = 0x26B0E9;
+		
+		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
+		this.addWaves();
 		
 		_playerShip = new JVPlayerShipEntity();
 		_playerShip.x = 320;
