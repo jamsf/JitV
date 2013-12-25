@@ -3,21 +3,22 @@ package jitv.datamodel.staticdata;
 import jitv.datamodel.JVDataObject;
 
 /**
- * JVEnemy
+ * JVEnemyClass
  * A data model class containing data for a type of enemy.
  * Created by Fletcher 11/30/13, Ported by Fletcher 12/15/13
  */
-class JVEnemy extends JVDataObject
+class JVEnemyClass extends JVDataObject
 {
-	public var type:String; // Enemy type should probably be its own data model, and this property should be either an id or an array of ids
+	// NOTE - Enemy type should probably be its own data model, and this property should be either an id or an array of ids
+	public var type:String; // Could be used to indicate strengths and weaknesses to specific weapon types.
 	public var difficulty:UInt;
 	public var patternId:UInt;
+	public var speed:Int; // Constant vertical speed of enemy, in addition to any movement specified by the enemy pattern
+	public var attackType:String;
 	public var imageName:String;
-	
-	/**
-	 * Private
-	 */
-	private static inline var DATA_TYPE_NAME:String = "enemy";
+
+	// Data info
+	public static inline var DATA_TYPE_NAME:String = "enemy_class";
 	public function new() { }
 	
 	// Fake database setup
@@ -28,11 +29,14 @@ class JVEnemy extends JVDataObject
 		
 		for (i in 0...10)
 		{
-			var enemy:JVEnemy = new JVEnemy();
+			var enemy:JVEnemyClass = new JVEnemyClass();
 			enemy.id = i;
+			enemy.name = "Enemy " + i;
 			enemy.type = "";
 			enemy.difficulty = 0;
 			enemy.patternId = 0;
+			enemy.speed = i;
+			enemy.attackType = "standard";
 			enemy.imageName = "ENEMY_0_ENTITY";
 			dataDictionary[i] = cast enemy;
 		}

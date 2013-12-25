@@ -17,8 +17,13 @@ class JVDataObject
 	public static function setupFakeDB():Void
 	{
 		fakeDB = new Map();
-		JVEnemy.setupFakeDB();
-		//JVEnemyPattern.setupFakeDB();
-		//JVEnemyWave.setupFakeDB();
+		JVEnemyClass.setupFakeDB();
+		JVEnemyPattern.setupFakeDB();
+	}
+
+	public static function lookupStaticDataObject(dataClass:String, dataId:Int):JVDataObject
+	{
+		var dataClassMap:Map<Int, JVDataObject> = fakeDB[dataClass];
+		return dataClassMap != null ? dataClassMap[dataId] : null;
 	}
 }
