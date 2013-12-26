@@ -12,7 +12,7 @@ import jitv.datamodel.staticdata.JVEnemyPattern;
  */
 class JVEnemy extends JVDataObject
 {
-	public var spawnTime:Float;
+	public var spawnTime:Int; // Time in 10ths of a second
 	public var indexInPattern:Int;
 	public var enemyClassId:Int;
 
@@ -28,4 +28,6 @@ class JVEnemy extends JVDataObject
 	{
 		return cast JVDataObject.lookupStaticDataObject(JVEnemyPattern.DATA_TYPE_NAME, this.enemyClass.patternId);
 	}
+
+	public function new() { }
 }

@@ -3,6 +3,7 @@ package jitv.scenes;
 import com.haxepunk.HXP;
 import extendedhxpunk.ext.EXTScene;
 import jitv.datamodel.proceduraldata.JVLevel;
+import jitv.procedural.JVLevelGenerator;
 
 /**
  * JVSceneManager
@@ -46,7 +47,7 @@ class JVSceneManager
 	public function goToSceneForCombatLevel(level:JVLevel):Void
 	{
 		clearScene();
-		_currentGameScene = new JVCombatScene(level);
+		_currentGameScene = new JVCombatScene(JVLevelGenerator.sharedInstance().generateLevel(0, 0, []));
 	}
 	
 	/**

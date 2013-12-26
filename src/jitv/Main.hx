@@ -4,6 +4,7 @@ import com.haxepunk.Engine;
 import com.haxepunk.HXP;
 import extendedhxpunk.ext.EXTConsole;
 import jitv.scenes.JVSceneManager;
+import jitv.datamodel.JVDataObject;
 
 /**
  * Main class for JitV's HaXe project
@@ -21,6 +22,7 @@ class Main extends Engine
 	function new()
 	{
 		super(kScreenWidth, kScreenHeight, JVConstants.FPS, true);
+		JVDataObject.setupFakeDB();
 	}
 
 	override public function init()

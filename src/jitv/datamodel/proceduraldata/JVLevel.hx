@@ -9,8 +9,9 @@ import jitv.datamodel.JVDataObject;
  */
 class JVLevel extends JVDataObject
 {
-	public var spawnTimes:Array<Float>; // An array of times (counting up from scene start) when enemies should appear
-	public var enemiesForTimes:Map<Float, JVEnemy>; // Maps spawn times to the enemies to spawn at that time
+	//NOTE - Times in 10ths of a second.
+	public var spawnTimes:Array<Int>; // An array of times (counting up from scene start) when enemies should appear.
+	public var enemiesForTimes:Map<Int, Array<JVEnemy>>; // Maps spawn times to the enemies to spawn at that time
 
 	//TODO - fcole - Properties for type of environment, length, whether there's a boss, and anything else specific to different levels.
 	public function new() { }

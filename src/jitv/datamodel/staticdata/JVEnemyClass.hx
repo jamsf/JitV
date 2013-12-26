@@ -35,7 +35,7 @@ class JVEnemyClass extends JVDataObject
 			enemy.type = "";
 			enemy.difficulty = 0;
 			enemy.patternId = 0;
-			enemy.speed = i;
+			enemy.speed = i + 1;
 			enemy.attackType = "standard";
 			enemy.imageName = "ENEMY_0_ENTITY";
 			dataDictionary[i] = cast enemy;
