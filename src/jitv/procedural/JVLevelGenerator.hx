@@ -6,6 +6,11 @@ import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
 import jitv.datamodel.staticdata.JVEnemyPattern;
 
+/**
+ * JVLevelGenerator
+ * Generates JVLevel procedural data objects
+ * Created by Fletcher, 12/25/2013 - Merry Christmas!
+ */
 class JVLevelGenerator
 {
 	/**
