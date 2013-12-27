@@ -79,12 +79,25 @@ class JVEnemyEntity extends Entity
 
 	public function pathStageComplete(_):Void
 	{
+		var previousKeyFrame:Int = _patternKeyFramesCompleted;
 		++_patternKeyFramesCompleted;
+		var startNewMotion:Bool = false;
+
 		if (_patternKeyFramesCompleted < _enemyData.enemyPattern.keyFrameCount)
+		{
+			startNewMotion = true;
+		}
+		else if (_patternKeyFramesCompleted > 1 && _enemyData.enemyPattern.loops)
+		{
+			_patternKeyFramesCompleted = _enemyData.enemyPattern.loopIndex;
+			startNewMotion = true;
+		}
+
+		if (startNewMotion)
 		{
 			var nextKeyFramePoint:Point = _enemyData.enemyPattern.keyFramePositions[_enemyData.indexInPattern][_patternKeyFramesCompleted];
 			_patternMotion.setMotion(_previousPoint.x, _previousPoint.y, nextKeyFramePoint.x * this.width, nextKeyFramePoint.y * this.height, 
-									 _enemyData.enemyPattern.keyFrameTimes[_patternKeyFramesCompleted - 1]);
+									 _enemyData.enemyPattern.keyFrameTimes[previousKeyFrame]);
 		}
 	}
 	
