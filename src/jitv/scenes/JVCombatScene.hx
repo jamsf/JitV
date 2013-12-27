@@ -23,6 +23,7 @@ class JVCombatScene extends EXTScene
 	public function new(level:JVLevel) 
 	{
 		super();
+		_levelData = level;
 	}
 	
 	override public function begin():Void
@@ -42,8 +43,6 @@ class JVCombatScene extends EXTScene
 	{
 		super.update();
 		
-		++_time;
-		
 		// Update background waves
 		var mapMovement:Float = 1.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		for (map in _waveMaps)
@@ -54,12 +53,23 @@ class JVCombatScene extends EXTScene
 		}
 		
 		// Spawn enemies
-		if (_time % 100 == 0)
+		if (_spawnTimesCompleted < _levelData.spawnTimes.length)
 		{
-			var enemyShip:JVEnemyEntity = new JVEnemyEntity();
-			enemyShip.x = Math.random() * HXP.screen.width;
-			enemyShip.y = -enemyShip.height - 2 - 1;
-			this.add(enemyShip);
+			var nextSpawnTimeInt:Int = _levelData.spawnTimes[_spawnTimesCompleted];
+			var nextSpawnTime:Float = nextSpawnTimeInt / 10.0;
+
+			if (_time >= nextSpawnTime)
+			{
+				++_spawnTimesCompleted;
+
+				for (enemy in _levelData.enemiesForTimes[nextSpawnTimeInt])
+				{
+					var enemyShip:JVEnemyEntity = new JVEnemyEntity();
+					enemyShip.x = Math.random() * HXP.screen.width;
+					enemyShip.y = -enemyShip.height - 2 - 1;
+					this.add(enemyShip);
+				}
+			}
 		}
 		
 		// Check collisions
@@ -73,14 +83,18 @@ class JVCombatScene extends EXTScene
 				_playerShip = null;
 			}
 		}
+
+		_time += HXP.elapsed;
 	}
 	
 	/**
 	 * Private
 	 */
-	private var _time:UInt;
+	private var _time:Float = 0.0;
 	private var _waveMaps:Array<Spritemap>;
 	private var _playerShip:JVPlayerShipEntity;
+	private var _levelData:JVLevel;
+	private var _spawnTimesCompleted:Int = 0;
 	
 	private function addWaves():Void
 	{

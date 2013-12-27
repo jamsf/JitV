@@ -104,6 +104,7 @@ class JVEnemyPattern extends JVDataObject
 		enemyPattern.loopIndex = loopToIndex;
 		enemyPattern.keyFramePositions = new Array();
 		enemyPattern.keyFrameTimes = new Array();
+		enemyPattern.shipCount = shipCount;
 
 		var stringToIndexMap:Map<String, Int> = new Map();
 		for (i in 0...shipCount)
