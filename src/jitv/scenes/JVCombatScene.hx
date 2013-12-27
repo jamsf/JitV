@@ -64,7 +64,7 @@ class JVCombatScene extends EXTScene
 
 				for (enemy in _levelData.enemiesForTimes[nextSpawnTimeInt])
 				{
-					var enemyShip:JVEnemyEntity = new JVEnemyEntity();
+					var enemyShip:JVEnemyEntity = new JVEnemyEntity(enemy);
 					enemyShip.x = Math.random() * HXP.screen.width;
 					enemyShip.y = -enemyShip.height - 2 - 1;
 					this.add(enemyShip);

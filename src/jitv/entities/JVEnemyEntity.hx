@@ -6,6 +6,9 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
+import jitv.datamodel.proceduraldata.JVEnemy;
+import jitv.datamodel.staticdata.JVEnemyClass;
+import jitv.datamodel.staticdata.JVEnemyPattern;
 
 /**
  * JVEnemyEntity
@@ -14,10 +17,12 @@ import jitv.JVConstants;
  */
 class JVEnemyEntity extends Entity
 {
-	public function new() 
+	public function new(enemyData:JVEnemy) 
 	{
 		super();
 		
+		_enemyData = enemyData;
+
 		var image:Image = new Image("gfx/entities/enemy_0_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
@@ -34,7 +39,7 @@ class JVEnemyEntity extends Entity
 	
 	override public function update():Void
 	{
-		var movementMagnitude:Float = 2.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		var movementMagnitude:Float = _enemyData.enemyClass.speed * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
 		// Move down
 		this.y += movementMagnitude;
@@ -69,6 +74,7 @@ class JVEnemyEntity extends Entity
 	/**
 	 * Private
 	 */
+	private var _enemyData:JVEnemy;
 	private var _health:Int = 100;
 	private var _cooldownTimer:EXTTimer;
 }
