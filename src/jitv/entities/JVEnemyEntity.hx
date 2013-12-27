@@ -1,14 +1,19 @@
 package jitv.entities;
 
+import flash.geom.Point;
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
+import com.haxepunk.Tween;
+import com.haxepunk.tweens.motion.*;
 import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
 import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
 import jitv.datamodel.staticdata.JVEnemyPattern;
+
+import extendedhxpunk.ext.EXTConsole;
 
 /**
  * JVEnemyEntity
@@ -34,15 +39,27 @@ class JVEnemyEntity extends Entity
 		this.width = image.width;
 		this.height = image.height;
 		
-		_cooldownTimer = EXTTimer.createTimer(1.167, true, fireBullet);
+		_cooldownTimer = EXTTimer.createTimer(1.167, true, fireBullet); //TODO - fcole - Fire speed from data
 	}
 	
 	override public function update():Void
 	{
-		var movementMagnitude:Float = _enemyData.enemyClass.speed * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
-		
+		// Follow pattern
+		if (!_hasSetUpPattern)
+		{
+			setupPatternMovement();
+			_hasSetUpPattern = true;
+		}
+		else
+		{
+			this.x += _patternMotion.x - _previousPoint.x;
+			this.y += _patternMotion.y - _previousPoint.y;
+			_previousPoint = new Point(_patternMotion.x, _patternMotion.y);
+		}
+
 		// Move down
-		this.y += movementMagnitude;
+		var movementMagnitude:Float = _enemyData.enemyClass.speed * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		this.moveBy(0, movementMagnitude, null, true);
 		
 		// Check for collisions
 		var collidedEntity:Entity = this.collide("player", this.x, this.y);
@@ -59,6 +76,17 @@ class JVEnemyEntity extends Entity
 		if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
 			HXP.scene.remove(this);
 	}
+
+	public function pathStageComplete(_):Void
+	{
+		++_patternKeyFramesCompleted;
+		if (_patternKeyFramesCompleted < _enemyData.enemyPattern.keyFrameCount)
+		{
+			var nextKeyFramePoint:Point = _enemyData.enemyPattern.keyFramePositions[_enemyData.indexInPattern][_patternKeyFramesCompleted];
+			_patternMotion.setMotion(_previousPoint.x, _previousPoint.y, nextKeyFramePoint.x * this.width, nextKeyFramePoint.y * this.height, 
+									 _enemyData.enemyPattern.keyFrameTimes[_patternKeyFramesCompleted - 1]);
+		}
+	}
 	
 	public function fireBullet(timer:EXTTimer):Void
 	{
@@ -69,6 +97,7 @@ class JVEnemyEntity extends Entity
 	override public function removed():Void
 	{
 		_cooldownTimer.invalidate();
+		this.removeTween(_patternMotion);
 	}
 	
 	/**
@@ -76,5 +105,22 @@ class JVEnemyEntity extends Entity
 	 */
 	private var _enemyData:JVEnemy;
 	private var _health:Int = 100;
+	private var _hasSetUpPattern:Bool = false;
 	private var _cooldownTimer:EXTTimer;
+
+	private var _patternKeyFramesCompleted:Int = 0;
+	private var _patternMotion:LinearMotion;
+	private var _previousPoint:Point;
+
+	private function setupPatternMovement():Void
+	{
+		_previousPoint = _enemyData.enemyPattern.keyFramePositions[_enemyData.indexInPattern][0];
+		_previousPoint = new Point(_previousPoint.x * this.width, _previousPoint.y * this.height);
+		this.x += _previousPoint.x;
+		this.y += _previousPoint.y;
+
+		_patternMotion = new LinearMotion(pathStageComplete, TweenType.Persist);
+		this.pathStageComplete(null);
+		this.addTween(_patternMotion);
+	}
 }

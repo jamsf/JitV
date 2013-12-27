@@ -81,14 +81,14 @@ class JVEnemyPattern extends JVDataObject
 				 "__1_3___0_2__")
 			],
 			[
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5
 			],
 			false,
 			-1
@@ -124,17 +124,17 @@ class JVEnemyPattern extends JVDataObject
 			var yOffset:Int = 0;
 			for (character in keyFrameString.split(""))
 			{
+				if (character != "_")
+				{
+					var shipIndex:Int = stringToIndexMap[character];
+					enemyPattern.keyFramePositions[shipIndex].push(new Point(xOffset + xModifier, yOffset + yModifier));
+				}
+
 				++xOffset;
 				if (xOffset == 13)
 				{
 					xOffset = 0;
 					++yOffset;
-				}
-
-				if (character != "_")
-				{
-					var shipIndex:Int = stringToIndexMap[character];
-					enemyPattern.keyFramePositions[shipIndex].push(new Point(xOffset + xModifier, yOffset + yModifier));
 				}
 			}
 

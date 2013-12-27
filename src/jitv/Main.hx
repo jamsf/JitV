@@ -21,7 +21,7 @@ class Main extends Engine
 
 	function new()
 	{
-		super(kScreenWidth, kScreenHeight, JVConstants.FPS, true);
+		super(kScreenWidth, kScreenHeight, JVConstants.FPS, false);
 		JVDataObject.setupFakeDB();
 	}
 
