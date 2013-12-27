@@ -65,7 +65,7 @@ class JVEnemyEntity extends Entity
 		var collidedEntity:Entity = this.collide("player", this.x, this.y);
 		if (collidedEntity != null)
 		{
-			_health -= 25;
+			_health -= 34;
 			HXP.scene.remove(collidedEntity);
 			
 			if (_health <= 0)

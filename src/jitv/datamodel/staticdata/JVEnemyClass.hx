@@ -18,6 +18,7 @@ class JVEnemyClass extends JVDataObject
 	public var imageName:String;
 
 	// Data info
+	public static var ENEMY_CLASS_IDS:Int = 0;
 	public static inline var DATA_TYPE_NAME:String = "enemy_class";
 	public function new() { }
 	
@@ -27,18 +28,53 @@ class JVEnemyClass extends JVDataObject
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
-		for (i in 0...10)
+		var id:Int = 0;
+
+		for (i in 0...3)
 		{
 			var enemy:JVEnemyClass = new JVEnemyClass();
-			enemy.id = i;
-			enemy.name = "Enemy " + i;
+			enemy.id = id;
+			enemy.name = "Enemy " + id;
 			enemy.type = "";
 			enemy.difficulty = 0;
 			enemy.patternId = 0;
 			enemy.speed = i + 1;
 			enemy.attackType = "standard";
 			enemy.imageName = "ENEMY_0_ENTITY";
-			dataDictionary[i] = cast enemy;
+			dataDictionary[id] = cast enemy;
+			++id;
 		}
+
+		for (i in 0...3)
+		{
+			var enemy:JVEnemyClass = new JVEnemyClass();
+			enemy.id = id;
+			enemy.name = "Enemy " + id;
+			enemy.type = "";
+			enemy.difficulty = 0;
+			enemy.patternId = 1;
+			enemy.speed = i + 1;
+			enemy.attackType = "standard";
+			enemy.imageName = "ENEMY_0_ENTITY";
+			dataDictionary[id] = cast enemy;
+			++id;
+		}
+
+		for (i in 0...4)
+		{
+			var enemy:JVEnemyClass = new JVEnemyClass();
+			enemy.id = id;
+			enemy.name = "Enemy " + id;
+			enemy.type = "";
+			enemy.difficulty = 0;
+			enemy.patternId = 2;
+			enemy.speed = i + 1;
+			enemy.attackType = "standard";
+			enemy.imageName = "ENEMY_0_ENTITY";
+			dataDictionary[id] = cast enemy;
+			++id;
+		}
+
+		ENEMY_CLASS_IDS = id;
 	}
 }

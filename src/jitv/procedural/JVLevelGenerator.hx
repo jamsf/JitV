@@ -33,7 +33,7 @@ class JVLevelGenerator
 	{
 		//NOTE - fcole - Temp logic
 		var level:JVLevel = new JVLevel();
-		level.spawnTimes = [20, 50, 80, 100, 120, 140, 150, 160];
+		level.spawnTimes = [20, 50, 80, 100, 120, 140, 150, 160, 170, 180, 185, 190, 195, 200, 202];
 		level.enemiesForTimes = new Map();
 
 		var id:Int = 0;
@@ -44,7 +44,8 @@ class JVLevelGenerator
 			if (level.enemiesForTimes[spawnTime] == null)
 				level.enemiesForTimes[spawnTime] = new Array();
 
-			var classId:Int = classIdCounter % 5;
+			classIdCounter = Std.int(Math.random() * JVEnemyClass.ENEMY_CLASS_IDS);
+			var classId:Int = classIdCounter % JVEnemyClass.ENEMY_CLASS_IDS; 
 			var enemy:JVEnemy = new JVEnemy();
 			enemy.id = id++;
 			enemy.name = "Enemy Instance " + id;
@@ -66,7 +67,7 @@ class JVLevelGenerator
 				level.enemiesForTimes[spawnTime].push(enemy);
 			}
 
-			++classIdCounter;
+			// ++classIdCounter;
 		}
 
 		return level;
