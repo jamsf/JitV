@@ -1,7 +1,6 @@
 package jitv.entities;
 
 import flash.geom.Point;
-import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Hitbox;
@@ -12,13 +11,14 @@ import extendedhxpunk.ext.EXTKey;
 import extendedhxpunk.ext.EXTMath;
 import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
+import jitv.entities.JVEntity;
 
 /**
  * JVPlayerShipEntity
  * Entity representing a player-controllable ship.
  * Created by Fletcher 11/3/13, Ported by Fletcher 12/15/13
  */
-class JVPlayerShipEntity extends Entity
+class JVPlayerShipEntity extends JVEntity
 {
 	public function new() 
 	{
@@ -39,6 +39,8 @@ class JVPlayerShipEntity extends Entity
 	
 	override public function update():Void
 	{
+		super.update();
+		
 		// Movement
 		var movementMagnitude:Float = JVConstants.BASE_SHIP_MOVEMENT_SPEED * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		

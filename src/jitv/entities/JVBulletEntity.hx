@@ -1,17 +1,17 @@
 package jitv.entities;
 
-import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import jitv.JVConstants;
+import jitv.entities.JVEntity;
 
 /**
  * JVPlayerShipEntity
  * Entity representing a player-controllable ship.
  * Created by Clement 12/8/13, Ported by Fletcher 12/15/13
  */
-class JVBulletEntity extends Entity
+class JVBulletEntity extends JVEntity
 {
 	public function new(x:Float, y:Float, type:String) 
 	{
@@ -33,6 +33,8 @@ class JVBulletEntity extends Entity
 	
 	override public function update():Void
 	{
+		super.update();
+		
 		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
 		if (type == "player")

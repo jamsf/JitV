@@ -1,26 +1,25 @@
 package jitv.entities;
 
 import flash.geom.Point;
-import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.Tween;
 import com.haxepunk.tweens.motion.*;
 import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
+import jitv.entities.JVEntity;
 import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
 import jitv.datamodel.staticdata.JVEnemyPattern;
-
-import extendedhxpunk.ext.EXTConsole;
 
 /**
  * JVEnemyEntity
  * Game entity representing an enemy in the scene.
  * Created by Fletcher
  */
-class JVEnemyEntity extends Entity
+class JVEnemyEntity extends JVEntity
 {
 	public function new(enemyData:JVEnemy) 
 	{
@@ -44,6 +43,8 @@ class JVEnemyEntity extends Entity
 	
 	override public function update():Void
 	{
+		super.update();
+		
 		// Follow pattern
 		if (!_hasSetUpPattern)
 		{
