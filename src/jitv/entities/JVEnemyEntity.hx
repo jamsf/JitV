@@ -50,16 +50,32 @@ class JVEnemyEntity extends Entity
 			setupPatternMovement();
 			_hasSetUpPattern = true;
 		}
-		else
+		else if (_patternStarted)
 		{
 			this.x += _patternMotion.x - _previousPoint.x;
 			this.y += _patternMotion.y - _previousPoint.y;
 			_previousPoint = new Point(_patternMotion.x, _patternMotion.y);
 		}
 
-		// Move down
-		var movementMagnitude:Float = _enemyData.enemyClass.speed * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
-		this.moveBy(0, movementMagnitude, null, true);
+		// Apply speed
+		var horizontalSpeed:Float = HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		var verticalSpeed:Float = horizontalSpeed;
+		if (_patternComplete)
+		{
+			horizontalSpeed *= _enemyData.enemyClass.speedAfterPattern.x;
+			verticalSpeed *= _enemyData.enemyClass.speedAfterPattern.y;
+		}
+		else if (_patternStarted)
+		{
+			horizontalSpeed *= _enemyData.enemyClass.speedDuringPattern.x;
+			verticalSpeed *= _enemyData.enemyClass.speedDuringPattern.y;
+		}
+		else
+		{
+			horizontalSpeed *= _enemyData.enemyClass.speedBeforePattern.x;
+			verticalSpeed *= _enemyData.enemyClass.speedBeforePattern.y;
+		}
+		this.moveBy(horizontalSpeed, verticalSpeed, null, true);
 		
 		// Check for collisions
 		var collidedEntity:Entity = this.collide("player", this.x, this.y);
@@ -99,6 +115,18 @@ class JVEnemyEntity extends Entity
 			_patternMotion.setMotion(_previousPoint.x, _previousPoint.y, nextKeyFramePoint.x * this.width, nextKeyFramePoint.y * this.height, 
 									 _enemyData.enemyPattern.keyFrameTimes[previousKeyFrame]);
 		}
+		else
+		{
+			_patternComplete = true;
+		}
+	}
+	
+	public function beginPatternMovement(timer:EXTTimer):Void
+	{
+		_patternStarted = true;
+		_patternMotion = new LinearMotion(pathStageComplete, TweenType.Persist);
+		this.pathStageComplete(null);
+		this.addTween(_patternMotion);
 	}
 	
 	public function fireBullet(timer:EXTTimer):Void
@@ -110,7 +138,9 @@ class JVEnemyEntity extends Entity
 	override public function removed():Void
 	{
 		_cooldownTimer.invalidate();
-		this.removeTween(_patternMotion);
+		
+		if (_patternMotion != null)
+			this.removeTween(_patternMotion);
 	}
 	
 	/**
@@ -124,6 +154,8 @@ class JVEnemyEntity extends Entity
 	private var _patternKeyFramesCompleted:Int = 0;
 	private var _patternMotion:LinearMotion;
 	private var _previousPoint:Point;
+	private var _patternStarted:Bool;
+	private var _patternComplete:Bool;
 
 	private function setupPatternMovement():Void
 	{
@@ -131,9 +163,11 @@ class JVEnemyEntity extends Entity
 		_previousPoint = new Point(_previousPoint.x * this.width, _previousPoint.y * this.height);
 		this.x += _previousPoint.x;
 		this.y += _previousPoint.y;
-
-		_patternMotion = new LinearMotion(pathStageComplete, TweenType.Persist);
-		this.pathStageComplete(null);
-		this.addTween(_patternMotion);
+		
+		// Delay the start of the pattern execution if necessary
+		if (_enemyData.enemyClass.patternDelay > 0)
+			EXTTimer.createTimer(_enemyData.enemyClass.patternDelay, false, beginPatternMovement);
+		else
+			this.beginPatternMovement(null);
 	}
 }
