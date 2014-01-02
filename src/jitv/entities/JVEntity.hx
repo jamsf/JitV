@@ -32,4 +32,10 @@ class JVEntity extends Entity
 		for (component in this.components)
 			component.render();
 	}
+	
+	override public function removed():Void
+	{
+		for (component in this.components)
+			component.cleanup();
+	}
 }

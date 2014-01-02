@@ -11,9 +11,5 @@ interface JVEntityComponent
 {
 	public function update():Void;
 	public function render():Void;
-	
-	/**
-	 * Private
-	 */
-	private var parentEntity:JVEntity;
+	public function cleanup():Void;
 }

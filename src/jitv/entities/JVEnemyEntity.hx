@@ -13,6 +13,7 @@ import jitv.entities.JVEntity;
 import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
 import jitv.datamodel.staticdata.JVEnemyPattern;
+import jitv.entities.components.JVPatternComponent;
 
 /**
  * JVEnemyEntity
@@ -37,6 +38,8 @@ class JVEnemyEntity extends JVEntity
 		this.type = "enemy";
 		this.width = image.width;
 		this.height = image.height;
+		_patternComponent = new JVPatternComponent(this, enemyData.enemyPattern, enemyData.indexInPattern, enemyData.enemyClass.patternDelay);
+		this.components.push(_patternComponent);
 		
 		_cooldownTimer = EXTTimer.createTimer(1.167, true, fireBullet); //TODO - fcole - Fire speed from data
 	}
@@ -44,29 +47,16 @@ class JVEnemyEntity extends JVEntity
 	override public function update():Void
 	{
 		super.update();
-		
-		// Follow pattern
-		if (!_hasSetUpPattern)
-		{
-			setupPatternMovement();
-			_hasSetUpPattern = true;
-		}
-		else if (_patternStarted)
-		{
-			this.x += _patternMotion.x - _previousPoint.x;
-			this.y += _patternMotion.y - _previousPoint.y;
-			_previousPoint = new Point(_patternMotion.x, _patternMotion.y);
-		}
 
 		// Apply speed
 		var horizontalSpeed:Float = HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		var verticalSpeed:Float = horizontalSpeed;
-		if (_patternComplete)
+		if (_patternComponent.complete)
 		{
 			horizontalSpeed *= _enemyData.enemyClass.speedAfterPattern.x;
 			verticalSpeed *= _enemyData.enemyClass.speedAfterPattern.y;
 		}
-		else if (_patternStarted)
+		else if (_patternComponent.started)
 		{
 			horizontalSpeed *= _enemyData.enemyClass.speedDuringPattern.x;
 			verticalSpeed *= _enemyData.enemyClass.speedDuringPattern.y;
@@ -94,42 +84,6 @@ class JVEnemyEntity extends JVEntity
 			HXP.scene.remove(this);
 	}
 
-	public function pathStageComplete(_):Void
-	{
-		var previousKeyFrame:Int = _patternKeyFramesCompleted;
-		++_patternKeyFramesCompleted;
-		var startNewMotion:Bool = false;
-
-		if (_patternKeyFramesCompleted < _enemyData.enemyPattern.keyFrameCount)
-		{
-			startNewMotion = true;
-		}
-		else if (_patternKeyFramesCompleted > 1 && _enemyData.enemyPattern.loops)
-		{
-			_patternKeyFramesCompleted = _enemyData.enemyPattern.loopIndex;
-			startNewMotion = true;
-		}
-
-		if (startNewMotion)
-		{
-			var nextKeyFramePoint:Point = _enemyData.enemyPattern.keyFramePositions[_enemyData.indexInPattern][_patternKeyFramesCompleted];
-			_patternMotion.setMotion(_previousPoint.x, _previousPoint.y, nextKeyFramePoint.x * this.width, nextKeyFramePoint.y * this.height, 
-									 _enemyData.enemyPattern.keyFrameTimes[previousKeyFrame]);
-		}
-		else
-		{
-			_patternComplete = true;
-		}
-	}
-	
-	public function beginPatternMovement(timer:EXTTimer):Void
-	{
-		_patternStarted = true;
-		_patternMotion = new LinearMotion(pathStageComplete, TweenType.Persist);
-		this.pathStageComplete(null);
-		this.addTween(_patternMotion);
-	}
-	
 	public function fireBullet(timer:EXTTimer):Void
 	{
 		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
@@ -138,10 +92,8 @@ class JVEnemyEntity extends JVEntity
 	
 	override public function removed():Void
 	{
+		super.removed();
 		_cooldownTimer.invalidate();
-		
-		if (_patternMotion != null)
-			this.removeTween(_patternMotion);
 	}
 	
 	/**
@@ -149,26 +101,6 @@ class JVEnemyEntity extends JVEntity
 	 */
 	private var _enemyData:JVEnemy;
 	private var _health:Int = 100;
-	private var _hasSetUpPattern:Bool = false;
 	private var _cooldownTimer:EXTTimer;
-
-	private var _patternKeyFramesCompleted:Int = 0;
-	private var _patternMotion:LinearMotion;
-	private var _previousPoint:Point;
-	private var _patternStarted:Bool;
-	private var _patternComplete:Bool;
-
-	private function setupPatternMovement():Void
-	{
-		_previousPoint = _enemyData.enemyPattern.keyFramePositions[_enemyData.indexInPattern][0];
-		_previousPoint = new Point(_previousPoint.x * this.width, _previousPoint.y * this.height);
-		this.x += _previousPoint.x;
-		this.y += _previousPoint.y;
-		
-		// Delay the start of the pattern execution if necessary
-		if (_enemyData.enemyClass.patternDelay > 0)
-			EXTTimer.createTimer(_enemyData.enemyClass.patternDelay, false, beginPatternMovement);
-		else
-			this.beginPatternMovement(null);
-	}
+	private var _patternComponent:JVPatternComponent;
 }
