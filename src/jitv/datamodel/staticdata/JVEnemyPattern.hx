@@ -1,7 +1,9 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
+import extendedhxpunk.ext.EXTOffsetType;
 import jitv.datamodel.JVDataObject;
+import jitv.JVConstants;
 
 /**
  * JVEnemyPattern
@@ -16,6 +18,9 @@ class JVEnemyPattern extends JVDataObject
 	public var keyFrameTimes:Array<Float>; // Each element is the time between the keyframe for that index, and the next one
 	public var loops:Bool; // Whether this pattern loops, or if enemies just maintain their final position until they exit the screen
 	public var loopIndex:Int; // Which keyframe to loop back to if this pattern loops
+	public var spawnAnchor:EXTOffsetType;
+	public var totalWidth:Int;
+	public var totalHeight:Int;
 	
 	// Data info
 	public static inline var DATA_TYPE_NAME:String = "enemy_pattern";
@@ -91,7 +96,10 @@ class JVEnemyPattern extends JVDataObject
 				0.5
 			],
 			false,
-			-1
+			-1,
+			JVConstants.PLAY_SPACE_WIDTH,
+			JVConstants.PLAY_SPACE_HEIGHT,
+			EXTOffsetType.TOP_CENTER
 			);
 
 		// ID 1
@@ -158,7 +166,10 @@ class JVEnemyPattern extends JVDataObject
 				0.5
 			],
 			false,
-			-1
+			-1,
+			JVConstants.PLAY_SPACE_WIDTH,
+			JVConstants.PLAY_SPACE_HEIGHT,
+			EXTOffsetType.TOP_CENTER
 			);
 
 		// ID 2
@@ -190,12 +201,22 @@ class JVEnemyPattern extends JVDataObject
 				2.5
 			],
 			true,
-			0
+			0,
+			JVConstants.PLAY_SPACE_WIDTH,
+			JVConstants.PLAY_SPACE_HEIGHT,
+			EXTOffsetType.TOP_CENTER
 			);
 	}
 
-	private static function enemyPatternFromString(shipCount:Int, keyFrameCount:Int, stringData:Array<String>, 
-													 timeData:Array<Float>, shouldLoop:Bool, loopToIndex:Int):JVEnemyPattern
+	private static function enemyPatternFromString(shipCount:Int, 
+												   keyFrameCount:Int, 
+												   stringData:Array<String>, 
+												   timeData:Array<Float>,
+												   shouldLoop:Bool,
+												   loopToIndex:Int,
+												   totalWidth:Int,
+												   totalHeight:Int,
+												   spawnAnchor:EXTOffsetType):JVEnemyPattern
 	{
 		var enemyPattern:JVEnemyPattern = new JVEnemyPattern();
 		enemyPattern.keyFrameCount = keyFrameCount;
@@ -204,6 +225,9 @@ class JVEnemyPattern extends JVDataObject
 		enemyPattern.keyFramePositions = new Array();
 		enemyPattern.keyFrameTimes = new Array();
 		enemyPattern.shipCount = shipCount;
+		enemyPattern.totalWidth = totalWidth;
+		enemyPattern.totalHeight = totalHeight;
+		enemyPattern.spawnAnchor = spawnAnchor;
 
 		var stringToIndexMap:Map<String, Int> = new Map();
 		for (i in 0...shipCount)
