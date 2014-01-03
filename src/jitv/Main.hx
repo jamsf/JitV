@@ -12,16 +12,12 @@ import jitv.datamodel.JVDataObject;
  */
 class Main extends Engine 
 {
-	//TODO - fcole - Figure out we're gonna handle different screen sizes
-	//NOTE - Screen size is also set in application.xml
-	public static inline var kScreenWidth:Int = 640;
-	public static inline var kScreenHeight:Int = 380;
 	public static inline var kClearColor:Int = 0xff7777;
 	public static inline var kProjectName:String = "JitV";
 
 	function new()
 	{
-		super(kScreenWidth, kScreenHeight, JVConstants.FPS, false);
+		super(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT, JVConstants.FPS, false);
 		JVDataObject.setupFakeDB();
 	}
 
