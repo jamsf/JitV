@@ -12,17 +12,18 @@ import jitv.JVConstants;
  */
 class JVEnemyPattern extends JVDataObject
 {
-	public var shipCount:Int; // Number of ships in this pattern
-	public var keyFrameCount:Int; // Number of keyframes in the pattern data
+	public var shipCount:Int; 		// Number of ships in this pattern
+	public var keyFrameCount:Int; 	// Number of keyframes in the pattern data
 	public var keyFramePositions:Array<Array<Point>>; // Each element is an array of keyframes of positions for the ship at that index
-	public var keyFrameTimes:Array<Float>; // Each element is the time between the keyframe for that index, and the next one
-	public var loops:Bool; // Whether this pattern loops, or if enemies just maintain their final position until they exit the screen
-	public var loopIndex:Int; // Which keyframe to loop back to if this pattern loops
-	public var spawnAnchor:EXTOffsetType;
-	public var totalWidth:Int;
-	public var totalHeight:Int;
-	public var gridColumns:Int;
-	public var gridRows:Int;
+	public var keyFrameTimes:Array<Float>; 	// Each element is the time between the keyframe for that index, and the next one
+	public var loops:Bool; 					// Whether this pattern loops, or if enemies just maintain their final position until they exit the screen
+	public var loopIndex:Int; 				// Which keyframe to loop back to if this pattern loops
+	public var spawnAnchor:EXTOffsetType; 	// How to anchor this pattern in the screen
+	public var initialPositionOffset:Point; // Position offset from the anchor
+	public var totalWidth:Int;				// Pixel width of the entire pattern
+	public var totalHeight:Int;				// Pixel height of the entire pattern
+	public var gridColumns:Int;				// Number of columns in the pattern grid
+	public var gridRows:Int;				// Number of rows in the column grid
 	
 	// Data info
 	public static inline var DATA_TYPE_NAME:String = "enemy_pattern";
@@ -103,6 +104,7 @@ class JVEnemyPattern extends JVDataObject
 			JVConstants.PLAY_SPACE_HEIGHT,
 			13,
 			5,
+			new Point(0, -JVConstants.PLAY_SPACE_HEIGHT / 5),
 			EXTOffsetType.TOP_CENTER
 			);
 
@@ -175,6 +177,7 @@ class JVEnemyPattern extends JVDataObject
 			JVConstants.PLAY_SPACE_HEIGHT,
 			13,
 			5,
+			new Point(0, -JVConstants.PLAY_SPACE_HEIGHT / 5 * 2),
 			EXTOffsetType.TOP_CENTER
 			);
 
@@ -212,6 +215,7 @@ class JVEnemyPattern extends JVDataObject
 			JVConstants.PLAY_SPACE_HEIGHT,
 			13,
 			5,
+			new Point(0, 0),
 			EXTOffsetType.TOP_CENTER
 			);
 	}
@@ -226,6 +230,7 @@ class JVEnemyPattern extends JVDataObject
 												   totalHeight:Int,
 												   gridColumns:Int,
 												   gridRows:Int,
+												   initialPositionOffset:Point,
 												   spawnAnchor:EXTOffsetType):JVEnemyPattern
 	{
 		var enemyPattern:JVEnemyPattern = new JVEnemyPattern();
@@ -240,6 +245,7 @@ class JVEnemyPattern extends JVDataObject
 		enemyPattern.spawnAnchor = spawnAnchor;
 		enemyPattern.gridColumns = gridColumns;
 		enemyPattern.gridRows = gridRows;
+		enemyPattern.initialPositionOffset = initialPositionOffset;
 
 		var stringToIndexMap:Map<String, Int> = new Map();
 		for (i in 0...shipCount)

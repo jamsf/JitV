@@ -119,8 +119,8 @@ class JVPatternComponent implements JVEntityComponent
 	{
 		_previousPoint = _pattern.keyFramePositions[_indexInPattern][0];
 		_previousPoint = patternPointToScreenPoint(_previousPoint);
-		_parentEntity.x += _previousPoint.x;
-		_parentEntity.y += _previousPoint.y;
+		_parentEntity.x += _previousPoint.x + _pattern.initialPositionOffset.x;
+		_parentEntity.y += _previousPoint.y + _pattern.initialPositionOffset.y;
 		
 		// Delay the start of the pattern execution if necessary
 		if (_delay > 0)
