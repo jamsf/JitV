@@ -30,6 +30,8 @@ class JVPatternComponent implements JVEntityComponent
 		_pattern = pattern;
 		_indexInPattern = indexInPattern;
 		_delay = delay;
+		_gridSpaceWidth = cast (pattern.totalWidth / pattern.gridColumns);
+		_gridSpaceHeight = cast (pattern.totalHeight / pattern.gridRows);
 	}
 	
 	public function update():Void 
@@ -79,7 +81,7 @@ class JVPatternComponent implements JVEntityComponent
 		{
 			var nextKeyFramePoint:Point = _pattern.keyFramePositions[_indexInPattern][_keyFramesCompleted];
 			_motion.setMotion(_previousPoint.x, _previousPoint.y,
-							  nextKeyFramePoint.x * _parentEntity.width, nextKeyFramePoint.y * _parentEntity.height,
+							  nextKeyFramePoint.x * _gridSpaceWidth, nextKeyFramePoint.y * _gridSpaceHeight,
 							  _pattern.keyFrameTimes[previousKeyFrame]);
 		}
 		else
@@ -107,11 +109,13 @@ class JVPatternComponent implements JVEntityComponent
 	private var _keyFramesCompleted:Int = 0;
 	private var _motion:LinearMotion;
 	private var _previousPoint:Point;
+	private var _gridSpaceWidth:Int;
+	private var _gridSpaceHeight:Int;
 	
 	private function setupPatternMovement():Void
 	{
 		_previousPoint = _pattern.keyFramePositions[_indexInPattern][0];
-		_previousPoint = new Point(_previousPoint.x * _parentEntity.width, _previousPoint.y * _parentEntity.height);
+		_previousPoint = new Point(_previousPoint.x * _gridSpaceWidth, _previousPoint.y * _gridSpaceHeight);
 		_parentEntity.x += _previousPoint.x;
 		_parentEntity.y += _previousPoint.y;
 		
