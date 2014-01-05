@@ -33,7 +33,7 @@ class JVLevelGenerator
 	{
 		//NOTE - fcole - Temp logic
 		var level:JVLevel = new JVLevel();
-		level.spawnTimes = [20, 50, 80, 100, 120, 140, 150, 160, 170, 180, 185, 190, 195, 200, 202];
+		level.spawnTimes = [20, 50, 80, 100, 120, 140, 160, 180, 200, 220, 240, 250, 260, 270, 290, 300, 310, 320, 330, 335, 340];
 		level.enemiesForTimes = new Map();
 
 		var id:Int = 0;
