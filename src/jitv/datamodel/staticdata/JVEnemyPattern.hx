@@ -225,6 +225,88 @@ class JVEnemyPattern extends JVDataObject
 			new Point(0, 0),
 			EXTOffsetType.TOP_CENTER
 			);
+		
+		// ID 3
+		dataDictionary[3] = cast JVEnemyPattern.enemyPatternFromString(
+			3,
+			4,
+			[
+				("___0" +
+				 "____" +
+				 "____" +
+				 "2__1"),
+				 
+				("0__1" +
+				 "____" +
+				 "____" +
+				 "___2"),
+
+				("1__2" +
+				 "____" +
+				 "____" +
+				 "0___"),
+
+				("2___" +
+				 "____" +
+				 "____" +
+				 "1__0"),
+			],
+			[
+				1.5,
+				1.5,
+				1.5,
+				1.5
+			],
+			false,
+			0,
+			cast (JVConstants.PLAY_SPACE_WIDTH * 0.25),
+			cast (JVConstants.PLAY_SPACE_WIDTH * 0.25),
+			4,
+			4,
+			new Point(32, 0),
+			EXTOffsetType.TOP_RIGHT
+			);
+		
+		// ID 4
+		dataDictionary[4] = cast JVEnemyPattern.enemyPatternFromString(
+			3,
+			4,
+			[
+				("0___" +
+				 "____" +
+				 "____" +
+				 "1__2"),
+				 
+				("1__0" +
+				 "____" +
+				 "____" +
+				 "2___"),
+
+				("2__1" +
+				 "____" +
+				 "____" +
+				 "___0"),
+
+				("___2" +
+				 "____" +
+				 "____" +
+				 "0__1"),
+			],
+			[
+				1.5,
+				1.5,
+				1.5,
+				1.5
+			],
+			false,
+			0,
+			cast (JVConstants.PLAY_SPACE_WIDTH * 0.25),
+			cast (JVConstants.PLAY_SPACE_WIDTH * 0.25),
+			4,
+			4,
+			new Point(-32, 0),
+			EXTOffsetType.TOP_LEFT
+			);
 	}
 
 	private static function enemyPatternFromString(shipCount:Int, 

@@ -33,8 +33,9 @@ class JVEnemyClass extends JVDataObject
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
 		var id:Int = 0;
+		var enemy:JVEnemyClass;
 		
-		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy = new JVEnemyClass();
 		enemy.id = id;
 		enemy.name = "Enemy " + id;
 		enemy.type = "";
@@ -49,7 +50,7 @@ class JVEnemyClass extends JVDataObject
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy = new JVEnemyClass();
 		enemy.id = id;
 		enemy.name = "Enemy " + id;
 		enemy.type = "";
@@ -64,7 +65,7 @@ class JVEnemyClass extends JVDataObject
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy = new JVEnemyClass();
 		enemy.id = id;
 		enemy.name = "Enemy " + id;
 		enemy.type = "";
@@ -74,6 +75,36 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedDuringPattern = new Point(0, 1);
 		enemy.speedBeforePattern = enemy.speedDuringPattern;
 		enemy.speedAfterPattern = enemy.speedDuringPattern;
+		enemy.attackType = "standard";
+		enemy.imageName = "ENEMY_0_ENTITY";
+		dataDictionary[id] = cast enemy;
+		++id;
+		
+		enemy = new JVEnemyClass();
+		enemy.id = id;
+		enemy.name = "Enemy " + id;
+		enemy.type = "";
+		enemy.difficulty = 0;
+		enemy.patternId = 3;
+		enemy.patternDelay = 2;
+		enemy.speedDuringPattern = new Point(0, 0);
+		enemy.speedBeforePattern = new Point(-2, 0);
+		enemy.speedAfterPattern = new Point(2, 0);
+		enemy.attackType = "standard";
+		enemy.imageName = "ENEMY_0_ENTITY";
+		dataDictionary[id] = cast enemy;
+		++id;
+		
+		enemy = new JVEnemyClass();
+		enemy.id = id;
+		enemy.name = "Enemy " + id;
+		enemy.type = "";
+		enemy.difficulty = 0;
+		enemy.patternId = 4;
+		enemy.patternDelay = 2;
+		enemy.speedDuringPattern = new Point(0, 0);
+		enemy.speedBeforePattern = new Point(2, 0);
+		enemy.speedAfterPattern = new Point(-2, 0);
 		enemy.attackType = "standard";
 		enemy.imageName = "ENEMY_0_ENTITY";
 		dataDictionary[id] = cast enemy;
