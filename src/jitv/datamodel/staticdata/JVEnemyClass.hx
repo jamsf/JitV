@@ -33,61 +33,52 @@ class JVEnemyClass extends JVDataObject
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
 		var id:Int = 0;
-
-		for (i in 0...3)
-		{
-			var enemy:JVEnemyClass = new JVEnemyClass();
-			enemy.id = id;
-			enemy.name = "Enemy " + id;
-			enemy.type = "";
-			enemy.difficulty = 0;
-			enemy.patternId = 0;
-			enemy.patternDelay = 1;
-			enemy.speedDuringPattern = new Point(0, 0);
-			enemy.speedBeforePattern = new Point(0, 2);
-			enemy.speedAfterPattern = new Point(0, 2);
-			enemy.attackType = "standard";
-			enemy.imageName = "ENEMY_0_ENTITY";
-			dataDictionary[id] = cast enemy;
-			++id;
-		}
-
-		for (i in 0...3)
-		{
-			var enemy:JVEnemyClass = new JVEnemyClass();
-			enemy.id = id;
-			enemy.name = "Enemy " + id;
-			enemy.type = "";
-			enemy.difficulty = 0;
-			enemy.patternId = 1;
-			enemy.patternDelay = 1;
-			enemy.speedDuringPattern = new Point(0, 0);
-			enemy.speedBeforePattern = new Point(0, 2);
-			enemy.speedAfterPattern = new Point(0, 2);
-			enemy.attackType = "standard";
-			enemy.imageName = "ENEMY_0_ENTITY";
-			dataDictionary[id] = cast enemy;
-			++id;
-		}
-
-		for (i in 0...4)
-		{
-			var enemy:JVEnemyClass = new JVEnemyClass();
-			enemy.id = id;
-			enemy.name = "Enemy " + id;
-			enemy.type = "";
-			enemy.difficulty = 0;
-			enemy.patternId = 2;
-			enemy.patternDelay = 0;
-			enemy.speedDuringPattern = new Point(0, 1);
-			enemy.speedBeforePattern = enemy.speedDuringPattern;
-			enemy.speedAfterPattern = enemy.speedDuringPattern;
-			enemy.attackType = "standard";
-			enemy.imageName = "ENEMY_0_ENTITY";
-			dataDictionary[id] = cast enemy;
-			++id;
-		}
-
+		
+		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy.id = id;
+		enemy.name = "Enemy " + id;
+		enemy.type = "";
+		enemy.difficulty = 0;
+		enemy.patternId = 0;
+		enemy.patternDelay = 1;
+		enemy.speedDuringPattern = new Point(0, 0);
+		enemy.speedBeforePattern = new Point(0, 2);
+		enemy.speedAfterPattern = new Point(0, 2);
+		enemy.attackType = "standard";
+		enemy.imageName = "ENEMY_0_ENTITY";
+		dataDictionary[id] = cast enemy;
+		++id;
+		
+		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy.id = id;
+		enemy.name = "Enemy " + id;
+		enemy.type = "";
+		enemy.difficulty = 0;
+		enemy.patternId = 1;
+		enemy.patternDelay = 1;
+		enemy.speedDuringPattern = new Point(0, 0);
+		enemy.speedBeforePattern = new Point(0, 2);
+		enemy.speedAfterPattern = new Point(0, 2);
+		enemy.attackType = "standard";
+		enemy.imageName = "ENEMY_0_ENTITY";
+		dataDictionary[id] = cast enemy;
+		++id;
+		
+		var enemy:JVEnemyClass = new JVEnemyClass();
+		enemy.id = id;
+		enemy.name = "Enemy " + id;
+		enemy.type = "";
+		enemy.difficulty = 0;
+		enemy.patternId = 2;
+		enemy.patternDelay = 0;
+		enemy.speedDuringPattern = new Point(0, 1);
+		enemy.speedBeforePattern = enemy.speedDuringPattern;
+		enemy.speedAfterPattern = enemy.speedDuringPattern;
+		enemy.attackType = "standard";
+		enemy.imageName = "ENEMY_0_ENTITY";
+		dataDictionary[id] = cast enemy;
+		++id;
+		
 		ENEMY_CLASS_IDS = id;
 	}
 }
