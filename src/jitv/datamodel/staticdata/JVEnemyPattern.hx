@@ -21,6 +21,8 @@ class JVEnemyPattern extends JVDataObject
 	public var spawnAnchor:EXTOffsetType;
 	public var totalWidth:Int;
 	public var totalHeight:Int;
+	public var gridColumns:Int;
+	public var gridRows:Int;
 	
 	// Data info
 	public static inline var DATA_TYPE_NAME:String = "enemy_pattern";
@@ -99,6 +101,8 @@ class JVEnemyPattern extends JVDataObject
 			-1,
 			JVConstants.PLAY_SPACE_WIDTH,
 			JVConstants.PLAY_SPACE_HEIGHT,
+			13,
+			5,
 			EXTOffsetType.TOP_CENTER
 			);
 
@@ -169,6 +173,8 @@ class JVEnemyPattern extends JVDataObject
 			-1,
 			JVConstants.PLAY_SPACE_WIDTH,
 			JVConstants.PLAY_SPACE_HEIGHT,
+			13,
+			5,
 			EXTOffsetType.TOP_CENTER
 			);
 
@@ -204,6 +210,8 @@ class JVEnemyPattern extends JVDataObject
 			0,
 			JVConstants.PLAY_SPACE_WIDTH,
 			JVConstants.PLAY_SPACE_HEIGHT,
+			13,
+			5,
 			EXTOffsetType.TOP_CENTER
 			);
 	}
@@ -216,6 +224,8 @@ class JVEnemyPattern extends JVDataObject
 												   loopToIndex:Int,
 												   totalWidth:Int,
 												   totalHeight:Int,
+												   gridColumns:Int,
+												   gridRows:Int,
 												   spawnAnchor:EXTOffsetType):JVEnemyPattern
 	{
 		var enemyPattern:JVEnemyPattern = new JVEnemyPattern();
@@ -228,6 +238,8 @@ class JVEnemyPattern extends JVDataObject
 		enemyPattern.totalWidth = totalWidth;
 		enemyPattern.totalHeight = totalHeight;
 		enemyPattern.spawnAnchor = spawnAnchor;
+		enemyPattern.gridColumns = gridColumns;
+		enemyPattern.gridRows = gridRows;
 
 		var stringToIndexMap:Map<String, Int> = new Map();
 		for (i in 0...shipCount)
@@ -254,7 +266,7 @@ class JVEnemyPattern extends JVDataObject
 				}
 
 				++xOffset;
-				if (xOffset == 13)
+				if (xOffset == gridColumns)
 				{
 					xOffset = 0;
 					++yOffset;
