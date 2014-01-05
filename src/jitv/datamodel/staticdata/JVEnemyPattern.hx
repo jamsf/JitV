@@ -252,9 +252,7 @@ class JVEnemyPattern extends JVDataObject
 		for (i in 0...keyFrameCount)
 		{
 			var keyFrameString:String = stringData[i];
-
-			var xModifier:Int = -6;
-			var yModifier:Int = -2;
+			
 			var xOffset:Int = 0;
 			var yOffset:Int = 0;
 			for (character in keyFrameString.split(""))
@@ -262,7 +260,7 @@ class JVEnemyPattern extends JVDataObject
 				if (character != "_")
 				{
 					var shipIndex:Int = stringToIndexMap[character];
-					enemyPattern.keyFramePositions[shipIndex].push(new Point(xOffset + xModifier, yOffset + yModifier));
+					enemyPattern.keyFramePositions[shipIndex].push(new Point(xOffset, yOffset));
 				}
 
 				++xOffset;

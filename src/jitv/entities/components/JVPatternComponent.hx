@@ -4,6 +4,8 @@ import flash.geom.Point;
 import com.haxepunk.tweens.motion.LinearMotion;
 import com.haxepunk.Tween;
 import extendedhxpunk.ext.EXTTimer;
+import extendedhxpunk.ext.EXTOffsetType;
+import jitv.JVConstants;
 import jitv.entities.JVEntity;
 import jitv.datamodel.staticdata.JVEnemyPattern;
 
@@ -80,8 +82,9 @@ class JVPatternComponent implements JVEntityComponent
 		if (startNewMotion)
 		{
 			var nextKeyFramePoint:Point = _pattern.keyFramePositions[_indexInPattern][_keyFramesCompleted];
+			nextKeyFramePoint = patternPointToScreenPoint(nextKeyFramePoint);
 			_motion.setMotion(_previousPoint.x, _previousPoint.y,
-							  nextKeyFramePoint.x * _gridSpaceWidth, nextKeyFramePoint.y * _gridSpaceHeight,
+							  nextKeyFramePoint.x, nextKeyFramePoint.y,
 							  _pattern.keyFrameTimes[previousKeyFrame]);
 		}
 		else
@@ -115,7 +118,7 @@ class JVPatternComponent implements JVEntityComponent
 	private function setupPatternMovement():Void
 	{
 		_previousPoint = _pattern.keyFramePositions[_indexInPattern][0];
-		_previousPoint = new Point(_previousPoint.x * _gridSpaceWidth, _previousPoint.y * _gridSpaceHeight);
+		_previousPoint = patternPointToScreenPoint(_previousPoint);
 		_parentEntity.x += _previousPoint.x;
 		_parentEntity.y += _previousPoint.y;
 		
@@ -124,5 +127,57 @@ class JVPatternComponent implements JVEntityComponent
 			EXTTimer.createTimer(_delay, false, beginPatternMovement);
 		else
 			this.beginPatternMovement(null);
+	}
+	
+	private function patternPointToScreenPoint(point:Point):Point
+	{
+		var scaledX:Int = cast ((point.x * _gridSpaceWidth) + (_gridSpaceWidth / 2));
+		var scaledY:Int = cast ((point.y * _gridSpaceHeight) + (_gridSpaceHeight / 2));
+		
+		if (_pattern.spawnAnchor == EXTOffsetType.TOP_CENTER)
+		{
+			return new Point(scaledX + (JVConstants.PLAY_SPACE_WIDTH / 2) - (_pattern.totalWidth / 2),
+							 scaledY);
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.TOP_RIGHT)
+		{
+			return new Point(scaledX + JVConstants.PLAY_SPACE_WIDTH - _pattern.totalWidth,
+							 scaledY);
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.LEFT_CENTER)
+		{
+			return new Point(scaledX,
+							 scaledY + (JVConstants.PLAY_SPACE_HEIGHT / 2) - (_pattern.totalHeight / 2));
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.CENTER)
+		{
+			return new Point(scaledX + (JVConstants.PLAY_SPACE_WIDTH / 2) - (_pattern.totalWidth / 2),
+							 scaledY + (JVConstants.PLAY_SPACE_HEIGHT / 2) - (_pattern.totalHeight / 2));
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.RIGHT_CENTER)
+		{
+			return new Point(scaledX + JVConstants.PLAY_SPACE_WIDTH - _pattern.totalWidth,
+							 scaledY + (JVConstants.PLAY_SPACE_HEIGHT / 2) - (_pattern.totalHeight / 2));
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.BOTTOM_LEFT)
+		{
+			return new Point(scaledX,
+							 scaledY + JVConstants.PLAY_SPACE_HEIGHT - _pattern.totalHeight);
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.BOTTOM_CENTER)
+		{
+			return new Point(scaledX + (JVConstants.PLAY_SPACE_WIDTH / 2) - (_pattern.totalWidth / 2),
+							 scaledY + JVConstants.PLAY_SPACE_HEIGHT - _pattern.totalHeight);
+		}
+		if (_pattern.spawnAnchor == EXTOffsetType.BOTTOM_RIGHT)
+		{
+			return new Point(scaledX + JVConstants.PLAY_SPACE_WIDTH - _pattern.totalWidth,
+							 scaledY + JVConstants.PLAY_SPACE_HEIGHT - _pattern.totalHeight);
+		}
+		else
+		// if (_pattern.spawnAnchor == EXTOffsetType.TOP_LEFT)
+		{
+			return new Point(scaledX, scaledY);
+		}
 	}
 }
