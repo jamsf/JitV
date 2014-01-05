@@ -13,8 +13,8 @@ import jitv.ui.JVHudView;
 import jitv.JVConstants;
 
 /**
- * JVCombatWorld
- * A world which represents a combat level in the game; the player(s) 
+ * JVCombatScene
+ * A scene which represents a combat level in the game; the player(s) 
  * fly around shooting enemies.
  * Created by Fletcher 11/3/13, Ported by Fletcher 12/15/13
  */
