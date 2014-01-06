@@ -232,9 +232,9 @@ class JVEnemyPattern extends JVDataObject
 			4,
 			[
 				("___0" +
+				 "___2" +
 				 "____" +
-				 "____" +
-				 "2__1"),
+				 "___1"),
 				 
 				("0__1" +
 				 "____" +
@@ -273,9 +273,9 @@ class JVEnemyPattern extends JVDataObject
 			4,
 			[
 				("0___" +
+				 "2___" +
 				 "____" +
-				 "____" +
-				 "1__2"),
+				 "1___"),
 				 
 				("1__0" +
 				 "____" +
