@@ -46,7 +46,7 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedBeforePattern = new Point(0, 2);
 		enemy.speedAfterPattern = new Point(0, 2);
 		enemy.attackType = "standard";
-		enemy.imageName = "ENEMY_0_ENTITY";
+		enemy.imageName = "enemy_0_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
@@ -61,7 +61,7 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedBeforePattern = new Point(0, 2);
 		enemy.speedAfterPattern = new Point(0, 2);
 		enemy.attackType = "standard";
-		enemy.imageName = "ENEMY_0_ENTITY";
+		enemy.imageName = "enemy_0_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
@@ -76,7 +76,7 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedBeforePattern = enemy.speedDuringPattern;
 		enemy.speedAfterPattern = enemy.speedDuringPattern;
 		enemy.attackType = "standard";
-		enemy.imageName = "ENEMY_0_ENTITY";
+		enemy.imageName = "enemy_0_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
@@ -91,7 +91,7 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedBeforePattern = new Point(-2, 0);
 		enemy.speedAfterPattern = new Point(2, 0);
 		enemy.attackType = "standard";
-		enemy.imageName = "ENEMY_0_ENTITY";
+		enemy.imageName = "enemy_1_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
@@ -106,7 +106,7 @@ class JVEnemyClass extends JVDataObject
 		enemy.speedBeforePattern = new Point(2, 0);
 		enemy.speedAfterPattern = new Point(-2, 0);
 		enemy.attackType = "standard";
-		enemy.imageName = "ENEMY_0_ENTITY";
+		enemy.imageName = "enemy_1_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		

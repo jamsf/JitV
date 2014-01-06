@@ -41,14 +41,14 @@ class JVBulletEntity extends JVEntity
 		{
 			this.y -= movementMagnitude;
 			
-			if (this.y < 0 - JVConstants.OFFSCREEN_DELETION_BUFFER)
+			if (this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
 				HXP.scene.remove(this);
 		}
 		else if (type == "enemy")
 		{
 			this.y += movementMagnitude;
 			
-			if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
+			if (this.y > HXP.screen.height + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
 				HXP.scene.remove(this);
 		}
 	}

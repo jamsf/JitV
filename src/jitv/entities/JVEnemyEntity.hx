@@ -28,11 +28,12 @@ class JVEnemyEntity extends JVEntity
 		
 		_enemyData = enemyData;
 
-		var image:Image = new Image("gfx/entities/enemy_0_entity.png");
+		var imagePath:String = "gfx/entities/" + _enemyData.enemyClass.imageName + ".png";
+		var image:Image = new Image(imagePath);
 		image.centerOrigin();
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/entities/enemy_0_entity.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
+		var mask:Pixelmask = new Pixelmask(imagePath, Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.mask = mask;
 		
 		this.type = "enemy";
@@ -80,7 +81,10 @@ class JVEnemyEntity extends JVEntity
 		}
 		
 		// Check if offscreen and remove
-		if (this.y > HXP.screen.height + JVConstants.OFFSCREEN_DELETION_BUFFER)
+		if (this.x < 0 - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y < 0 - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER)
 			HXP.scene.remove(this);
 	}
 

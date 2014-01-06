@@ -14,9 +14,10 @@ class JVConstants
 #end
 	public static inline var ASSUMED_FPS_FOR_PHYSICS:Int = 60;
 	public static inline var BASE_SHIP_MOVEMENT_SPEED:Float = 4.0;
-	public static inline var OFFSCREEN_DELETION_BUFFER:Int = 32;
+	public static inline var ENEMY_OFFSCREEN_DELETION_BUFFER:Int = 128;
+	public static inline var BULLET_OFFSCREEN_DELETION_BUFFER:Int = 32;
 	
-	//TODO - fcole - Figure out we're gonna handle different screen sizes
+	//TODO - fcole - Figure out how we're gonna handle different screen sizes
 	//NOTE - Screen size is set in application.xml
 	public static inline var PLAY_SPACE_WIDTH:Int = 640;
 	public static inline var PLAY_SPACE_HEIGHT:Int = 380;
