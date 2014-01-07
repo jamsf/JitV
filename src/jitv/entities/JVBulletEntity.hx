@@ -38,18 +38,14 @@ class JVBulletEntity extends JVEntity
 		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
 		if (type == "player")
-		{
 			this.y -= movementMagnitude;
-			
-			if (this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
-				HXP.scene.remove(this);
-		}
 		else if (type == "enemy")
-		{
 			this.y += movementMagnitude;
-			
-			if (this.y > HXP.screen.height + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
-				HXP.scene.remove(this);
-		}
+		
+		if (this.x < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+			this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
+			HXP.scene.remove(this);
 	}
 }
