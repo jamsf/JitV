@@ -1,5 +1,7 @@
 package jitv.entities;
 
+import com.haxepunk.utils.Joystick;
+import extendedhxpunk.io.Gamepad;
 import flash.geom.Point;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
@@ -35,6 +37,9 @@ class JVPlayerShipEntity extends JVEntity
 		
 		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
 		_cooldownTimer.paused = true;
+		
+		// Hardcoded gamepad to be 0th one
+		_gamepad = new Gamepad(0);
 	}
 	
 	override public function update():Void
@@ -49,25 +54,42 @@ class JVPlayerShipEntity extends JVEntity
 		var xMultiplier:Float = 1.0;
 		var yMultiplier:Float = 1.0;
 		
-		if (Input.check(Key.RIGHT))
+		// TODO - Have better checking for controller support
+		if ((Math.abs(_gamepad.leftAnalogueX) > 0) || (Math.abs(_gamepad.leftAnalogueY) > 0))
 		{
-			horizontalMovement = true;
+			if (Math.abs(_gamepad.leftAnalogueX) > 0)
+			{
+				horizontalMovement = true;
+				xMultiplier = _gamepad.leftAnalogueX;
+			}
+			if (Math.abs(_gamepad.leftAnalogueY) > 0)
+			{
+				verticalMovement = true;
+				yMultiplier = _gamepad.leftAnalogueY;
+			}
 		}
-		if (Input.check(Key.LEFT))
+		else
 		{
-			horizontalMovement = !horizontalMovement;
-			xMultiplier = -1.0;
+			if (Input.check(Key.RIGHT))
+			{
+				horizontalMovement = true;
+			}
+			if (Input.check(Key.LEFT))
+			{
+				horizontalMovement = !horizontalMovement;
+				xMultiplier = -1.0;
+			}
+			if (Input.check(Key.DOWN))
+			{
+				verticalMovement = true;
+			}
+			if (Input.check(Key.UP))
+			{
+				verticalMovement = !verticalMovement;
+				yMultiplier = -1.0;
+			}
 		}
-		if (Input.check(Key.DOWN))
-		{
-			verticalMovement = true;
-		}
-		if (Input.check(Key.UP))
-		{
-			verticalMovement = !verticalMovement;
-			yMultiplier = -1.0;
-		}
-		
+			
 		if (horizontalMovement && verticalMovement)
 		{
 			xMultiplier *= EXTMath.SQRT2_2;
@@ -80,7 +102,7 @@ class JVPlayerShipEntity extends JVEntity
 			this.y += yMultiplier * movementMagnitude;
 			
 		// Primary Fire
-		if (Input.check(Key.SPACE) && _cooldown == false)
+		if ((Input.check(Key.SPACE) || (_gamepad != null && _gamepad.check(XboxButton.A_BUTTON))) && _cooldown == false)
 		{
 			fireBullet();
 		}
@@ -102,6 +124,8 @@ class JVPlayerShipEntity extends JVEntity
 	 */
 	private var _cooldownTimer:EXTTimer;
 	private var _cooldown:Bool;
+	private var _gamepad:Gamepad;
+	
 	private static inline var FIRING_RATE:Float = 0.167;
 	
 	private function fireBullet():Void
@@ -110,5 +134,10 @@ class JVPlayerShipEntity extends JVEntity
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;
+	}
+	
+	private function updateMovement():Void
+	{
+		
 	}
 }
