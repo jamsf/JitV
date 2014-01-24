@@ -77,7 +77,10 @@ class JVEnemyEntity extends JVEntity
 			HXP.scene.remove(collidedEntity);
 			
 			if (_health <= 0)
+			{
+				killed();
 				HXP.scene.remove(this);
+			}
 		}
 		
 		// Check if offscreen and remove
@@ -85,13 +88,26 @@ class JVEnemyEntity extends JVEntity
 			this.y < 0 - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
 			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
 			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER)
-			HXP.scene.remove(this);
+			HXP.scene.remove(this); //TODO: Account for things that might be going on with the ship if it hits this point.
 	}
 
 	public function fireBullet(timer:EXTTimer):Void
 	{
 		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
 		HXP.scene.add(bullet);
+	}
+	
+	/**
+	 * 	killed - public; Function that handles enemy ships dying.
+	 *	PRECON:		this has fallen at or below 0 health
+	 * 	POSTCON:	Enemy is no longer colidable, potentially a powerup has spawned, and eventually a death animation should play	
+	 */
+	public function killed():Void 
+	{
+		var pwrup:JVPowerUpEntity = new JVPowerUpEntity(this.x, this.y, this.type);
+		if (1)
+			HXP.scene.add(pwrup);
+		//this.type = "dying_enemy"; //TODO: Implement death animations
 	}
 	
 	override public function removed():Void

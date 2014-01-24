@@ -4,6 +4,7 @@ import com.haxepunk.utils.Joystick;
 import extendedhxpunk.io.Gamepad;
 import flash.geom.Point;
 import com.haxepunk.HXP;
+import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Hitbox;
 import com.haxepunk.masks.Pixelmask;
@@ -105,6 +106,13 @@ class JVPlayerShipEntity extends JVEntity
 		if ((Input.check(Key.SPACE) || (_gamepad != null && _gamepad.check(XboxButton.A_BUTTON))) && _cooldown == false)
 		{
 			fireBullet();
+		}
+		
+		var collidedPwrup:Entity = this.collide("pwrup", this.x, this.y);
+		if (collidedPwrup != null)
+		{
+			//Call pwrup logic here.
+			HXP.scene.remove(collidedPwrup);		
 		}
 	}
 	
