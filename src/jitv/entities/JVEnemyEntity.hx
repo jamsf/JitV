@@ -105,7 +105,7 @@ class JVEnemyEntity extends JVEntity
 	public function killed():Void 
 	{
 		var pwrup:JVPowerUpEntity = new JVPowerUpEntity(this.x, this.y, this.type);
-		if (1)
+		if (true)
 			HXP.scene.add(pwrup);
 		//this.type = "dying_enemy"; //TODO: Implement death animations
 	}
