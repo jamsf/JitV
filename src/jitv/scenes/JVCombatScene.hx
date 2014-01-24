@@ -6,6 +6,7 @@ import com.haxepunk.graphics.Spritemap;
 import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
+import extendedhxpunk.ext.EXTTimer;
 import jitv.datamodel.proceduraldata.JVLevel;
 import jitv.entities.JVEnemyEntity;
 import jitv.entities.JVPlayerShipEntity;
@@ -37,6 +38,9 @@ class JVCombatScene extends EXTScene
 		_playerShip.x = 320;
 		_playerShip.y = 240;
 		this.add(_playerShip);
+		
+		_levelEndsTimer = EXTTimer.createTimer(20, false, goToLevelSelectScene);
+		_levelEndsTimer.paused = true;
 	}
 	
 	override public function update():Void
@@ -69,6 +73,12 @@ class JVCombatScene extends EXTScene
 				}
 			}
 		}
+		else
+		{	
+			// Go to level select 20 seconds after all enemy waves have spawned
+			_levelEndsTimer.paused = false;
+			//EXTTimer.createTimer(5, false, goToLevelSelectScene);
+		}
 		
 		// Check collisions
 		if (_playerShip != null)
@@ -85,6 +95,11 @@ class JVCombatScene extends EXTScene
 		_time += HXP.elapsed;
 	}
 	
+	public function goToLevelSelectScene(timer:EXTTimer):Void
+	{
+		JVSceneManager.sharedInstance().goToLevelSelectScene();
+	}
+	
 	/**
 	 * Private
 	 */
@@ -93,6 +108,9 @@ class JVCombatScene extends EXTScene
 	private var _playerShip:JVPlayerShipEntity;
 	private var _levelData:JVLevel;
 	private var _spawnTimesCompleted:Int = 0;
+	private var _levelEndsTimer:EXTTimer;
+	
+
 	
 	private function addWaves():Void
 	{
