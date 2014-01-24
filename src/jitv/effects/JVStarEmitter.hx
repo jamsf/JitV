@@ -25,7 +25,8 @@ class JVStarEmitter extends Entity
 		
 		// Set background image
 		var image:Image = new Image("gfx/entities/particle_entity.png");
-		image.scale = HXP.screen.width;
+		image.scaledWidth = HXP.screen.width;
+		image.scaledHeight = HXP.screen.height;
 		image.color = 0x000000;
 		
 		graphic = image;
