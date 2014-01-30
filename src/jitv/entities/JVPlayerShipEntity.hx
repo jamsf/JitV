@@ -108,10 +108,12 @@ class JVPlayerShipEntity extends JVEntity
 			fireBullet();
 		}
 		
+		//This is the logic that handles collision with a powerup.
 		var collidedPwrup:Entity = this.collide("pwrup", this.x, this.y);
 		if (collidedPwrup != null)
 		{
 			//Call pwrup logic here.
+			++_lifeCount;
 			HXP.scene.remove(collidedPwrup);		
 		}
 	}
@@ -128,11 +130,32 @@ class JVPlayerShipEntity extends JVEntity
 	}
 	
 	/**
+	 *	isHit 	- 	public mutator function; Logic that executes when ship is hit
+	 *	PRECON:		this has just been hit by an opposing entity type
+	 *	POSTCON:	logic that executes when ship is hit by an enemy in its current state
+	 */
+	public function isHit():Void
+	{
+		--_lifeCount;
+	}
+	
+	/**
+	 *	getLives	- 	public accesor function; Retrieve number of player lives
+	 *	PRECON:			N/A
+	 *	POSTCON:		Return life count for this ship
+	 */
+	public function getLives():Int
+	{
+		return _lifeCount;
+	}
+	
+	/**
 	 * Private
 	 */
 	private var _cooldownTimer:EXTTimer;
 	private var _cooldown:Bool;
 	private var _gamepad:Gamepad;
+	private var _lifeCount:Int;
 	
 	private static inline var FIRING_RATE:Float = 0.167;
 	
