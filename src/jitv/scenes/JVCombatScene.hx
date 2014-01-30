@@ -32,12 +32,13 @@ class JVCombatScene extends EXTScene
 	{
 		//HXP.screen.color = 0x26B0E9;
 		
-		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
+		_hudView = new JVHudView(this.worldCamera);
+		this.staticUiController.rootView.addSubview(_hudView);
 		//this.addWaves();
 		_starEmitter = new JVStarEmitter();
 		this.add(_starEmitter);
 		
-		_playerShip = new JVPlayerShipEntity();
+		_playerShip = new JVPlayerShipEntity(_hudView);
 		_playerShip.x = 320;
 		_playerShip.y = 240;
 		this.add(_playerShip);
@@ -120,7 +121,7 @@ class JVCombatScene extends EXTScene
 	private var _levelData:JVLevel;
 	private var _spawnTimesCompleted:Int = 0;
 	private var _levelEndsTimer:EXTTimer;
-	
+	private var _hudView:JVHudView;
 
 	
 	/*

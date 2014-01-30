@@ -52,7 +52,7 @@ class JVHudView extends UIView
 		this.addSubview(livesDisplay);
 		this.addSubview(_livesCount);
 		
-		updateLivesCount(1);
+		//updateLivesCount(1);
 	}
 	
 	public function backButtonCallback(args:Array<Dynamic>):Void
