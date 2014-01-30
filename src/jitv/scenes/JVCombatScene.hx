@@ -92,8 +92,14 @@ class JVCombatScene extends EXTScene
 			if (collidedEnemy != null)
 			{
 				this.remove(collidedEnemy);
-				this.remove(_playerShip);
-				_playerShip = null;
+				//DESC: Remove the player ship if there are no more lives. Otherwise call method for the ship being hit.
+				if (_playerShip.getLives() == 0)
+				{
+					this.remove(_playerShip);
+					_playerShip = null;
+				}
+				else
+					_playerShip.isHit();
 			}
 		}
 
