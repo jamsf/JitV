@@ -59,6 +59,12 @@ class JVMainMenuScene extends EXTScene
 		_playButton.enabled = false;
 		menuDialog.addSubview(_playButton);
 		
+		// Configure button
+		_configureButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "configure", configureButtonCallback);
+		_configureButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		_configureButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		menuDialog.addSubview(_configureButton);
+		
 		this.staticUiController.rootView.addSubview(titleDialog);
 		this.staticUiController.rootView.addSubview(menuDialog);
 	}
@@ -73,9 +79,15 @@ class JVMainMenuScene extends EXTScene
 		JVSceneManager.sharedInstance().goToLevelSelectScene();
 	}
 	
+	public function configureButtonCallback(args:Array<Dynamic>):Void
+	{
+		JVSceneManager.sharedInstance().goToButonSelectScene();
+	}
+	
 	/**
 	 * Private
 	 */
 	private var _toggleButton:JVExampleMenuButton;
 	private var _playButton:JVExampleMenuButton;
+	private var _configureButton:JVExampleMenuButton;
 }
