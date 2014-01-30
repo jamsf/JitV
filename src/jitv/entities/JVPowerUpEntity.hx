@@ -15,7 +15,12 @@ import jitv.entities.JVEntity;
  */
 class JVPowerUpEntity extends JVEntity
 {
-
+	/**
+	 * Public ctor func; default constructor
+	 * @param	x		int; represents position along the x-axis
+	 * @param	y		int; represents position along the y-axis
+	 * @param	type	string; object type descriptor
+	 */
 	public function new(x:Float, y:Float, type:String) 
 	{
 		super();
@@ -35,7 +40,7 @@ class JVPowerUpEntity extends JVEntity
 	}
 	
 	/**
-	 * Update - Public; runs update loop on powerup entity
+	 * Update - Public Mutatator func; runs update loop on powerup entity
 	 * PRECON:	N/A
 	 * POSTCON:	Power-up Entity is updated.
 	 */
