@@ -1,6 +1,7 @@
 package jitv.datamodel;
 
 import jitv.datamodel.staticdata.*;
+import extendedhxpunk.ext.EXTJsonSerialization;
 
 /**
  * JVDataObject
@@ -19,6 +20,7 @@ class JVDataObject
 		fakeDB = new Map();
 		JVEnemyClass.setupFakeDB();
 		JVEnemyPattern.setupFakeDB();
+		JVJsonTestDataClass.setupFakeDB();
 	}
 
 	public static function lookupStaticDataObject(dataClass:String, dataId:Int):JVDataObject

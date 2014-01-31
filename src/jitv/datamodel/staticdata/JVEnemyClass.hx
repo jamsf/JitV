@@ -2,6 +2,7 @@ package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
 import jitv.datamodel.JVDataObject;
+import tjson.TJSON;
 
 /**
  * JVEnemyClass
@@ -35,6 +36,21 @@ class JVEnemyClass extends JVDataObject
 		var id:Int = 0;
 		var enemy:JVEnemyClass;
 		
+		//enemy = TJSON.parse(
+		//"{" +
+			//"id: " + id + ", " +
+			//"name: 'Enemy " + id + "'" + ", " +
+			//"type: ''" + ", " +
+			//"difficulty: 0" + ", " +
+			//"patternId: 0" + ", " +
+			//"patternDelay: 1" + ", " +
+			//"speedDuringPattern: { x: 0, y: 0 }" + ", " +
+			//"speedBeforePattern: { x: 0, y: 2 }" + ", " +
+			//"speedAfterPattern:  { x: 0, y: 2 }" + ", " +
+			//"attackType: 'standard'" + ", " +
+			//"imageName: 'enemy_0_entity'" +
+		//"}");
+
 		enemy = new JVEnemyClass();
 		enemy.id = id;
 		enemy.name = "Enemy " + id;
