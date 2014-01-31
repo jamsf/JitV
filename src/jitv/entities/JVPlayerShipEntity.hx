@@ -95,7 +95,7 @@ class JVPlayerShipEntity extends JVEntity
 				yMultiplier = -1.0;
 			}
 		}
-			
+		
 		if (horizontalMovement && verticalMovement)
 		{
 			xMultiplier *= EXTMath.SQRT2_2;
@@ -106,7 +106,11 @@ class JVPlayerShipEntity extends JVEntity
 			this.x += xMultiplier * movementMagnitude;
 		if (verticalMovement)
 			this.y += yMultiplier * movementMagnitude;
-			
+		
+		
+		clampHorizontal(0, JVConstants.PLAY_SPACE_WIDTH);
+		clampVertical(0, JVConstants.PLAY_SPACE_HEIGHT);
+		
 		// Primary Fire
 		if ((Input.check(Key.SPACE) || (_gamepad != null && _gamepad.check(XboxButton.A_BUTTON))) && _cooldown == false)
 		{
