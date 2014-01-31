@@ -70,7 +70,7 @@ class JVEnemyEntity extends JVEntity
 		this.moveBy(horizontalSpeed, verticalSpeed, null, true);
 		
 		// Check for collisions
-		var collidedEntity:Entity = this.collide("player", this.x, this.y);
+		var collidedEntity:Entity = this.collide("playerbullet", this.x, this.y);
 		if (collidedEntity != null)
 		{
 			_health -= 34;
@@ -98,7 +98,7 @@ class JVEnemyEntity extends JVEntity
 	}
 	
 	/**
-	 * 	killed - public; Function that handles enemy ships dying.
+	 * 	killed - public mutator funciton; Logic for when an enemy ship dies.
 	 *	PRECON:		this has fallen at or below 0 health
 	 * 	POSTCON:	Enemy is no longer colidable, potentially a powerup has spawned, and eventually a death animation should play	
 	 */

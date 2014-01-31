@@ -21,4 +21,7 @@ class JVConstants
 	//NOTE - Screen size is set in application.xml
 	public static inline var PLAY_SPACE_WIDTH:Int = 640;
 	public static inline var PLAY_SPACE_HEIGHT:Int = 380;
+
+	//Player Constants
+	public static inline var START_LIVES:Int = 3;
 }
