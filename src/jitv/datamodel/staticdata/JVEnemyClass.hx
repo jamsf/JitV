@@ -1,8 +1,11 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
+import haxe.Resource;
 import jitv.datamodel.JVDataObject;
+import tjson.TJSON;
 import extendedhxpunk.ext.EXTJsonSerialization;
+import extendedhxpunk.ext.EXTConsole;
 
 /**
  * JVEnemyClass
@@ -33,94 +36,21 @@ class JVEnemyClass extends JVDataObject
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
-		var id:Int = 0;
-		var enemy:JVEnemyClass;
+		var stringsArray:Array<String> = Resource.listNames();
+		var fileContent:String = Resource.getString("enemy_class");
+		//EXTConsole.debug("JVEnemyClass", "setupFakeDB", [fileContent]);
 		
-		enemy = EXTJsonSerialization.decode(
-		"{" +
-			"id: " + id                + ", " +
-			"name: 'Enemy " + id + "'" + ", " +
-			"type: ''"                 + ", " +
-			"difficulty: 0"            + ", " +
-			"patternId: 0"             + ", " +
-			"patternDelay: 1"          + ", " +
-			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
-			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
-			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
-			"attackType: 'standard'"   + ", " +
-			"imageName: 'enemy_0_entity'" +
-		"}", JVEnemyClass);
-		dataDictionary[id] = cast enemy;
-		++id;
+		var o:Dynamic = TJSON.parse(fileContent);
 		
-		enemy = EXTJsonSerialization.decode(
-		"{" +
-			"id: " + id                + ", " +
-			"name: 'Enemy " + id + "'" + ", " +
-			"type: ''"                 + ", " +
-			"difficulty: 0"            + ", " +
-			"patternId: 1"             + ", " +
-			"patternDelay: 1"          + ", " +
-			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
-			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
-			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
-			"attackType: 'standard'"   + ", " +
-			"imageName: 'enemy_0_entity'" +
-		"}", JVEnemyClass);
-		dataDictionary[id] = cast enemy;
-		++id;
+		for (field in Reflect.fields(o)) 
+		{
+			var inst = Type.createEmptyInstance(JVEnemyClass);
+			var data = Reflect.field(o, field);
+			EXTJsonSerialization.populate(cast inst, data);
+			dataDictionary[Std.parseInt(field)] = cast inst;
+		}
 		
-		enemy = EXTJsonSerialization.decode(
-		"{" +
-			"id: " + id                + ", " +
-			"name: 'Enemy " + id + "'" + ", " +
-			"type: ''"                 + ", " +
-			"difficulty: 0"            + ", " +
-			"patternId: 2"             + ", " +
-			"patternDelay: 0"          + ", " +
-			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
-			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
-			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
-			"attackType: 'standard'"   + ", " +
-			"imageName: 'enemy_0_entity'" +
-		"}", JVEnemyClass);
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		enemy = EXTJsonSerialization.decode(
-		"{" +
-			"id: " + id                + ", " +
-			"name: 'Enemy " + id + "'" + ", " +
-			"type: ''"                 + ", " +
-			"difficulty: 0"            + ", " +
-			"patternId: 3"             + ", " +
-			"patternDelay: 2"          + ", " +
-			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
-			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: -2, y: 0 }" + ", " +
-			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 2, y: 0 }" + ", " +
-			"attackType: 'standard'"   + ", " +
-			"imageName: 'enemy_1_entity'" +
-		"}", JVEnemyClass);
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		enemy = EXTJsonSerialization.decode(
-		"{" +
-			"id: " + id                + ", " +
-			"name: 'Enemy " + id + "'" + ", " +
-			"type: ''"                 + ", " +
-			"difficulty: 0"            + ", " +
-			"patternId: 4"             + ", " +
-			"patternDelay: 2"          + ", " +
-			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
-			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 2, y: 0 }" + ", " +
-			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: -2, y: 0 }" + ", " +
-			"attackType: 'standard'"   + ", " +
-			"imageName: 'enemy_1_entity'" +
-		"}", JVEnemyClass);
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		ENEMY_CLASS_IDS = id;
+		for (i in dataDictionary)
+			++ENEMY_CLASS_IDS;
 	}
 }
