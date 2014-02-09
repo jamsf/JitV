@@ -1,6 +1,7 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
+// import flash.utils.Dictionary;
 import haxe.Resource;
 import jitv.datamodel.JVDataObject;
 import tjson.TJSON;
@@ -40,8 +41,14 @@ class JVEnemyClass extends JVDataObject
 		var fileContent:String = Resource.getString("enemy_class");
 		//EXTConsole.debug("JVEnemyClass", "setupFakeDB", [fileContent]);
 		
+		//TODO - fcole - Is there a way to do this this simply that works with cpp targets?
+		// var o = EXTJsonSerialization.decode(fileContent, Dictionary);
+		// for (field in Reflect.fields(o))
+		// {
+		// 	dataDictionary[Std.parseInt(field)] = cast Reflect.field(o, field);
+		// }
+
 		var o:Dynamic = TJSON.parse(fileContent);
-		
 		for (field in Reflect.fields(o)) 
 		{
 			var inst = Type.createEmptyInstance(JVEnemyClass);
