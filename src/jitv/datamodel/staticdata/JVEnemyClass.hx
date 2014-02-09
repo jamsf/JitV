@@ -21,10 +21,6 @@ class JVEnemyClass extends JVDataObject
 	public var speedAfterPattern:Point;  // Speed to use after the pattern is complete (if it's not a looping pattern)
 	public var attackType:String;
 	public var imageName:String;
-
-	//(get, never)
-	// For setting properties from json
-	
 	
 	// Data info
 	public static var ENEMY_CLASS_IDS:Int = 0;
@@ -54,79 +50,74 @@ class JVEnemyClass extends JVDataObject
 			"attackType: 'standard'"   + ", " +
 			"imageName: 'enemy_0_entity'" +
 		"}", JVEnemyClass);
-
-		//enemy = new JVEnemyClass();
-		//enemy.id = id;
-		//enemy.name = "Enemy " + id;
-		//enemy.type = "";
-		//enemy.difficulty = 0;
-		//enemy.patternId = 0;
-		//enemy.patternDelay = 1;
-		//enemy.speedDuringPattern = new Point(0, 0);
-		//enemy.speedBeforePattern = new Point(0, 2);
-		//enemy.speedAfterPattern = new Point(0, 2);
-		//enemy.attackType = "standard";
-		//enemy.imageName = "enemy_0_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 1;
-		enemy.patternDelay = 1;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(0, 2);
-		enemy.speedAfterPattern = new Point(0, 2);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
+		enemy = EXTJsonSerialization.decode(
+		"{" +
+			"id: " + id                + ", " +
+			"name: 'Enemy " + id + "'" + ", " +
+			"type: ''"                 + ", " +
+			"difficulty: 0"            + ", " +
+			"patternId: 1"             + ", " +
+			"patternDelay: 1"          + ", " +
+			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
+			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
+			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
+			"attackType: 'standard'"   + ", " +
+			"imageName: 'enemy_0_entity'" +
+		"}", JVEnemyClass);
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 2;
-		enemy.patternDelay = 0;
-		enemy.speedDuringPattern = new Point(0, 1);
-		enemy.speedBeforePattern = enemy.speedDuringPattern;
-		enemy.speedAfterPattern = enemy.speedDuringPattern;
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
+		enemy = EXTJsonSerialization.decode(
+		"{" +
+			"id: " + id                + ", " +
+			"name: 'Enemy " + id + "'" + ", " +
+			"type: ''"                 + ", " +
+			"difficulty: 0"            + ", " +
+			"patternId: 2"             + ", " +
+			"patternDelay: 0"          + ", " +
+			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
+			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
+			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 1 }" + ", " +
+			"attackType: 'standard'"   + ", " +
+			"imageName: 'enemy_0_entity'" +
+		"}", JVEnemyClass);
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 3;
-		enemy.patternDelay = 2;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(-2, 0);
-		enemy.speedAfterPattern = new Point(2, 0);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_1_entity";
+		enemy = EXTJsonSerialization.decode(
+		"{" +
+			"id: " + id                + ", " +
+			"name: 'Enemy " + id + "'" + ", " +
+			"type: ''"                 + ", " +
+			"difficulty: 0"            + ", " +
+			"patternId: 3"             + ", " +
+			"patternDelay: 2"          + ", " +
+			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
+			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: -2, y: 0 }" + ", " +
+			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 2, y: 0 }" + ", " +
+			"attackType: 'standard'"   + ", " +
+			"imageName: 'enemy_1_entity'" +
+		"}", JVEnemyClass);
 		dataDictionary[id] = cast enemy;
 		++id;
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 4;
-		enemy.patternDelay = 2;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(2, 0);
-		enemy.speedAfterPattern = new Point(-2, 0);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_1_entity";
+		enemy = EXTJsonSerialization.decode(
+		"{" +
+			"id: " + id                + ", " +
+			"name: 'Enemy " + id + "'" + ", " +
+			"type: ''"                 + ", " +
+			"difficulty: 0"            + ", " +
+			"patternId: 4"             + ", " +
+			"patternDelay: 2"          + ", " +
+			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
+			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 2, y: 0 }" + ", " +
+			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: -2, y: 0 }" + ", " +
+			"attackType: 'standard'"   + ", " +
+			"imageName: 'enemy_1_entity'" +
+		"}", JVEnemyClass);
 		dataDictionary[id] = cast enemy;
 		++id;
 		
