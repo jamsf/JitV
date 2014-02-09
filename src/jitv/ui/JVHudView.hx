@@ -2,7 +2,11 @@ package jitv.ui;
 
 import flash.geom.Point;
 import com.haxepunk.HXP;
+import com.haxepunk.graphics.Image;
+import com.haxepunk.graphics.Text;
 import extendedhxpunk.ui.UIView;
+import extendedhxpunk.ui.UIImageView;
+import extendedhxpunk.ui.UILabel;
 import extendedhxpunk.ext.EXTUtility;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTCamera;
@@ -33,9 +37,22 @@ class JVHudView extends UIView
 		zoomOutButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		zoomOutButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		
+		var livesIcon:Image = new Image("gfx/ui/player_life_icon.png");
+		var livesDisplay:UIImageView = new UIImageView(new Point( -45, 90), livesIcon);
+		livesDisplay.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
+		livesDisplay.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
+		//todo update the livescount to player lives
+		_livesCount = new UILabel(new Point(-10, 90), new Text("x 5"));
+		_livesCount.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
+		_livesCount.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
+		
 		this.addSubview(backButton);
 		this.addSubview(zoomInButton);
 		this.addSubview(zoomOutButton);
+		this.addSubview(livesDisplay);
+		this.addSubview(_livesCount);
+		
+		//updateLivesCount(1);
 	}
 	
 	public function backButtonCallback(args:Array<Dynamic>):Void
@@ -53,8 +70,14 @@ class JVHudView extends UIView
 		_camera.zoomWithAnchor(-0.1, EXTUtility.ZERO_POINT, EXTOffsetType.CENTER);
 	}
 	
+	public function updateLivesCount(lives:Int):Void
+	{
+		_livesCount.text = new Text("x " + lives);
+	}
+	
 	/**
 	 * Private
 	 */
 	private var _camera:EXTCamera;
+	private var _livesCount:UILabel;
 }

@@ -37,7 +37,7 @@ class JVBulletEntity extends JVEntity
 		
 		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
-		if (type == "player")
+		if (type == "playerbullet")
 			this.y -= movementMagnitude;
 		else if (type == "enemy")
 			this.y += movementMagnitude;

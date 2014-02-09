@@ -6,7 +6,9 @@ import com.haxepunk.graphics.Spritemap;
 import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
+import extendedhxpunk.ext.EXTTimer;
 import jitv.datamodel.proceduraldata.JVLevel;
+import jitv.effects.JVStarEmitter;
 import jitv.entities.JVEnemyEntity;
 import jitv.entities.JVPlayerShipEntity;
 import jitv.ui.JVHudView;
@@ -28,21 +30,28 @@ class JVCombatScene extends EXTScene
 	
 	override public function begin():Void
 	{
-		HXP.screen.color = 0x26B0E9;
+		//HXP.screen.color = 0x26B0E9;
 		
-		this.staticUiController.rootView.addSubview(new JVHudView(this.worldCamera));
-		this.addWaves();
+		_hudView = new JVHudView(this.worldCamera);
+		this.staticUiController.rootView.addSubview(_hudView);
+		//this.addWaves();
+		_starEmitter = new JVStarEmitter();
+		this.add(_starEmitter);
 		
-		_playerShip = new JVPlayerShipEntity();
+		_playerShip = new JVPlayerShipEntity(_hudView);
 		_playerShip.x = 320;
 		_playerShip.y = 240;
 		this.add(_playerShip);
+		
+		_levelEndsTimer = EXTTimer.createTimer(20, false, goToLevelSelectScene);
+		_levelEndsTimer.paused = true;
 	}
 	
 	override public function update():Void
 	{
 		super.update();
 		
+		/*
 		// Update background waves
 		var mapMovement:Float = 1.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		for (map in _waveMaps)
@@ -51,6 +60,7 @@ class JVCombatScene extends EXTScene
 			if (map.y > 32)
 				map.y = 0;
 		}
+		*/
 		
 		// Spawn enemies
 		if (_spawnTimesCompleted < _levelData.spawnTimes.length)
@@ -69,6 +79,12 @@ class JVCombatScene extends EXTScene
 				}
 			}
 		}
+		else
+		{	
+			// Go to level select 20 seconds after all enemy waves have spawned
+			_levelEndsTimer.paused = false;
+			//EXTTimer.createTimer(5, false, goToLevelSelectScene);
+		}
 		
 		// Check collisions
 		if (_playerShip != null)
@@ -77,23 +93,38 @@ class JVCombatScene extends EXTScene
 			if (collidedEnemy != null)
 			{
 				this.remove(collidedEnemy);
-				this.remove(_playerShip);
-				_playerShip = null;
+				//DESC: Remove the player ship if there are no more lives. Otherwise call method for the ship being hit.
+				if (_playerShip.getLives() == 0)
+				{
+					this.remove(_playerShip);
+					_playerShip = null;
+				}
+				else
+					_playerShip.isHit();
 			}
 		}
 
 		_time += HXP.elapsed;
 	}
 	
+	public function goToLevelSelectScene(timer:EXTTimer):Void
+	{
+		JVSceneManager.sharedInstance().goToLevelSelectScene();
+	}
+	
 	/**
 	 * Private
 	 */
 	private var _time:Float = 0.0;
-	private var _waveMaps:Array<Spritemap>;
+	private var _starEmitter:JVStarEmitter;
 	private var _playerShip:JVPlayerShipEntity;
 	private var _levelData:JVLevel;
 	private var _spawnTimesCompleted:Int = 0;
+	private var _levelEndsTimer:EXTTimer;
+	private var _hudView:JVHudView;
+
 	
+	/*
 	private function addWaves():Void
 	{
 		_waveMaps = new Array();
@@ -118,4 +149,5 @@ class JVCombatScene extends EXTScene
 			++i;
 		}
 	}
+	*/
 }

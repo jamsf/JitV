@@ -1,0 +1,136 @@
+{
+	0 : {
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
+		id : 0,
+		name : 'Enemy 0',
+		type : '',
+		difficulty : 0,
+		patternId : 0,
+		patternDelay : 1,
+		speedDuringPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 0
+		},
+		speedBeforePattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 2
+		},
+		speedAfterPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 2
+		},
+		attackType : 'standard',
+		imageName : 'enemy_0_entity'
+	},
+	
+	1 : {
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
+		id : 1,
+		name : 'Enemy 1',
+		type : '',
+		difficulty : 0,
+		patternId : 1,
+		patternDelay : 1,
+		speedDuringPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 0
+		},
+		speedBeforePattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 2
+		},
+		speedAfterPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 2
+		},
+		attackType : 'standard',
+		imageName : 'enemy_0_entity'
+	},
+	
+	2 : {
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
+		id : 2,
+		name : 'Enemy 2',
+		type : '',
+		difficulty : 0,
+		patternId : 2,
+		patternDelay : 0,
+		speedDuringPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 1
+		},
+		speedBeforePattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 1
+		},
+		speedAfterPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 1
+		},
+		attackType : 'standard',
+		imageName : 'enemy_0_entity'
+	},
+	
+	3 : {
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
+		id : 3,
+		name : 'Enemy 3',
+		type : '',
+		difficulty : 0,
+		patternId : 3,
+		patternDelay : 2,
+		speedDuringPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 0
+		},
+		speedBeforePattern : {
+			_explicitType : 'flash.geom.Point',
+			x: -2,
+			y: 0
+		},
+		speedAfterPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 2,
+			y: 0
+		},
+		attackType : 'standard',
+		imageName : 'enemy_1_entity'
+	},
+	
+	4 : {
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
+		id : 4,
+		name : 'Enemy 4',
+		type : '',
+		difficulty : 0,
+		patternId : 4,
+		patternDelay : 2,
+		speedDuringPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 0,
+			y: 0
+		},
+		speedBeforePattern : {
+			_explicitType : 'flash.geom.Point',
+			x: 2,
+			y: 0
+		},
+		speedAfterPattern : {
+			_explicitType : 'flash.geom.Point',
+			x: -2,
+			y: 0
+		},
+		attackType : 'standard',
+		imageName : 'enemy_1_entity'
+	}
+}

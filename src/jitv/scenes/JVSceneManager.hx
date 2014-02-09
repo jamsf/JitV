@@ -51,6 +51,15 @@ class JVSceneManager
 	}
 	
 	/**
+	 * Create a scene for a configuration.
+	 */
+	public function goToButonSelectScene():Void
+	{
+		clearScene();
+		_currentGameScene = new JVButtonSelectScene();
+	}
+	
+	/**
 	 * Update either the current world or the transition between worlds
 	 */
 	public function update():Void

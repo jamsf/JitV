@@ -1,7 +1,11 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
+import haxe.Resource;
 import jitv.datamodel.JVDataObject;
+import tjson.TJSON;
+import extendedhxpunk.ext.EXTJsonSerialization;
+import extendedhxpunk.ext.EXTConsole;
 
 /**
  * JVEnemyClass
@@ -20,7 +24,7 @@ class JVEnemyClass extends JVDataObject
 	public var speedAfterPattern:Point;  // Speed to use after the pattern is complete (if it's not a looping pattern)
 	public var attackType:String;
 	public var imageName:String;
-
+	
 	// Data info
 	public static var ENEMY_CLASS_IDS:Int = 0;
 	public static inline var DATA_TYPE_NAME:String = "enemy_class";
@@ -32,84 +36,21 @@ class JVEnemyClass extends JVDataObject
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
-		var id:Int = 0;
-		var enemy:JVEnemyClass;
+		var stringsArray:Array<String> = Resource.listNames();
+		var fileContent:String = Resource.getString("enemy_class");
+		//EXTConsole.debug("JVEnemyClass", "setupFakeDB", [fileContent]);
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 0;
-		enemy.patternDelay = 1;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(0, 2);
-		enemy.speedAfterPattern = new Point(0, 2);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
-		dataDictionary[id] = cast enemy;
-		++id;
+		var o:Dynamic = TJSON.parse(fileContent);
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 1;
-		enemy.patternDelay = 1;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(0, 2);
-		enemy.speedAfterPattern = new Point(0, 2);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
-		dataDictionary[id] = cast enemy;
-		++id;
+		for (field in Reflect.fields(o)) 
+		{
+			var inst = Type.createEmptyInstance(JVEnemyClass);
+			var data = Reflect.field(o, field);
+			EXTJsonSerialization.populate(cast inst, data);
+			dataDictionary[Std.parseInt(field)] = cast inst;
+		}
 		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 2;
-		enemy.patternDelay = 0;
-		enemy.speedDuringPattern = new Point(0, 1);
-		enemy.speedBeforePattern = enemy.speedDuringPattern;
-		enemy.speedAfterPattern = enemy.speedDuringPattern;
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 3;
-		enemy.patternDelay = 2;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(-2, 0);
-		enemy.speedAfterPattern = new Point(2, 0);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_1_entity";
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 4;
-		enemy.patternDelay = 2;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(2, 0);
-		enemy.speedAfterPattern = new Point(-2, 0);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_1_entity";
-		dataDictionary[id] = cast enemy;
-		++id;
-		
-		ENEMY_CLASS_IDS = id;
+		for (i in dataDictionary)
+			++ENEMY_CLASS_IDS;
 	}
 }
