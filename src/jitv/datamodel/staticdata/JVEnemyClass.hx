@@ -2,7 +2,7 @@ package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
 import jitv.datamodel.JVDataObject;
-import tjson.TJSON;
+import extendedhxpunk.ext.EXTJsonSerialization;
 
 /**
  * JVEnemyClass
@@ -22,6 +22,10 @@ class JVEnemyClass extends JVDataObject
 	public var attackType:String;
 	public var imageName:String;
 
+	//(get, never)
+	// For setting properties from json
+	
+	
 	// Data info
 	public static var ENEMY_CLASS_IDS:Int = 0;
 	public static inline var DATA_TYPE_NAME:String = "enemy_class";
@@ -36,33 +40,33 @@ class JVEnemyClass extends JVDataObject
 		var id:Int = 0;
 		var enemy:JVEnemyClass;
 		
-		//enemy = TJSON.parse(
-		//"{" +
-			//"id: " + id + ", " +
-			//"name: 'Enemy " + id + "'" + ", " +
-			//"type: ''" + ", " +
-			//"difficulty: 0" + ", " +
-			//"patternId: 0" + ", " +
-			//"patternDelay: 1" + ", " +
-			//"speedDuringPattern: { x: 0, y: 0 }" + ", " +
-			//"speedBeforePattern: { x: 0, y: 2 }" + ", " +
-			//"speedAfterPattern:  { x: 0, y: 2 }" + ", " +
-			//"attackType: 'standard'" + ", " +
-			//"imageName: 'enemy_0_entity'" +
-		//"}");
+		enemy = EXTJsonSerialization.decode(
+		"{" +
+			"id: " + id                + ", " +
+			"name: 'Enemy " + id + "'" + ", " +
+			"type: ''"                 + ", " +
+			"difficulty: 0"            + ", " +
+			"patternId: 0"             + ", " +
+			"patternDelay: 1"          + ", " +
+			"speedDuringPattern: { _explicitType: 'flash.geom.Point', x: 0, y: 0 }" + ", " +
+			"speedBeforePattern: { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
+			"speedAfterPattern:  { _explicitType: 'flash.geom.Point', x: 0, y: 2 }" + ", " +
+			"attackType: 'standard'"   + ", " +
+			"imageName: 'enemy_0_entity'" +
+		"}", JVEnemyClass);
 
-		enemy = new JVEnemyClass();
-		enemy.id = id;
-		enemy.name = "Enemy " + id;
-		enemy.type = "";
-		enemy.difficulty = 0;
-		enemy.patternId = 0;
-		enemy.patternDelay = 1;
-		enemy.speedDuringPattern = new Point(0, 0);
-		enemy.speedBeforePattern = new Point(0, 2);
-		enemy.speedAfterPattern = new Point(0, 2);
-		enemy.attackType = "standard";
-		enemy.imageName = "enemy_0_entity";
+		//enemy = new JVEnemyClass();
+		//enemy.id = id;
+		//enemy.name = "Enemy " + id;
+		//enemy.type = "";
+		//enemy.difficulty = 0;
+		//enemy.patternId = 0;
+		//enemy.patternDelay = 1;
+		//enemy.speedDuringPattern = new Point(0, 0);
+		//enemy.speedBeforePattern = new Point(0, 2);
+		//enemy.speedAfterPattern = new Point(0, 2);
+		//enemy.attackType = "standard";
+		//enemy.imageName = "enemy_0_entity";
 		dataDictionary[id] = cast enemy;
 		++id;
 		
