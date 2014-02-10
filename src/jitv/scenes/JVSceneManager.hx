@@ -4,6 +4,7 @@ import com.haxepunk.HXP;
 import extendedhxpunk.ext.EXTScene;
 import jitv.datamodel.proceduraldata.JVLevel;
 import jitv.procedural.JVLevelGenerator;
+import editor.JVEditorScene;
 
 /**
  * JVSceneManager
@@ -58,6 +59,17 @@ class JVSceneManager
 		clearScene();
 		_currentGameScene = new JVButtonSelectScene();
 	}
+
+	/**
+	 * Create the editor scene
+	 */
+// #if debug & !flash
+	public function goToEditorScene():Void
+	{
+		clearScene();
+		_currentGameScene = new JVEditorScene();
+	}
+// #end
 	
 	/**
 	 * Update either the current world or the transition between worlds

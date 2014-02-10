@@ -64,6 +64,12 @@ class JVMainMenuScene extends EXTScene
 		_configureButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		_configureButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		menuDialog.addSubview(_configureButton);
+
+		// Editor button
+		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _configureButton.position.y + _configureButton.size.y + 15), "editor", editorButtonCallback);
+		editorButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		editorButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		menuDialog.addSubview(editorButton);
 		
 		this.staticUiController.rootView.addSubview(titleDialog);
 		this.staticUiController.rootView.addSubview(menuDialog);
@@ -82,6 +88,11 @@ class JVMainMenuScene extends EXTScene
 	public function configureButtonCallback(args:Array<Dynamic>):Void
 	{
 		JVSceneManager.sharedInstance().goToButonSelectScene();
+	}
+
+	public function editorButtonCallback(args:Array<Dynamic>):Void
+	{
+		JVSceneManager.sharedInstance().goToEditorScene();
 	}
 	
 	/**
