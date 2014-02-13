@@ -6,6 +6,7 @@ import extendedhxpunk.ui.*;
 import extendedhxpunk.ext.*;
 import jitv.ui.*;
 import jitv.scenes.JVSceneManager;
+import jitv.JVConstants;
 
 class JVEditorMainView extends UIView
 {
@@ -20,6 +21,7 @@ class JVEditorMainView extends UIView
 
 	public function exitButtonCallback(args:Array<Dynamic>):Void
 	{
+		HXP.resizeStage(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 		JVSceneManager.sharedInstance().goToMainMenuScene();
 	}
 }

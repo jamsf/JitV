@@ -9,13 +9,14 @@ class JVEditorScene extends EXTScene
 {
 	public function new()
 	{
+		HXP.resizeStage(1000, 600);
 		super();
 	}
 
 	override public function begin():Void
 	{
 		super.begin();
-
+		
 		this.staticUiController.rootView.addSubview(new JVEditorMainView());
 	}
 
