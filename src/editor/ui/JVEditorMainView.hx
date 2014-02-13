@@ -17,10 +17,10 @@ class JVEditorMainView extends UIView
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
 		
-		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(170, HXP.screen.height));
+		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
 		sidePanelView.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
 		sidePanelView.offsetAlignmentForSelf = EXTOffsetType.TOP_LEFT;
-		sidePanelView.backgroundColor.setColor(0.0, 0.0, 0.0, 0.8);
+		sidePanelView.backgroundColor.setColor(0.7, 0.5, 0.4, 1.0);
 		
 		var exitButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, -10), "exit editor", exitButtonCallback, null);
 		exitButton.offsetAlignmentInParent = EXTOffsetType.BOTTOM_CENTER;
@@ -30,9 +30,17 @@ class JVEditorMainView extends UIView
 		importButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		importButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
-		var exportButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 60), "export", exportButtonCallback, null);
+		var exportButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 50), "export", exportButtonCallback, null);
 		exportButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		exportButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		
+		var previewButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 90), "preview", previewButtonCallback, null);
+		previewButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		previewButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		
+		var keyframeButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 130), "+keyframe", keyframeButtonCallback, null);
+		keyframeButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		keyframeButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
 		var sideImageVertical:Image = new Image("gfx/ui/speech_bubble_side_vertical_8x8.png");
 		sideImageVertical.scaledHeight = HXP.screen.height;
@@ -42,8 +50,10 @@ class JVEditorMainView extends UIView
 		
 		sidePanelView.addSubview(rightBoundsImageView);
 		sidePanelView.addSubview(exitButton);
+		sidePanelView.addSubview(previewButton);
 		sidePanelView.addSubview(importButton);
 		sidePanelView.addSubview(exportButton);
+		sidePanelView.addSubview(keyframeButton);
 		this.addSubview(sidePanelView);
 	}
 	
@@ -53,6 +63,16 @@ class JVEditorMainView extends UIView
 	}
 	
 	public function exportButtonCallback(args:Array<Dynamic>):Void
+	{
+		
+	}
+	
+	public function keyframeButtonCallback(args:Array<Dynamic>):Void
+	{
+		
+	}
+	
+	public function previewButtonCallback(args:Array<Dynamic>):Void
 	{
 		
 	}
