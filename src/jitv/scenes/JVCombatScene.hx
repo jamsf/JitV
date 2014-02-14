@@ -43,7 +43,7 @@ class JVCombatScene extends EXTScene
 		_playerShip.y = 240;
 		this.add(_playerShip);
 		
-		_levelEndsTimer = EXTTimer.createTimer(20, false, goToLevelSelectScene);
+		_levelEndsTimer = EXTTimer.createTimer(8, false, goToLevelSelectScene);
 		_levelEndsTimer.paused = true;
 	}
 	
@@ -86,6 +86,8 @@ class JVCombatScene extends EXTScene
 			//EXTTimer.createTimer(5, false, goToLevelSelectScene);
 		}
 		
+
+		
 		// Check collisions
 		if (_playerShip != null)
 		{
@@ -102,6 +104,12 @@ class JVCombatScene extends EXTScene
 				else
 					_playerShip.isHit();
 			}
+		}
+		
+		// If player has died start the end level timer
+		if (_playerShip == null)
+		{
+			_levelEndsTimer.paused = false;
 		}
 
 		_time += HXP.elapsed;
