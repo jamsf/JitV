@@ -37,12 +37,27 @@ class JVEnemyClass extends JVDataObject
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
 		
+		var stringsArray:Array<String> = Resource.listNames();
 		var fileContent:String = Resource.getString("enemy_class");
-		var dataArray:Array<JVEnemyClass> = EXTJsonSerialization.decode(fileContent, Array);
+		//EXTConsole.debug("JVEnemyClass", "setupFakeDB", [fileContent]);
 		
-		for (i in 0...dataArray.length)
-			dataDictionary[i] = cast dataArray[i];
+		//TODO - fcole - Is there a way to do this this simply that works with cpp targets?
+		// var o = EXTJsonSerialization.decode(fileContent, Dictionary);
+		// for (field in Reflect.fields(o))
+		// {
+		// 	dataDictionary[Std.parseInt(field)] = cast Reflect.field(o, field);
+		// }
+
+		var o:Dynamic = TJSON.parse(fileContent);
+		for (field in Reflect.fields(o)) 
+		{
+			var inst = Type.createEmptyInstance(JVEnemyClass);
+			var data = Reflect.field(o, field);
+			EXTJsonSerialization.populate(cast inst, data);
+			dataDictionary[Std.parseInt(field)] = cast inst;
+		}
 		
-		ENEMY_CLASS_IDS = dataArray.length;
+		for (i in dataDictionary)
+			++ENEMY_CLASS_IDS;
 	}
 }

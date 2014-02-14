@@ -1,5 +1,5 @@
-[
-	{
+{
+	0 : {
 		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
 		id : 0,
 		name : 'Enemy 0',
@@ -26,7 +26,7 @@
 		imageName : 'enemy_0_entity'
 	},
 	
-	{
+	1 : {
 		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
 		id : 1,
 		name : 'Enemy 1',
@@ -53,7 +53,7 @@
 		imageName : 'enemy_0_entity'
 	},
 	
-	{
+	2 : {
 		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
 		id : 2,
 		name : 'Enemy 2',
@@ -80,7 +80,7 @@
 		imageName : 'enemy_0_entity'
 	},
 	
-	{
+	3 : {
 		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
 		id : 3,
 		name : 'Enemy 3',
@@ -107,7 +107,7 @@
 		imageName : 'enemy_1_entity'
 	},
 	
-	{
+	4 : {
 		_explicitType : 'jitv.datamodel.staticdata.JVEnemyClass',
 		id : 4,
 		name : 'Enemy 4',
@@ -133,4 +133,4 @@
 		attackType : 'standard',
 		imageName : 'enemy_1_entity'
 	}
-]
+}
