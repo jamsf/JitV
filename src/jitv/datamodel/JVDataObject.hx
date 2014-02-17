@@ -18,7 +18,7 @@ class JVDataObject
 	public static function setupFakeDB():Void
 	{
 		fakeDB = new Map();
-		JVEnemyClass.setupFakeDB();
+		JVEnemyClass.setupDB();
 		JVEnemyPattern.setupFakeDB();
 		JVJsonTestDataClass.setupFakeDB();
 	}

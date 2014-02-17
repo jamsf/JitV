@@ -1,7 +1,6 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
-// import flash.utils.Dictionary;
 import haxe.Resource;
 import jitv.datamodel.JVDataObject;
 import tjson.TJSON;
@@ -32,7 +31,7 @@ class JVEnemyClass extends JVDataObject
 	public function new() { }
 	
 	// Fake database setup
-	public static function setupFakeDB():Void
+	public static function setupDB():Void
 	{
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
 		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
