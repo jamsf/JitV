@@ -34,9 +34,9 @@ class JVEnemyClass extends JVDataObject
 	public static function setupDB():Void
 	{
 		var dataDictionary:Map<Int, JVDataObject> = new Map();
-		JVDataObject.fakeDB[DATA_TYPE_NAME] = dataDictionary;
+		JVDataObject.DB[DATA_TYPE_NAME] = dataDictionary;
 		
-		var fileContent:String = Resource.getString("enemy_class");
+		var fileContent:String = Resource.getString(DATA_TYPE_NAME);
 		var dataArray:Array<JVEnemyClass> = EXTJsonSerialization.decode(fileContent, Array);
 		
 		for (i in 0...dataArray.length)

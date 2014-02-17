@@ -1,0 +1,765 @@
+[
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyPattern',
+		id : 0,
+		name : 'Enemy Pattern 0',
+		shipCount : 4,
+		keyFrameCount : 8,
+		keyFramePositions : [
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 2,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 2,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 2,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 9,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 10,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 11,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 10,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 12,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 11,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 10,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 9,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 4
+				}
+			]
+		],
+		keyFrameTimes : [
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5
+		],
+		loops : false,
+		loopIndex : -1,
+		rawSpawnAnchor : 'TOP_CENTER',
+		initialPositionOffset : {
+			_explicitType : 'flash.geom.Point',
+			x : 0,
+			y : -76
+		},
+		totalWidth : 640,
+		totalHeight : 380,
+		gridColumns : 13,
+		gridRows : 5
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyPattern',
+		id : 1,
+		name : 'Enemy Pattern 1',
+		shipCount : 5,
+		keyFrameCount : 8,
+		keyFramePositions : [
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 2,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 4,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 2,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 5,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 6,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 10,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 7,
+					y : 4
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 10,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 12,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 8,
+					y : 4
+				}
+			]
+		],
+		keyFrameTimes : [
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5
+		],
+		loops : false,
+		loopIndex : -1,
+		rawSpawnAnchor : 'TOP_CENTER',
+		initialPositionOffset : {
+			_explicitType : 'flash.geom.Point',
+			x : 0,
+			y : -152
+		},
+		totalWidth : 640,
+		totalHeight : 380,
+		gridColumns : 13,
+		gridRows : 5
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyPattern',
+		id : 2,
+		name : 'Enemy Pattern 2',
+		shipCount : 5,
+		keyFrameCount : 4,
+		keyFramePositions : [
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 14,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 0
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 14,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 1
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 14,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 2
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 2
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 14,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 3
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 14,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 1,
+					y : 4
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 13,
+					y : 4
+				}
+			]
+		],
+		keyFrameTimes : [
+			0.2,
+			2.5,
+			2.5,
+			2.5
+		],
+		loops : true,
+		loopIndex : 2,
+		rawSpawnAnchor : 'TOP_CENTER',
+		initialPositionOffset : {
+			_explicitType : 'flash.geom.Point',
+			x : 0,
+			y : 0
+		},
+		totalWidth : 738,
+		totalHeight : 380,
+		gridColumns : 15,
+		gridRows : 5
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyPattern',
+		id : 3,
+		name : 'Enemy Pattern 3',
+		shipCount : 3,
+		keyFrameCount : 4,
+		keyFramePositions : [
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 3
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				}
+			]
+		],
+		keyFrameTimes : [
+			1.5,
+			1.5,
+			1.5,
+			1.5
+		],
+		loops : false,
+		loopIndex : 0,
+		rawSpawnAnchor : 'TOP_RIGHT',
+		initialPositionOffset : {
+			_explicitType : 'flash.geom.Point',
+			x : 32,
+			y : 0
+		},
+		totalWidth : 160,
+		totalHeight : 160,
+		gridColumns : 4,
+		gridRows : 4
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVEnemyPattern',
+		id : 4,
+		name : 'Enemy Pattern 4',
+		shipCount : 3,
+		keyFrameCount : 4,
+		keyFramePositions : [
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 3
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 3
+				}
+			],
+			[
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 1
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 3
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 0,
+					y : 0
+				},
+				{
+					_explicitType : 'flash.geom.Point',
+					x : 3,
+					y : 0
+				}
+			]
+		],
+		keyFrameTimes : [
+			1.5,
+			1.5,
+			1.5,
+			1.5
+		],
+		loops : false,
+		loopIndex : 0,
+		rawSpawnAnchor : 'TOP_LEFT',
+		initialPositionOffset : {
+			_explicitType : 'flash.geom.Point',
+			x : -32,
+			y : 0
+		},
+		totalWidth : 160,
+		totalHeight : 160,
+		gridColumns : 4,
+		gridRows : 4
+	}
+]

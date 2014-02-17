@@ -35,5 +35,6 @@
 	
 	<!-- put data files here -->
 	<haxeflag name="-resource jsondata/enemy_class.json@enemy_class" />
+	<haxeflag name="-resource jsondata/enemy_pattern.json@enemy_pattern" />
 	
 </project>

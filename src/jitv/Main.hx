@@ -18,7 +18,7 @@ class Main extends Engine
 	function new()
 	{
 		super(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT, JVConstants.FPS, false);
-		JVDataObject.setupFakeDB();
+		JVDataObject.setupDB();
 	}
 
 	override public function init()

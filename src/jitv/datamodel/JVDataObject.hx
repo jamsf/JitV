@@ -13,19 +13,18 @@ class JVDataObject
 	public var id:UInt;
 	public var name:String;
 	
-	// Fake database until we get sqlite or something set up
-	public static var fakeDB:Map<String, Map<Int, JVDataObject>>;
-	public static function setupFakeDB():Void
+	// Map of all our data objects
+	public static var DB:Map<String, Map<Int, JVDataObject>>;
+	public static function setupDB():Void
 	{
-		fakeDB = new Map();
+		DB = new Map();
 		JVEnemyClass.setupDB();
-		JVEnemyPattern.setupFakeDB();
-		JVJsonTestDataClass.setupFakeDB();
+		JVEnemyPattern.setupDB();
 	}
 
 	public static function lookupStaticDataObject(dataClass:String, dataId:Int):JVDataObject
 	{
-		var dataClassMap:Map<Int, JVDataObject> = fakeDB[dataClass];
+		var dataClassMap:Map<Int, JVDataObject> = DB[dataClass];
 		return dataClassMap != null ? dataClassMap[dataId] : null;
 	}
 }
