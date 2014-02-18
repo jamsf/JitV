@@ -48,26 +48,5 @@ class JVEnemyPattern extends JVDataObject
 		
 		for (i in 0...dataArray.length)
 			dataDictionary[i] = cast dataArray[i];
-		
-		//var mapping = JVJsonMappings.explicitTypeMapping;
-		var mapping2 = JVJsonMappings.fieldMapping;
-		
-		var encodablePattern = JVJsonMappings.createEncodable(dataDictionary[0]);
-		var string0:String = EXTJsonSerialization.encode(encodablePattern);
-		trace(string0);
-		
-		//var fakePoint:Point = new Point();
-		//fakePoint.length = 5;
-		//try
-		//{
-			//Reflect.setProperty(fakePoint, "length", 5);
-		//}
-		//catch (msg:String)
-		//{
-			//trace(msg);
-		//}
-		//var populatedDynamic
-		//var string0:String = EXTJsonSerialization.encode(dataDictionary[0]);
-		//trace(string0);
 	}
 }

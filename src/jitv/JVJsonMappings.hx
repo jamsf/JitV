@@ -1,18 +1,12 @@
 package jitv;
 
 /**
- * ...
+ * JVJsonMappings
+ * Specialized encoding for json objects
  * Created by Fletcher, 2/17/2014
  */
 class JVJsonMappings
 {
-	//public static var explicitTypeMapping = 
-	//{ 
-		//"Point" : "flash.geom.Point",
-		//"JVEnemyClass" : "jitv.datamodel.staticdata.JVEnemyClass",
-		//"JVEnemyPattern" : "jitv.datamodel.staticdata.JVEnemyPattern"
-	//};
-	
 	public static var fieldMapping = 
 	{ 
 		"flash.geom.Point" : ["x", "y"]
@@ -23,11 +17,7 @@ class JVJsonMappings
 		var type = Type.getClass(objectToEncode);
 		var typeName:String = null;
 		if (type != null)
-		{
 			typeName = Type.getClassName(type);
-			//if (Reflect.hasField(explicitTypeMapping, typeName))
-				//Reflect.setField(encodable, "_explicitType", Reflect.field(explicitTypeMapping, typeName));
-		}
 		
 		if (typeName == "Array")
 		{
@@ -100,10 +90,6 @@ class JVJsonMappings
 		if (type != null)
 			typeName = Type.getClassName(Type.getClass(obj));
 		
-		//if (typeName != null && Reflect.hasField(explicitTypeMapping, typeName) && Reflect.hasField(fieldMapping, Reflect.field(explicitTypeMapping, typeName)))
-		//{
-			//return Reflect.field(fieldMapping, Reflect.field(explicitTypeMapping, typeName));
-		//}
 		if (typeName != null && Reflect.hasField(fieldMapping, typeName))
 		{
 			return Reflect.field(fieldMapping, typeName);
