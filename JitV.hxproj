@@ -28,7 +28,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;-resource jsondata/enemy_class.json@enemy_class&#xA;--macro allowPackage(&quot;flash&quot;)&#xA;--macro keep(&quot;jitv.Main&quot;)" />
+    <option additional="--no-output&#xA;-resource jsondata/enemy_class.json@enemy_class&#xA;-resource jsondata/enemy_pattern.json@enemy_pattern&#xA;--macro allowPackage(&quot;flash&quot;)&#xA;--macro keep(&quot;jitv.Main&quot;)" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
