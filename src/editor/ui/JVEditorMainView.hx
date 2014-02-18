@@ -10,12 +10,15 @@ import extendedhxpunk.ext.EXTUtility;
 import jitv.ui.JVExampleMenuButton;
 import jitv.scenes.JVSceneManager;
 import jitv.JVConstants;
+import editor.JVEditorDataHandler;
 
 class JVEditorMainView extends UIView
 {
-	public function new()
+	public function new(dataHandler:JVEditorDataHandler)
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
+		
+		_dataHandler = dataHandler;
 		
 		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
 		sidePanelView.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
@@ -64,7 +67,7 @@ class JVEditorMainView extends UIView
 	
 	public function exportButtonCallback(args:Array<Dynamic>):Void
 	{
-		
+		_dataHandler.writePatternDataToDisk();
 	}
 	
 	public function keyframeButtonCallback(args:Array<Dynamic>):Void
@@ -82,4 +85,9 @@ class JVEditorMainView extends UIView
 		HXP.resizeStage(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 		JVSceneManager.sharedInstance().goToMainMenuScene();
 	}
+	
+	/**
+	 * Private
+	 */
+	private var _dataHandler:JVEditorDataHandler;
 }

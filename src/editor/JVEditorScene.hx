@@ -1,15 +1,15 @@
 package editor;
 
-import com.haxepunk.*;
-import extendedhxpunk.ui.*;
-import extendedhxpunk.ext.*;
-import editor.ui.*;
+import com.haxepunk.HXP;
+import extendedhxpunk.ext.EXTScene;
+import jitv.datamodel.staticdata.JVEnemyPattern;
+import editor.ui.JVEditorMainView;
 
 class JVEditorScene extends EXTScene
 {
 	public function new()
 	{
-		HXP.resizeStage(1000, 600);
+		HXP.resizeStage(JVEditorConstants.EDITOR_SCREEN_WIDTH , JVEditorConstants.EDITOR_SCREEN_HEIGHT);
 		super();
 	}
 
@@ -17,7 +17,9 @@ class JVEditorScene extends EXTScene
 	{
 		super.begin();
 		
-		this.staticUiController.rootView.addSubview(new JVEditorMainView());
+		_dataHandler = new JVEditorDataHandler("./jsondata/" + JVEnemyPattern.DATA_TYPE_NAME + ".json");
+		_dataHandler.loadPatternDataFromDisk();
+		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler));
 	}
 
 	override public function update():Void
@@ -29,4 +31,9 @@ class JVEditorScene extends EXTScene
 	{
 		super.render();
 	}
+	
+	/**
+	 * Private
+	 */
+	private var _dataHandler:JVEditorDataHandler;
 }
