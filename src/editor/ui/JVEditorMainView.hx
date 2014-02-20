@@ -7,6 +7,7 @@ import extendedhxpunk.ui.UIView;
 import extendedhxpunk.ui.UIImageView;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
+import jitv.datamodel.staticdata.JVEnemyPattern;
 import jitv.ui.JVExampleMenuButton;
 import jitv.scenes.JVSceneManager;
 import jitv.JVConstants;
@@ -57,6 +58,22 @@ class JVEditorMainView extends UIView
 		sidePanelView.addSubview(importButton);
 		sidePanelView.addSubview(exportButton);
 		sidePanelView.addSubview(keyframeButton);
+		
+		if (_dataHandler.patterns != null)
+		{
+			var y:Int = 170;
+			for (i in 0..._dataHandler.patterns.length)
+			{
+				var pattern:JVEnemyPattern = _dataHandler.patterns[i];
+				var patternButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, y), pattern.name, patternButtonCallback, [pattern]);
+				patternButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+				patternButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+				sidePanelView.addSubview(patternButton);
+				
+				y += 40;
+			}
+		}
+		
 		this.addSubview(sidePanelView);
 	}
 	
@@ -84,6 +101,11 @@ class JVEditorMainView extends UIView
 	{
 		HXP.resizeStage(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 		JVSceneManager.sharedInstance().goToMainMenuScene();
+	}
+	
+	public function patternButtonCallback(args:Array<Dynamic>):Void
+	{
+		var pattern:JVEnemyPattern = args[0];
 	}
 	
 	/**
