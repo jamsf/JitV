@@ -14,9 +14,9 @@ import jitv.scenes.JVSceneManager;
 /**
  * JVButtonSelectScene
  * Game scene for navigation of the main menu
- * Created by Gerrit 1/29/2014, Ported by Gerrit
+ * Created by Gerrit 2/22/2014, Ported by Gerrit
  */
-class JVButtonSelectScene extends EXTScene
+class JVCustomizeShipScene extends EXTScene
 {
 
 	public function new() 
@@ -30,30 +30,33 @@ class JVButtonSelectScene extends EXTScene
 		
 		// Background Image
 		var screenSize:Point = this.worldCamera.currentViewSize();
-		var backgroundImage:Image = new Image("gfx/backgrounds/temp_buttons_backgroud.png");
+		var backgroundImage:Image = new Image("gfx/backgrounds/temp_ship_custom_background.png");
 		backgroundImage.x = screenSize.x / 2;
 		backgroundImage.y = screenSize.y / 2;
 		backgroundImage.centerOrigin();
 		this.addGraphic(backgroundImage);
 		
 		// UI
-		var titleDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -120), new Point(250, 60));
+		var titleDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -120), new Point(610, 60));
 		titleDialog.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
-		var titleText:Text = new Text("Configure Buttons", 0, 0, { "size" : 19, "color" : 0xEEEEEE });
+		var titleText:Text = new Text("Customize Ship", 0, 0, { "size" : 19, "color" : 0xEEEEEE });
 		var titleLabel:UILabel = new UILabel(EXTUtility.ZERO_POINT, titleText);
 		titleDialog.addSubview(titleLabel);
 		
-		var menuDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -115), new Point(600, 300));
-		menuDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		var shipDialog:JVExampleDialog = new JVExampleDialog(new Point(-55, -115), new Point(500, 300));
+		shipDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		var partDialog:JVExampleDialog = new JVExampleDialog(new Point(255, -115), new Point(100, 300));
+		partDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
 		// Back button
-		_backButton = new JVExampleMenuButton(new Point(-10, -10), "back", backButtonCallback);
+		_backButton = new JVExampleMenuButton(new Point(-10, -10), "Finish", backButtonCallback);
 		_backButton.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_RIGHT;
 		_backButton.offsetAlignmentInParent = EXTOffsetType.BOTTOM_RIGHT;
-		menuDialog.addSubview(_backButton);
+		shipDialog.addSubview(_backButton);
 		
 		this.staticUiController.rootView.addSubview(titleDialog);
-		this.staticUiController.rootView.addSubview(menuDialog);
+		this.staticUiController.rootView.addSubview(shipDialog);
+		this.staticUiController.rootView.addSubview(partDialog);
 	}
 	
 	public function backButtonCallback(args:Array<Dynamic>):Void
