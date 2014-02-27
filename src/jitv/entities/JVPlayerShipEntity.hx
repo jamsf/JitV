@@ -116,6 +116,10 @@ class JVPlayerShipEntity extends JVEntity
 		{
 			fireBullet();
 		}
+		else if ((Input.check(Key.X) || (_gamepad != null && _gamepad.check(XboxButton.B_BUTTON))) && _cooldown == false)
+		{
+			fireBurstBullet();
+		}
 		
 		//This is the logic that handles collision with a powerup.
 		var collidedPwrup:Entity = this.collide("pwrup", this.x, this.y);
@@ -173,7 +177,19 @@ class JVPlayerShipEntity extends JVEntity
 	
 	private function fireBullet():Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet");
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6);
+		HXP.scene.add(bullet);
+		_cooldown = true;
+		_cooldownTimer.paused = false;
+	}
+	
+	private function fireBurstBullet():Void
+	{
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6);
+		HXP.scene.add(bullet);
+		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.6, 6);
+		HXP.scene.add(bullet);
+		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.4, 6);
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;

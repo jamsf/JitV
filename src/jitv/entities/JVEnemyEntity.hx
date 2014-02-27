@@ -93,7 +93,7 @@ class JVEnemyEntity extends JVEntity
 
 	public function fireBullet(timer:EXTTimer):Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type, .5, 6.0);
 		HXP.scene.add(bullet);
 	}
 	

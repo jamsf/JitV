@@ -1,8 +1,10 @@
 package jitv.entities;
 
+import com.haxepunk.debug.Console;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
+import com.haxepunk.math.Vector;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
 
@@ -13,7 +15,10 @@ import jitv.entities.JVEntity;
  */
 class JVBulletEntity extends JVEntity
 {
-	public function new(x:Float, y:Float, type:String) 
+	var vel:Vector;
+	var movementMagnitude:Float;
+	
+	public function new(x:Float, y:Float, type:String, angle:Float, velocity:Float) 
 	{
 		super();
 		
@@ -29,18 +34,17 @@ class JVBulletEntity extends JVEntity
 		this.height = image.height;
 		this.x = x;
 		this.y = y;
+		vel = JVUtil.createVector(angle, velocity);
 	}
 	
 	override public function update():Void
 	{
 		super.update();
 		
-		var movementMagnitude:Float = 6.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		movementMagnitude = HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		
-		if (type == "playerbullet")
-			this.y -= movementMagnitude;
-		else if (type == "enemy")
-			this.y += movementMagnitude;
+		this.x += vel.x * movementMagnitude;
+		this.y += vel.y * movementMagnitude;
 		
 		if (this.x < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
 			this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
