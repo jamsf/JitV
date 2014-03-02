@@ -34,10 +34,14 @@ class JVEditorDataHandler
 #if !flash
 		var contentToWrite:String = EXTJsonSerialization.encode(this.patterns, JVJsonMappings.fieldMapping);
 		File.saveContent(_filepath, contentToWrite);
-#if debug
+ #if debug
 		// Navigate out of the bin folder and save the new data in our repo's folder
+  #if mac
+		File.saveContent("../../../../../../../" + _filepath, contentToWrite);
+  #else
 		File.saveContent("../../../../" + _filepath, contentToWrite);
-#end
+  #end
+ #end
 #end
 	}
 	
