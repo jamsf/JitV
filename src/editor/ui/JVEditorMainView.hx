@@ -15,12 +15,14 @@ import editor.JVEditorDataHandler;
 
 class JVEditorMainView extends UIView
 {
-	public function new(dataHandler:JVEditorDataHandler, updatePatternCallback:Int->Void = null)
+	public function new(dataHandler:JVEditorDataHandler, updatePatternCallback:Int->Void, gridVisibilityCallback:Bool->Void)
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
 		
 		_dataHandler = dataHandler;
 		_updatePatternCallback = updatePatternCallback;
+		_gridVisibilityCallback = gridVisibilityCallback;
+		_gridVisible = true;
 		
 		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
 		sidePanelView.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
@@ -47,6 +49,10 @@ class JVEditorMainView extends UIView
 		keyframeButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		keyframeButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
+		var gridVisibilityButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 170), "toggle grid", gridVisibilityButtonCallback, null);
+		gridVisibilityButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		gridVisibilityButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		
 		var sideImageVertical:Image = new Image("gfx/ui/speech_bubble_side_vertical_8x8.png");
 		sideImageVertical.scaledHeight = HXP.screen.height;
 		var rightBoundsImageView:UIImageView = new UIImageView(EXTUtility.ZERO_POINT, sideImageVertical);
@@ -59,10 +65,11 @@ class JVEditorMainView extends UIView
 		sidePanelView.addSubview(importButton);
 		sidePanelView.addSubview(exportButton);
 		sidePanelView.addSubview(keyframeButton);
+		sidePanelView.addSubview(gridVisibilityButton);
 		
 		if (_dataHandler.patterns != null)
 		{
-			var y:Int = 170;
+			var y:Int = 210;
 			for (i in 0..._dataHandler.patterns.length)
 			{
 				var pattern:JVEnemyPattern = _dataHandler.patterns[i];
@@ -110,9 +117,17 @@ class JVEditorMainView extends UIView
 		_updatePatternCallback(pattern.id);
 	}
 	
+	public function gridVisibilityButtonCallback(args:Array<Dynamic>):Void
+	{
+		_gridVisible = !_gridVisible;
+		_gridVisibilityCallback(_gridVisible);
+	}
+	
 	/**
 	 * Private
 	 */
 	private var _dataHandler:JVEditorDataHandler;
 	private var _updatePatternCallback:Int->Void;
+	private var _gridVisibilityCallback:Bool->Void;
+	private var _gridVisible:Bool;
 }

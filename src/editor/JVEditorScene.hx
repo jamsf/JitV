@@ -6,6 +6,7 @@ import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import extendedhxpunk.ext.EXTScene;
 import jitv.datamodel.staticdata.JVEnemyPattern;
+import jitv.JVConstants;
 import editor.ui.JVEditorMainView;
 
 class JVEditorScene extends EXTScene
@@ -24,7 +25,7 @@ class JVEditorScene extends EXTScene
 		_keyFrameLocationEntities = new Array();
 		_dataHandler = new JVEditorDataHandler("./jsondata/" + JVEnemyPattern.DATA_TYPE_NAME + ".json");
 		_dataHandler.loadPatternDataFromDisk();
-		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, loadPatternForDisplay));
+		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, loadPatternForDisplay, toggleGridVisibility));
 
 		this.loadPatternForDisplay(0);
 	}
@@ -37,6 +38,17 @@ class JVEditorScene extends EXTScene
 	override public function render():Void
 	{
 		super.render();
+		var gfx = HXP.scene.getSpriteByLayer(9999).graphics;
+		gfx.beginFill(0x700000, 1.0);
+		gfx.drawRect(JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_X, JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_Y, JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
+	}
+	
+	public function toggleGridVisibility(visible:Bool):Void
+	{
+		for (i in 0..._grid.length)
+		{
+			_grid[i].visible = visible;
+		}
 	}
 	
 	public function loadPatternForDisplay(patternIndex:Int):Void
@@ -60,17 +72,19 @@ class JVEditorScene extends EXTScene
 		var columns:Int = pattern.gridColumns;
 		var rows:Int = pattern.gridRows;
 		var gridSpaceImage:Image = new Image("gfx/editor/editor_grid_space.png");
-		gridSpaceImage.scaledWidth = pattern.totalWidth / columns;// * 0.75;
-		gridSpaceImage.scaledHeight = pattern.totalHeight / rows;// * 0.75;
+		gridSpaceImage.scaledWidth = pattern.totalWidth / columns;
+		gridSpaceImage.scaledHeight = pattern.totalHeight / rows;
+		var initialX:Int = cast (JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_X + (JVConstants.PLAY_SPACE_WIDTH / 2) - (pattern.totalWidth / 2));
+		var initialY:Int = cast (JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_Y + (JVConstants.PLAY_SPACE_HEIGHT / 2) - (pattern.totalHeight / 2));
 		
 		// Setup the grid
 		for (x in 0...columns)
 		{
 			for (y in 0...rows)
 			{
-				var entity:Entity = new Entity(175 + x * gridSpaceImage.scaledWidth, 
-												50 + y * gridSpaceImage.scaledHeight, 
-												gridSpaceImage);
+				var entity:Entity = new Entity(initialX + x * gridSpaceImage.scaledWidth, 
+											   initialY + y * gridSpaceImage.scaledHeight, 
+											   gridSpaceImage);
 				this.add(entity);
 				_grid.push(entity);
 			}
