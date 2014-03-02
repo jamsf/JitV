@@ -115,6 +115,7 @@ class JVEditorMainView extends UIView
 	{
 		var pattern:JVEnemyPattern = args[0];
 		_updatePatternCallback(pattern.id);
+		_gridVisible = true;
 	}
 	
 	public function gridVisibilityButtonCallback(args:Array<Dynamic>):Void
