@@ -15,11 +15,12 @@ import editor.JVEditorDataHandler;
 
 class JVEditorMainView extends UIView
 {
-	public function new(dataHandler:JVEditorDataHandler)
+	public function new(dataHandler:JVEditorDataHandler, updatePatternCallback:Int->Void = null)
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
 		
 		_dataHandler = dataHandler;
+		_updatePatternCallback = updatePatternCallback;
 		
 		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
 		sidePanelView.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
@@ -106,10 +107,12 @@ class JVEditorMainView extends UIView
 	public function patternButtonCallback(args:Array<Dynamic>):Void
 	{
 		var pattern:JVEnemyPattern = args[0];
+		_updatePatternCallback(pattern.id);
 	}
 	
 	/**
 	 * Private
 	 */
 	private var _dataHandler:JVEditorDataHandler;
+	private var _updatePatternCallback:Int->Void;
 }
