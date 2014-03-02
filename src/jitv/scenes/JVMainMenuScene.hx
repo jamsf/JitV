@@ -66,10 +66,12 @@ class JVMainMenuScene extends EXTScene
 		menuDialog.addSubview(_configureButton);
 
 		// Editor button
+#if !flash
 		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _configureButton.position.y + _configureButton.size.y + 15), "editor", editorButtonCallback);
 		editorButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		editorButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		menuDialog.addSubview(editorButton);
+#end
 		
 		this.staticUiController.rootView.addSubview(titleDialog);
 		this.staticUiController.rootView.addSubview(menuDialog);
