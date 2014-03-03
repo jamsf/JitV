@@ -58,7 +58,7 @@ class JVEditorMainView extends UIView
 		var rightBoundsImageView:UIImageView = new UIImageView(EXTUtility.ZERO_POINT, sideImageVertical);
 		rightBoundsImageView.offsetAlignmentInParent = EXTOffsetType.RIGHT_CENTER;
 		rightBoundsImageView.offsetAlignmentForSelf = EXTOffsetType.CENTER;
-		
+
 		sidePanelView.addSubview(rightBoundsImageView);
 		sidePanelView.addSubview(exitButton);
 		sidePanelView.addSubview(previewButton);
@@ -67,27 +67,13 @@ class JVEditorMainView extends UIView
 		sidePanelView.addSubview(keyframeButton);
 		sidePanelView.addSubview(gridVisibilityButton);
 		
-		if (_dataHandler.patterns != null)
-		{
-			var y:Int = 210;
-			for (i in 0..._dataHandler.patterns.length)
-			{
-				var pattern:JVEnemyPattern = _dataHandler.patterns[i];
-				var patternButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, y), pattern.name, patternButtonCallback, [pattern]);
-				patternButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-				patternButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
-				sidePanelView.addSubview(patternButton);
-				
-				y += 40;
-			}
-		}
-		
 		this.addSubview(sidePanelView);
 	}
 	
 	public function importButtonCallback(args:Array<Dynamic>):Void
 	{
-		
+		_importView = new JVEditorImportView(_dataHandler, patternButtonCallback);
+		this.addSubview(_importView);
 	}
 	
 	public function exportButtonCallback(args:Array<Dynamic>):Void
@@ -116,6 +102,8 @@ class JVEditorMainView extends UIView
 		var pattern:JVEnemyPattern = args[0];
 		_updatePatternCallback(pattern.id);
 		_gridVisible = true;
+		this.removeSubview(_importView);
+		_importView = null;
 	}
 	
 	public function gridVisibilityButtonCallback(args:Array<Dynamic>):Void
@@ -128,6 +116,7 @@ class JVEditorMainView extends UIView
 	 * Private
 	 */
 	private var _dataHandler:JVEditorDataHandler;
+	private var _importView:JVEditorImportView;
 	private var _updatePatternCallback:Int->Void;
 	private var _gridVisibilityCallback:Bool->Void;
 	private var _gridVisible:Bool;
