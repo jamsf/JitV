@@ -191,7 +191,7 @@
         ]
         ,"id" : 0
         ,"loops" : false
-        ,"name" : "Enemy Pattern 0"
+        ,"name" : "pattern 0"
         ,"shipCount" : 4
         ,"totalWidth" : 640
         ,"totalHeight" : 380
@@ -432,7 +432,7 @@
         ]
         ,"id" : 1
         ,"loops" : false
-        ,"name" : "Enemy Pattern 1"
+        ,"name" : "pattern 1"
         ,"shipCount" : 5
         ,"totalWidth" : 640
         ,"totalHeight" : 380
@@ -569,7 +569,7 @@
         ]
         ,"id" : 2
         ,"loops" : true
-        ,"name" : "Enemy Pattern 2"
+        ,"name" : "pattern 2"
         ,"shipCount" : 5
         ,"totalWidth" : 738
         ,"totalHeight" : 380
@@ -662,7 +662,7 @@
         ]
         ,"id" : 3
         ,"loops" : false
-        ,"name" : "Enemy Pattern 3"
+        ,"name" : "pattern 3"
         ,"shipCount" : 3
         ,"totalWidth" : 160
         ,"totalHeight" : 160
@@ -755,7 +755,7 @@
         ]
         ,"id" : 4
         ,"loops" : false
-        ,"name" : "Enemy Pattern 4"
+        ,"name" : "pattern 4"
         ,"shipCount" : 3
         ,"totalWidth" : 160
         ,"totalHeight" : 160
