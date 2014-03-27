@@ -3,6 +3,8 @@ package jitv.scenes;
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Spritemap;
+import com.haxepunk.utils.Input;
+import com.haxepunk.utils.Key;
 import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
@@ -28,6 +30,19 @@ class JVCombatScene extends EXTScene
 		_levelData = level;
 	}
 	
+	/**
+	 * Void:onPause
+	 * This function is called when the player wishes to pause the game. A Bool paused is passed in as an argument for the function. If true, the game pauses. If false, the game resumes from a pause.
+	 * PRECON:		A player has triggered the key bind for pausing the game. 
+	 * POSTCON:		The game screen is paused if paused is true, otherwise the game returns and resumes.
+	 * 
+	 * @param	paused
+	 */
+	public function onPause(paused:Bool):Void
+	{
+		_paused = paused;
+	}
+	
 	override public function begin():Void
 	{
 		//HXP.screen.color = 0x26B0E9;
@@ -49,6 +64,12 @@ class JVCombatScene extends EXTScene
 	
 	override public function update():Void
 	{
+		if (Input.released(Key.ESCAPE))
+			onPause(!_paused);
+
+		if (_paused)
+			return;
+
 		super.update();
 		
 		/*
@@ -124,6 +145,7 @@ class JVCombatScene extends EXTScene
 	 * Private
 	 */
 	private var _time:Float = 0.0;
+	private var _paused:Bool = false;
 	private var _starEmitter:JVStarEmitter;
 	private var _playerShip:JVPlayerShipEntity;
 	private var _levelData:JVLevel;
