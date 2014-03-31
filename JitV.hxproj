@@ -23,7 +23,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="tools=1.2.1&#xA;lime_native&#xA;no-compilation&#xA;openfl=1.2&#xA;display&#xA;windows&#xA;desktop&#xA;no-compilation" />
+    <option directives="tools=1.2.9&#xA;lime_native&#xA;no-compilation&#xA;display&#xA;windows&#xA;desktop&#xA;no-compilation" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
@@ -33,7 +33,6 @@
   <!-- haxelib libraries -->
   <haxelib>
     <library name="openfl" />
-    <library name="lime" />
     <library name="tjson" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
