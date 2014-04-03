@@ -1,5 +1,6 @@
 package editor.ui;
 
+import editor.JVEditorScene;
 import flash.geom.Point;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
@@ -15,13 +16,12 @@ import editor.JVEditorDataHandler;
 
 class JVEditorMainView extends UIView
 {
-	public function new(dataHandler:JVEditorDataHandler, updatePatternCallback:Int->Void, gridVisibilityCallback:Bool->Void)
+	public function new(dataHandler:JVEditorDataHandler, editor:JVEditorScene)
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
 		
 		_dataHandler = dataHandler;
-		_updatePatternCallback = updatePatternCallback;
-		_gridVisibilityCallback = gridVisibilityCallback;
+		_editor = editor;
 		_gridVisible = true;
 		
 		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
@@ -53,6 +53,14 @@ class JVEditorMainView extends UIView
 		gridVisibilityButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		gridVisibilityButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
+		var chooseShipButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 210), "pick ship", chooseShipButtonCallback, null);
+		chooseShipButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		chooseShipButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		
+		var chooseKeyFrameButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 250), "pick frame", chooseKeyFrameButtonCallback, null);
+		chooseKeyFrameButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		chooseKeyFrameButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		
 		var sideImageVertical:Image = new Image("gfx/ui/speech_bubble_side_vertical_8x8.png");
 		sideImageVertical.scaledHeight = HXP.screen.height;
 		var rightBoundsImageView:UIImageView = new UIImageView(EXTUtility.ZERO_POINT, sideImageVertical);
@@ -66,6 +74,8 @@ class JVEditorMainView extends UIView
 		sidePanelView.addSubview(exportButton);
 		sidePanelView.addSubview(keyframeButton);
 		sidePanelView.addSubview(gridVisibilityButton);
+		sidePanelView.addSubview(chooseShipButton);
+		sidePanelView.addSubview(chooseKeyFrameButton);
 		
 		this.addSubview(sidePanelView);
 	}
@@ -100,7 +110,9 @@ class JVEditorMainView extends UIView
 	public function patternButtonCallback(args:Array<Dynamic>):Void
 	{
 		var pattern:JVEnemyPattern = args[0];
-		_updatePatternCallback(pattern.id);
+		_editor.loadPatternForDisplay(pattern.id);
+		_editor.updateSelectedShip(-1);
+		_editor.updateSelectedKeyFrame(-1);
 		_gridVisible = true;
 		this.removeSubview(_importView);
 		_importView = null;
@@ -109,15 +121,34 @@ class JVEditorMainView extends UIView
 	public function gridVisibilityButtonCallback(args:Array<Dynamic>):Void
 	{
 		_gridVisible = !_gridVisible;
-		_gridVisibilityCallback(_gridVisible);
+		_editor.toggleGridVisibility(_gridVisible);
 	}
+	
+	public function chooseShipButtonCallback(args:Array<Dynamic>):Void
+	{
+		
+	}
+	
+	public function chooseKeyFrameButtonCallback(args:Array<Dynamic>):Void
+	{
+		_chooseKeyFrameView = new JVEditorChooseKeyFrameView(_dataHandler.patterns[_editor.currentPatternIndex], updateKeyFrameCallback);
+		this.addSubview(_chooseKeyFrameView);
+	}
+	
+	public function updateKeyFrameCallback(keyFrameIndex:Int):Void
+	{
+		_editor.updateSelectedKeyFrame(keyFrameIndex);
+		this.removeSubview(_chooseKeyFrameView);
+		_chooseKeyFrameView = null;
+	}
+	
 	
 	/**
 	 * Private
 	 */
+	private var _editor:JVEditorScene;
 	private var _dataHandler:JVEditorDataHandler;
 	private var _importView:JVEditorImportView;
-	private var _updatePatternCallback:Int->Void;
-	private var _gridVisibilityCallback:Bool->Void;
+	private var _chooseKeyFrameView:JVEditorChooseKeyFrameView;
 	private var _gridVisible:Bool;
 }

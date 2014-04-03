@@ -6,11 +6,17 @@ import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import extendedhxpunk.ext.EXTScene;
 import jitv.datamodel.staticdata.JVEnemyPattern;
+import jitv.entities.JVEntity;
 import jitv.JVConstants;
 import editor.ui.JVEditorMainView;
+import editor.entities.components.JVEditorKeyFrameLocationComponent;
 
 class JVEditorScene extends EXTScene
 {
+	public var currentPatternIndex:Int;
+	public var currentKeyFrameIndex:Int; // Display all if -1
+	public var currentShipIndex:Int; // Display all if -1
+	
 	public function new()
 	{
 		HXP.resizeStage(JVEditorConstants.EDITOR_SCREEN_WIDTH , JVEditorConstants.EDITOR_SCREEN_HEIGHT);
@@ -23,9 +29,11 @@ class JVEditorScene extends EXTScene
 		
 		_grid = new Array();
 		_keyFrameLocationEntities = new Array();
+		this.currentKeyFrameIndex = -1;
+		this.currentShipIndex = -1;
 		_dataHandler = new JVEditorDataHandler("./jsondata/" + JVEnemyPattern.DATA_TYPE_NAME + ".json");
 		_dataHandler.loadPatternDataFromDisk();
-		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, loadPatternForDisplay, toggleGridVisibility));
+		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, this));
 
 		this.loadPatternForDisplay(0);
 	}
@@ -43,6 +51,10 @@ class JVEditorScene extends EXTScene
 		gfx.drawRect(JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_X, JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_Y, JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 	}
 	
+	
+	/*
+	 * UI Callbacks
+	 */
 	public function toggleGridVisibility(visible:Bool):Void
 	{
 		for (i in 0..._grid.length)
@@ -51,10 +63,20 @@ class JVEditorScene extends EXTScene
 		}
 	}
 	
+	public function updateSelectedShip(shipIndex:Int):Void
+	{
+		this.currentShipIndex = shipIndex;
+	}
+	
+	public function updateSelectedKeyFrame(keyFrameIndex:Int):Void
+	{
+		this.currentKeyFrameIndex = keyFrameIndex;
+	}
+	
 	public function loadPatternForDisplay(patternIndex:Int):Void
 	{
-		_currentPatternIndex = patternIndex;
-		var pattern:JVEnemyPattern = _dataHandler.patterns[_currentPatternIndex];
+		this.currentPatternIndex = patternIndex;
+		var pattern:JVEnemyPattern = _dataHandler.patterns[this.currentPatternIndex];
 		
 		// Clean up display data from previous pattern
 		for (i in 0..._grid.length)
@@ -112,9 +134,11 @@ class JVEditorScene extends EXTScene
 			{
 				var keyframe:Point = keyframesForShip[j];
 				var gridSpaceEntity:Entity = this.gridSpaceEntityForLocation(cast keyframe.x, cast keyframe.y);
-				var keyFrameLocationEntity:Entity = new Entity(gridSpaceEntity.x + (gridSpaceImage.scaledWidth / 2), 
-															   gridSpaceEntity.y + (gridSpaceImage.scaledHeight / 2), 
-															   shipLocationImage);
+				var keyFrameLocationEntity:JVEntity = new JVEntity();
+				keyFrameLocationEntity.x = gridSpaceEntity.x + (gridSpaceImage.scaledWidth / 2);
+				keyFrameLocationEntity.y = gridSpaceEntity.y + (gridSpaceImage.scaledHeight / 2);
+				keyFrameLocationEntity.graphic = shipLocationImage;
+				keyFrameLocationEntity.components.push(new JVEditorKeyFrameLocationComponent(keyFrameLocationEntity, this, i, j));
 				keyFrameLocationEntity.type = "key_frame_location";
 				this.add(keyFrameLocationEntity);
 				_keyFrameLocationEntities.push(keyFrameLocationEntity);
@@ -124,7 +148,7 @@ class JVEditorScene extends EXTScene
 	
 	public function gridSpaceEntityForLocation(x:Int, y:Int):Entity
 	{
-		var currentPattern:JVEnemyPattern = _dataHandler.patterns[_currentPatternIndex];
+		var currentPattern:JVEnemyPattern = _dataHandler.patterns[this.currentPatternIndex];
 		return _grid[(x * currentPattern.gridRows) + y];
 	}
 
@@ -132,7 +156,6 @@ class JVEditorScene extends EXTScene
 	 * Private
 	 */
 	private var _dataHandler:JVEditorDataHandler;
-	private var _currentPatternIndex:Int;
 	private var _grid:Array<Entity>;
 	private var _keyFrameLocationEntities:Array<Entity>;
 }
