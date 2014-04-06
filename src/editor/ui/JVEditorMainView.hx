@@ -1,6 +1,5 @@
 package editor.ui;
 
-import editor.JVEditorScene;
 import flash.geom.Point;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
@@ -13,16 +12,16 @@ import jitv.ui.JVExampleMenuButton;
 import jitv.scenes.JVSceneManager;
 import jitv.JVConstants;
 import editor.JVEditorDataHandler;
+import editor.JVEditorStateHandler;
 
 class JVEditorMainView extends UIView
 {
-	public function new(dataHandler:JVEditorDataHandler, editor:JVEditorScene)
+	public function new(dataHandler:JVEditorDataHandler, stateHandler:JVEditorStateHandler)
 	{
 		super(EXTUtility.ZERO_POINT, new Point(HXP.screen.width, HXP.screen.height));
 		
 		_dataHandler = dataHandler;
-		_editor = editor;
-		_gridVisible = true;
+		_stateHandler = stateHandler;
 		
 		var sidePanelView:UIView = new UIView(EXTUtility.ZERO_POINT, new Point(150, HXP.screen.height));
 		sidePanelView.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
@@ -110,18 +109,17 @@ class JVEditorMainView extends UIView
 	public function patternButtonCallback(args:Array<Dynamic>):Void
 	{
 		var pattern:JVEnemyPattern = args[0];
-		_editor.loadPatternForDisplay(pattern.id);
-		_editor.updateSelectedShip(-1);
-		_editor.updateSelectedKeyFrame(-1);
-		_gridVisible = true;
+		_stateHandler.currentPatternIndex = pattern.id;
+		_stateHandler.currentShipIndex = -1;
+		_stateHandler.currentKeyFrameIndex = -1;
+		_stateHandler.gridVisible = true;
 		this.removeSubview(_importView);
 		_importView = null;
 	}
 	
 	public function gridVisibilityButtonCallback(args:Array<Dynamic>):Void
 	{
-		_gridVisible = !_gridVisible;
-		_editor.toggleGridVisibility(_gridVisible);
+		_stateHandler.gridVisible = !_stateHandler.gridVisible;
 	}
 	
 	public function chooseShipButtonCallback(args:Array<Dynamic>):Void
@@ -131,13 +129,13 @@ class JVEditorMainView extends UIView
 	
 	public function chooseKeyFrameButtonCallback(args:Array<Dynamic>):Void
 	{
-		_chooseKeyFrameView = new JVEditorChooseKeyFrameView(_dataHandler.patterns[_editor.currentPatternIndex], updateKeyFrameCallback);
+		_chooseKeyFrameView = new JVEditorChooseKeyFrameView(_dataHandler.patterns[_stateHandler.currentPatternIndex], updateKeyFrameCallback);
 		this.addSubview(_chooseKeyFrameView);
 	}
 	
 	public function updateKeyFrameCallback(keyFrameIndex:Int):Void
 	{
-		_editor.updateSelectedKeyFrame(keyFrameIndex);
+		_stateHandler.currentKeyFrameIndex = keyFrameIndex;
 		this.removeSubview(_chooseKeyFrameView);
 		_chooseKeyFrameView = null;
 	}
@@ -146,9 +144,8 @@ class JVEditorMainView extends UIView
 	/**
 	 * Private
 	 */
-	private var _editor:JVEditorScene;
+	private var _stateHandler:JVEditorStateHandler;
 	private var _dataHandler:JVEditorDataHandler;
 	private var _importView:JVEditorImportView;
 	private var _chooseKeyFrameView:JVEditorChooseKeyFrameView;
-	private var _gridVisible:Bool;
 }

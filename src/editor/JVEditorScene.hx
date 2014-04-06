@@ -12,11 +12,7 @@ import editor.ui.JVEditorMainView;
 import editor.entities.components.JVEditorKeyFrameLocationComponent;
 
 class JVEditorScene extends EXTScene
-{
-	public var currentPatternIndex:Int;
-	public var currentKeyFrameIndex:Int; // Display all if -1
-	public var currentShipIndex:Int; // Display all if -1
-	
+{	
 	public function new()
 	{
 		HXP.resizeStage(JVEditorConstants.EDITOR_SCREEN_WIDTH , JVEditorConstants.EDITOR_SCREEN_HEIGHT);
@@ -29,13 +25,12 @@ class JVEditorScene extends EXTScene
 		
 		_grid = new Array();
 		_keyFrameLocationEntities = new Array();
-		this.currentKeyFrameIndex = -1;
-		this.currentShipIndex = -1;
 		_dataHandler = new JVEditorDataHandler("./jsondata/" + JVEnemyPattern.DATA_TYPE_NAME + ".json");
 		_dataHandler.loadPatternDataFromDisk();
-		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, this));
+		_stateHandler = new JVEditorStateHandler(this, _dataHandler);
+		this.staticUiController.rootView.addSubview(new JVEditorMainView(_dataHandler, _stateHandler));
 
-		this.loadPatternForDisplay(0);
+		this.loadPatternForDisplay(_dataHandler.patterns[0]);
 	}
 
 	override public function update():Void
@@ -63,21 +58,8 @@ class JVEditorScene extends EXTScene
 		}
 	}
 	
-	public function updateSelectedShip(shipIndex:Int):Void
+	public function loadPatternForDisplay(pattern:JVEnemyPattern):Void
 	{
-		this.currentShipIndex = shipIndex;
-	}
-	
-	public function updateSelectedKeyFrame(keyFrameIndex:Int):Void
-	{
-		this.currentKeyFrameIndex = keyFrameIndex;
-	}
-	
-	public function loadPatternForDisplay(patternIndex:Int):Void
-	{
-		this.currentPatternIndex = patternIndex;
-		var pattern:JVEnemyPattern = _dataHandler.patterns[this.currentPatternIndex];
-		
 		// Clean up display data from previous pattern
 		for (i in 0..._grid.length)
 		{
@@ -138,7 +120,7 @@ class JVEditorScene extends EXTScene
 				keyFrameLocationEntity.x = gridSpaceEntity.x + (gridSpaceImage.scaledWidth / 2);
 				keyFrameLocationEntity.y = gridSpaceEntity.y + (gridSpaceImage.scaledHeight / 2);
 				keyFrameLocationEntity.graphic = shipLocationImage;
-				keyFrameLocationEntity.components.push(new JVEditorKeyFrameLocationComponent(keyFrameLocationEntity, this, i, j));
+				keyFrameLocationEntity.components.push(new JVEditorKeyFrameLocationComponent(keyFrameLocationEntity, _stateHandler, i, j));
 				keyFrameLocationEntity.type = "key_frame_location";
 				this.add(keyFrameLocationEntity);
 				_keyFrameLocationEntities.push(keyFrameLocationEntity);
@@ -148,13 +130,14 @@ class JVEditorScene extends EXTScene
 	
 	public function gridSpaceEntityForLocation(x:Int, y:Int):Entity
 	{
-		var currentPattern:JVEnemyPattern = _dataHandler.patterns[this.currentPatternIndex];
+		var currentPattern:JVEnemyPattern = _dataHandler.patterns[_stateHandler.currentPatternIndex];
 		return _grid[(x * currentPattern.gridRows) + y];
 	}
 
 	/**
 	 * Private
 	 */
+	private var _stateHandler:JVEditorStateHandler;
 	private var _dataHandler:JVEditorDataHandler;
 	private var _grid:Array<Entity>;
 	private var _keyFrameLocationEntities:Array<Entity>;

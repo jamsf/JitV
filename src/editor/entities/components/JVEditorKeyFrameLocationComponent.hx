@@ -2,7 +2,7 @@ package editor.entities.components;
 
 import jitv.entities.components.JVEntityComponent;
 import jitv.entities.JVEntity;
-import editor.JVEditorScene;
+import editor.JVEditorStateHandler;
 
 /**
  * ...
@@ -10,18 +10,20 @@ import editor.JVEditorScene;
  */
 class JVEditorKeyFrameLocationComponent implements JVEntityComponent
 {
-	public function new(parentEntity:JVEntity, editor:JVEditorScene, shipIndex:Int, keyFrameIndex:Int) 
+	public function new(parentEntity:JVEntity, editorStateHandler:JVEditorStateHandler, shipIndex:Int, keyFrameIndex:Int) 
 	{
 		_parentEntity = parentEntity;
-		_editor = editor;
+		_editorStateHandler = editorStateHandler;
 		_shipIndex = shipIndex;
 		_keyFrameIndex = keyFrameIndex;
 	}
 	
 	public function update():Void
 	{
-		_parentEntity.visible = ((_editor.currentShipIndex == -1 || _editor.currentShipIndex == _shipIndex) &&
-			(_editor.currentKeyFrameIndex == -1 || _editor.currentKeyFrameIndex == _keyFrameIndex));
+		_parentEntity.visible = ((_editorStateHandler.currentShipIndex == -1 || 
+								  _editorStateHandler.currentShipIndex == _shipIndex) &&
+								 (_editorStateHandler.currentKeyFrameIndex == -1 || 
+								  _editorStateHandler.currentKeyFrameIndex == _keyFrameIndex));
 	}
 	
 	public function render():Void
@@ -31,14 +33,15 @@ class JVEditorKeyFrameLocationComponent implements JVEntityComponent
 	
 	public function cleanup():Void
 	{
-		
+		_parentEntity = null;
+		_editorStateHandler = null;
 	}
 	
 	/*
 	 * Private
 	 */
 	private var _parentEntity:JVEntity;
-	private var _editor:JVEditorScene;
+	private var _editorStateHandler:JVEditorStateHandler;
 	private var _shipIndex:Int;
 	private var _keyFrameIndex:Int;
 }
