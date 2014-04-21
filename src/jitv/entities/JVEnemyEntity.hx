@@ -82,6 +82,11 @@ class JVEnemyEntity extends JVEntity
 				killed();
 				HXP.scene.remove(this);
 			}
+			else // TODO - clem - flash the enemy white instead
+			{
+				visible = false;
+				_damageTakenTimer = EXTTimer.createTimer(0.05, false, visibilityOn);
+			}
 		}
 		
 		// Check if offscreen and remove
@@ -123,5 +128,11 @@ class JVEnemyEntity extends JVEntity
 	private var _enemyData:JVEnemy;
 	private var _health:Int = 100;
 	private var _cooldownTimer:EXTTimer;
+	private var _damageTakenTimer:EXTTimer;
 	private var _patternComponent:JVPatternComponent;
+	
+	private function visibilityOn(timer:EXTTimer):Void
+	{
+		visible = true;
+	}
 }
