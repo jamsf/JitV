@@ -177,7 +177,7 @@ class JVPlayerShipEntity extends JVEntity
 	
 	private function fireBullet():Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6, 34);
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;
@@ -185,11 +185,11 @@ class JVPlayerShipEntity extends JVEntity
 	
 	private function fireBurstBullet():Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6, 20);
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.6, 6);
+		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.6, 6, 20);
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.4, 6);
+		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.4, 6, 20);
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;

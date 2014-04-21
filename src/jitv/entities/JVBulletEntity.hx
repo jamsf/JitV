@@ -7,6 +7,7 @@ import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.math.Vector;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
+import openfl.utils.Int16Array;
 
 /**
  * JVPlayerShipEntity
@@ -17,8 +18,9 @@ class JVBulletEntity extends JVEntity
 {
 	var vel:Vector;
 	var movementMagnitude:Float;
+	var damagePoints:Int;
 	
-	public function new(x:Float, y:Float, type:String, angle:Float, velocity:Float) 
+	public function new(x:Float, y:Float, type:String, angle:Float, velocity:Float, damagePoints:Int) 
 	{
 		super();
 		
@@ -29,6 +31,7 @@ class JVBulletEntity extends JVEntity
 		var mask:Pixelmask = new Pixelmask("gfx/entities/bullet_0_entity.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
 		this.mask = mask;
 		
+		this.damagePoints = damagePoints;
 		this.type = type;
 		this.width = image.width;
 		this.height = image.height;
@@ -51,5 +54,10 @@ class JVBulletEntity extends JVEntity
 			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
 			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
 			HXP.scene.remove(this);
+	}
+	
+	public function getDamagePoints():Int
+	{
+		return damagePoints;
 	}
 }

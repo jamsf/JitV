@@ -73,7 +73,8 @@ class JVEnemyEntity extends JVEntity
 		var collidedEntity:Entity = this.collide("playerbullet", this.x, this.y);
 		if (collidedEntity != null)
 		{
-			_health -= 34;
+			var collidedBullet:JVBulletEntity = cast(collidedEntity, JVBulletEntity);
+			_health -= collidedBullet.getDamagePoints();
 			HXP.scene.remove(collidedEntity);
 			
 			if (_health <= 0)
@@ -93,7 +94,7 @@ class JVEnemyEntity extends JVEntity
 
 	public function fireBullet(timer:EXTTimer):Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type, .5, 6.0);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type, .5, 6.0, 100);
 		HXP.scene.add(bullet);
 	}
 	
