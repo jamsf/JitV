@@ -85,7 +85,7 @@ class JVEnemyEntity extends JVEntity
 			else // TODO - clem - flash the enemy white instead
 			{
 				visible = false;
-				_damageTakenTimer = EXTTimer.createTimer(0.05, false, visibilityOn);
+				_damageTakenTimer = EXTTimer.createTimer(0.03, false, visibilityOn);
 			}
 		}
 		

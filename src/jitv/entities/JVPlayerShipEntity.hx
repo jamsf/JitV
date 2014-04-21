@@ -35,6 +35,7 @@ class JVPlayerShipEntity extends JVEntity
 		this.mask = new Pixelmask("gfx/masks/player_ship_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.type = "player";
 		this._lifeCount = JVConstants.START_LIVES;
+		this._invincible = false;
 		// this.width = 12;
 		// this.height = 12;
 		
@@ -118,7 +119,7 @@ class JVPlayerShipEntity extends JVEntity
 		}
 		else if ((Input.check(Key.X) || (_gamepad != null && _gamepad.check(XboxButton.B_BUTTON))) && _cooldown == false)
 		{
-			fireBurstBullet();
+			fireSpreadBullet();
 		}
 		
 		//This is the logic that handles collision with a powerup.
@@ -140,7 +141,8 @@ class JVPlayerShipEntity extends JVEntity
 	
 	override public function removed():Void
 	{
-		_cooldownTimer.invalidate();
+		// TODO - clem - why was there a need to invalidate the timer?
+		//_cooldownTimer.invalidate(); 
 	}
 	
 	/**
@@ -150,8 +152,15 @@ class JVPlayerShipEntity extends JVEntity
 	 */
 	public function isHit():Void
 	{
-		--_lifeCount;
+		--_lifeCount;				
 		_hud.updateLivesCount(_lifeCount);
+	}
+	
+	public function activateInvincibility():Void // TODO - clem - change this to flashing white
+	{
+		_invincible = true;
+		_invincibilityFlashTimer = EXTTimer.createTimer(0.2, true, toggleVisibility);
+		_invincibilityOffTimer = EXTTimer.createTimer(2.5, false, invincibilityOff);
 	}
 	
 	/**
@@ -164,6 +173,11 @@ class JVPlayerShipEntity extends JVEntity
 		return _lifeCount;
 	}
 	
+	public function isInvincible():Bool
+	{
+		return _invincible;
+	}
+	
 	/**
 	 * Private
 	 */
@@ -172,6 +186,9 @@ class JVPlayerShipEntity extends JVEntity
 	private var _gamepad:Gamepad;
 	private var _lifeCount:Int;
 	private var _hud:JVHudView;
+	private var _invincible:Bool;
+	private var _invincibilityFlashTimer:EXTTimer;
+	private var _invincibilityOffTimer:EXTTimer;
 	
 	private static inline var FIRING_RATE:Float = 0.167;
 	
@@ -183,7 +200,7 @@ class JVPlayerShipEntity extends JVEntity
 		_cooldownTimer.paused = false;
 	}
 	
-	private function fireBurstBullet():Void
+	private function fireSpreadBullet():Void
 	{
 		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6, 20);
 		HXP.scene.add(bullet);
@@ -193,6 +210,18 @@ class JVPlayerShipEntity extends JVEntity
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;
+	}
+	
+	private function toggleVisibility(timer:EXTTimer):Void
+	{
+		visible = !visible;
+	}
+	
+	private function invincibilityOff(timer:EXTTimer):Void
+	{
+		_invincible = false;
+		_invincibilityFlashTimer.invalidate();
+		this.visible = true;
 	}
 	
 	private function updateMovement():Void

@@ -60,6 +60,8 @@ class JVCombatScene extends EXTScene
 		
 		_levelEndsTimer = EXTTimer.createTimer(8, false, goToLevelSelectScene);
 		_levelEndsTimer.paused = true;
+		
+		_gameover = false;
 	}
 	
 	override public function update():Void
@@ -110,7 +112,7 @@ class JVCombatScene extends EXTScene
 
 		
 		// Check collisions
-		if (_playerShip != null)
+		if (_playerShip != null && !_playerShip.isInvincible())
 		{
 			var collidedEnemy:Entity = _playerShip.collide("enemy", _playerShip.x, _playerShip.y);
 			if (collidedEnemy != null)
@@ -121,14 +123,19 @@ class JVCombatScene extends EXTScene
 				{
 					this.remove(_playerShip);
 					_playerShip = null;
+					_gameover = true;
 				}
 				else
+				{
 					_playerShip.isHit();
+					this.remove(_playerShip);
+					_playerRespawnTimer = EXTTimer.createTimer(3, false, respawnPlayer);
+				}
 			}
 		}
 		
 		// If player has died start the end level timer
-		if (_playerShip == null)
+		if (_gameover)
 		{
 			_levelEndsTimer.paused = false;
 		}
@@ -151,7 +158,17 @@ class JVCombatScene extends EXTScene
 	private var _levelData:JVLevel;
 	private var _spawnTimesCompleted:Int = 0;
 	private var _levelEndsTimer:EXTTimer;
+	private var _playerRespawnTimer:EXTTimer;
 	private var _hudView:JVHudView;
+	private var _gameover:Bool;
+	
+	private function respawnPlayer(timer:EXTTimer):Void
+	{
+		_playerShip.x = 320;
+		_playerShip.y = 240;
+		this.add(_playerShip);
+		_playerShip.activateInvincibility();
+	}
 
 	
 	/*
