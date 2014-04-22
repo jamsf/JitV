@@ -28,11 +28,11 @@ class JVPlayerShipEntity extends JVEntity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/entities/player_ship_entity.png");
+		var image:Image = new Image("gfx/entities/player_ship_entity_theme2.png");
 		image.centerOrigin();
 		this.graphic = image;
 		
-		this.mask = new Pixelmask("gfx/masks/player_ship_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
+		this.mask = new Pixelmask("gfx/masks/player_ship_mask_theme2.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.type = "player";
 		this._lifeCount = JVConstants.START_LIVES;
 		this._invincible = false;
@@ -190,11 +190,11 @@ class JVPlayerShipEntity extends JVEntity
 	private var _invincibilityFlashTimer:EXTTimer;
 	private var _invincibilityOffTimer:EXTTimer;
 	
-	private static inline var FIRING_RATE:Float = 0.167;
+	private static inline var FIRING_RATE:Float = 0.14;
 	
 	private function fireBullet():Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6, 34);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.5, 8, 34);
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;
@@ -202,11 +202,11 @@ class JVPlayerShipEntity extends JVEntity
 	
 	private function fireSpreadBullet():Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, "playerbullet", -.5, 6, 20);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.5, 6, 20);
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.6, 6, 20);
+		bullet = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.6, 6, 20);
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y, "playerbullet", -.4, 6, 20);
+		bullet = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.4, 6, 20);
 		HXP.scene.add(bullet);
 		_cooldown = true;
 		_cooldownTimer.paused = false;

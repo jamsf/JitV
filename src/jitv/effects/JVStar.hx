@@ -26,7 +26,7 @@ class JVStar extends Entity
 		var image:Image = new Image("gfx/entities/particle_entity.png");
 		
 		// Calculate greyscale for star
-		image.color = 0x000000;
+		image.color = 0x2E2E2E;
 		var greyScale : Int = Std.int(ran * 125);
 		image.color = (greyScale << 16) | (greyScale << 8) | greyScale;
 		
