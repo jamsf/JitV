@@ -41,9 +41,6 @@ class JVPlayerShipEntity extends JVEntity
 		
 		_hud = hud;
 		
-		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
-		_cooldownTimer.paused = true;
-		
 		// Hardcoded gamepad to be 0th one
 		_gamepad = new Gamepad(0);
 		_hud.updateLivesCount(_lifeCount);
@@ -139,10 +136,15 @@ class JVPlayerShipEntity extends JVEntity
 		_cooldownTimer.paused = true;
 	}
 	
+	override public function added():Void
+	{
+		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
+		_cooldownTimer.paused = true;
+	}
+	
 	override public function removed():Void
 	{
-		// TODO - clem - why was there a need to invalidate the timer?
-		//_cooldownTimer.invalidate(); 
+		_cooldownTimer.invalidate();
 	}
 	
 	/**
