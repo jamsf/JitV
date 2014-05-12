@@ -11,5 +11,6 @@ interface JVEntityComponent
 {
 	public function update():Void;
 	public function render():Void;
+	public function prepare():Void;
 	public function cleanup():Void;
 }

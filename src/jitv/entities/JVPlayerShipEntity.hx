@@ -80,16 +80,6 @@ class JVPlayerShipEntity extends JVEntity
 		}
 	}
 	
-	override public function added():Void
-	{
-		
-	}
-	
-	override public function removed():Void
-	{
-		
-	}
-	
 	/**
 	 *	isHit 	- 	public mutator function; Logic that executes when ship is hit
 	 *	PRECON:		this has just been hit by an opposing entity type

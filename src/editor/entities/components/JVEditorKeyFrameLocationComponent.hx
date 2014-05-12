@@ -31,6 +31,11 @@ class JVEditorKeyFrameLocationComponent implements JVEntityComponent
 		
 	}
 	
+	public function prepare():Void
+	{
+		
+	}
+	
 	public function cleanup():Void
 	{
 		_parentEntity = null;

@@ -84,6 +84,11 @@ class JVMovementComponent implements JVEntityComponent
 		
 	}
 	
+	public function prepare():Void
+	{
+		
+	}
+	
 	public function cleanup():Void 
 	{
 		

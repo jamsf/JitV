@@ -28,9 +28,7 @@ class JVWeaponComponent implements JVEntityComponent
 		_gamepad = gamepad;
 		
 		_weaponHandler = JVWeaponHandler.WeaponHandlerForShipWeapon(shipWeapon);
-		
-		_cooldownTimer = EXTTimer.createTimer(shipWeapon.weaponClass.fireRate, true, resetBulletCooldown);
-		_cooldownTimer.paused = true;
+		this.prepare();
 	}
 	
 	public function update():Void 
@@ -48,9 +46,17 @@ class JVWeaponComponent implements JVEntityComponent
 		
 	}
 	
+	public function prepare():Void
+	{
+		if (_cooldownTimer == null)
+			_cooldownTimer = EXTTimer.createTimer(_shipWeapon.weaponClass.fireRate, true, resetBulletCooldown);
+		_cooldownTimer.paused = true;
+	}
+	
 	public function cleanup():Void 
 	{
 		_cooldownTimer.invalidate();
+		_cooldownTimer = null;
 	}
 	
 	/**
