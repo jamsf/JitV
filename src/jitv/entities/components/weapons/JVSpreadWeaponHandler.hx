@@ -22,11 +22,14 @@ class JVSpreadWeaponHandler extends JVWeaponHandler
 	 */
 	override public function fireFromLauncher(launcher:JVEntity):Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.5, 6, 20);
+		var bullet:JVBulletEntity = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.5, 6, _damage);
+		bullet.y -= bullet.halfHeight / 3;
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.6, 6, 20);
+		bullet = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.6, 6, _damage);
+		bullet.y -= bullet.halfHeight / 3;
 		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.4, 6, 20);
+		bullet = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.4, 6, _damage);
+		bullet.y -= bullet.halfHeight / 3;
 		HXP.scene.add(bullet);
 	}
 }

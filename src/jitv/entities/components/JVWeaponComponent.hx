@@ -50,6 +50,7 @@ class JVWeaponComponent implements JVEntityComponent
 	{
 		if (_cooldownTimer == null)
 			_cooldownTimer = EXTTimer.createTimer(_shipWeapon.weaponClass.fireRate, true, resetBulletCooldown);
+		_cooldown = false;
 		_cooldownTimer.paused = true;
 	}
 	

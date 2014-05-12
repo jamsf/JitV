@@ -22,7 +22,8 @@ class JVStandardWeaponHandler extends JVWeaponHandler
 	 */
 	override public function fireFromLauncher(launcher:JVEntity):Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.5, 8, 34);
+		var bullet:JVBulletEntity = new JVBulletEntity(launcher.x, launcher.y - launcher.halfHeight, "playerbullet", -.5, 10, _damage);
+		bullet.y -= bullet.halfHeight / 3;
 		HXP.scene.add(bullet);
 	}
 }

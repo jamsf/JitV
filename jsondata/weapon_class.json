@@ -4,8 +4,8 @@
 		id : 0,
 		name : 'Standard Weapon',
 		imageName : '',
-		damage : 1,
-		fireRate : 0.14,
+		damage : 35,
+		fireRate : 0.12,
 		ammoCost : 0,
 		attackType : 'standard',
 		projectileImageNames : ['bullet_0_entity_theme2']
@@ -15,8 +15,8 @@
 		id : 1,
 		name : 'Spread Weapon',
 		imageName : '',
-		damage : 1,
-		fireRate : 0.14,
+		damage : 35,
+		fireRate : 0.20,
 		ammoCost : 0,
 		attackType : 'spread',
 		projectileImageNames : ['bullet_0_entity_theme2']

@@ -31,6 +31,7 @@ class JVWeaponHandler
 	public function new(shipWeapon:JVShipWeapon) 
 	{
 		_shipWeapon = shipWeapon;
+		_damage = shipWeapon.weaponClass.damage;
 	}
 	
 	/**
@@ -45,4 +46,5 @@ class JVWeaponHandler
 	 * Private
 	 */
 	private var _shipWeapon:JVShipWeapon;
+	private var _damage:Int;
 }
