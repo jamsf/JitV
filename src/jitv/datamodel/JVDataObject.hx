@@ -20,6 +20,7 @@ class JVDataObject
 		DB = new Map();
 		JVEnemyClass.setupDB();
 		JVEnemyPattern.setupDB();
+		JVWeaponClass.setupDB();
 	}
 
 	public static function lookupStaticDataObject(dataClass:String, dataId:Int):JVDataObject

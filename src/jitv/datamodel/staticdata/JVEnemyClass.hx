@@ -1,9 +1,8 @@
 package jitv.datamodel.staticdata;
 
-import flash.geom.Point;
 import haxe.Resource;
+import flash.geom.Point;
 import jitv.datamodel.JVDataObject;
-import tjson.TJSON;
 import extendedhxpunk.ext.EXTJsonSerialization;
 import extendedhxpunk.ext.EXTConsole;
 

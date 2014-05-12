@@ -1,0 +1,24 @@
+[
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVWeaponClass',
+		id : 0,
+		name : 'Standard Weapon',
+		imageName : '',
+		damage : 1,
+		fireRate : 0.14,
+		ammoCost : 0,
+		attackType : 'standard',
+		projectileImageNames : ['bullet_0_entity_theme2']
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVWeaponClass',
+		id : 1,
+		name : 'Spread Weapon',
+		imageName : '',
+		damage : 1,
+		fireRate : 0.14,
+		ammoCost : 0,
+		attackType : 'spread',
+		projectileImageNames : ['bullet_0_entity_theme2']
+	}
+]

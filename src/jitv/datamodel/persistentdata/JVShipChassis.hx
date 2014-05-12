@@ -1,4 +1,4 @@
-package jitv.datamodel.proceduraldata;
+package jitv.datamodel.persistentdata;
 
 import jitv.datamodel.JVDataObject;
 

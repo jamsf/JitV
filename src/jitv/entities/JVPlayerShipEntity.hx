@@ -13,6 +13,8 @@ import com.haxepunk.utils.Key;
 import extendedhxpunk.ext.EXTKey;
 import extendedhxpunk.ext.EXTMath;
 import extendedhxpunk.ext.EXTTimer;
+import jitv.entities.components.JVWeaponComponent;
+import jitv.datamodel.persistentdata.JVShipWeapon;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
 import jitv.ui.JVHudView;
@@ -36,14 +38,24 @@ class JVPlayerShipEntity extends JVEntity
 		this.type = "player";
 		this._lifeCount = JVConstants.START_LIVES;
 		this._invincible = false;
-		// this.width = 12;
-		// this.height = 12;
 		
 		_hud = hud;
 		
 		// Hardcoded gamepad to be 0th one
 		_gamepad = new Gamepad(0);
 		_hud.updateLivesCount(_lifeCount);
+		
+		// Temporary hardcoded weapons
+		var tempPrimaryWeapon:JVShipWeapon = new JVShipWeapon();
+		tempPrimaryWeapon.weaponClassId = 0;
+		tempPrimaryWeapon.level = 1;
+		var tempSecondaryWeapon:JVShipWeapon = new JVShipWeapon();
+		tempSecondaryWeapon.weaponClassId = 1;
+		tempSecondaryWeapon.level = 1;
+		
+		// Add components for weapons
+		this.components.push(new JVWeaponComponent(this, tempPrimaryWeapon, Key.SPACE, XboxButton.A_BUTTON, _gamepad));
+		this.components.push(new JVWeaponComponent(this, tempSecondaryWeapon, Key.X, XboxButton.B_BUTTON, _gamepad));
 	}
 	
 	override public function update():Void
@@ -109,16 +121,6 @@ class JVPlayerShipEntity extends JVEntity
 		clampHorizontal(0, JVConstants.PLAY_SPACE_WIDTH);
 		clampVertical(0, JVConstants.PLAY_SPACE_HEIGHT);
 		
-		// Primary Fire
-		if ((Input.check(Key.SPACE) || (_gamepad != null && _gamepad.check(XboxButton.A_BUTTON))) && _cooldown == false)
-		{
-			fireBullet();
-		}
-		else if ((Input.check(Key.X) || (_gamepad != null && _gamepad.check(XboxButton.B_BUTTON))) && _cooldown == false)
-		{
-			fireSpreadBullet();
-		}
-		
 		//This is the logic that handles collision with a powerup.
 		var collidedPwrup:Entity = this.collide("pwrup", this.x, this.y);
 		if (collidedPwrup != null)
@@ -130,21 +132,14 @@ class JVPlayerShipEntity extends JVEntity
 		}
 	}
 	
-	public function resetBulletCooldown(timer:EXTTimer):Void
-	{
-		_cooldown = false;
-		_cooldownTimer.paused = true;
-	}
-	
 	override public function added():Void
 	{
-		_cooldownTimer = EXTTimer.createTimer(FIRING_RATE, true, resetBulletCooldown);
-		_cooldownTimer.paused = true;
+		
 	}
 	
 	override public function removed():Void
 	{
-		_cooldownTimer.invalidate();
+		
 	}
 	
 	/**
@@ -183,8 +178,6 @@ class JVPlayerShipEntity extends JVEntity
 	/**
 	 * Private
 	 */
-	private var _cooldownTimer:EXTTimer;
-	private var _cooldown:Bool;
 	private var _gamepad:Gamepad;
 	private var _lifeCount:Int;
 	private var _hud:JVHudView;
@@ -193,26 +186,6 @@ class JVPlayerShipEntity extends JVEntity
 	private var _invincibilityOffTimer:EXTTimer;
 	
 	private static inline var FIRING_RATE:Float = 0.14;
-	
-	private function fireBullet():Void
-	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.5, 8, 34);
-		HXP.scene.add(bullet);
-		_cooldown = true;
-		_cooldownTimer.paused = false;
-	}
-	
-	private function fireSpreadBullet():Void
-	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.5, 6, 20);
-		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.6, 6, 20);
-		HXP.scene.add(bullet);
-		bullet = new JVBulletEntity(this.x, this.y - this.halfHeight, "playerbullet", -.4, 6, 20);
-		HXP.scene.add(bullet);
-		_cooldown = true;
-		_cooldownTimer.paused = false;
-	}
 	
 	private function toggleVisibility(timer:EXTTimer):Void
 	{
