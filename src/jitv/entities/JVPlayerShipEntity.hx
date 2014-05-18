@@ -31,11 +31,11 @@ class JVPlayerShipEntity extends JVEntity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/entities/player_ship_entity_theme2.png");
+		var image:Image = new Image("gfx/entities/player_ship_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
 		
-		this.mask = new Pixelmask("gfx/masks/player_ship_mask_theme2.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
+		this.mask = new Pixelmask("gfx/masks/player_ship_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.type = "player";
 		_lifeCount = JVConstants.START_LIVES;
 		_invincible = false;

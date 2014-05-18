@@ -8,7 +8,7 @@
 		fireRate : 0.12,
 		ammoCost : 0,
 		attackType : 'standard',
-		projectileImageNames : ['bullet_0_entity_theme2']
+		projectileImageNames : ['bullet_0_entity']
 	},
 	{
 		_explicitType : 'jitv.datamodel.staticdata.JVWeaponClass',
@@ -19,6 +19,6 @@
 		fireRate : 0.20,
 		ammoCost : 0,
 		attackType : 'spread',
-		projectileImageNames : ['bullet_0_entity_theme2']
+		projectileImageNames : ['bullet_0_entity']
 	}
 ]

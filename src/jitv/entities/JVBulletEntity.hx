@@ -24,11 +24,11 @@ class JVBulletEntity extends JVEntity
 	{
 		super();
 		
-		var image:Image = new Image("gfx/entities/bullet_0_entity_theme2.png");
+		var image:Image = new Image("gfx/entities/bullet_0_entity.png");
 		image.centerOrigin();
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/masks/bullet_0_mask_theme2.png", Std.int( -image.width / 2), Std.int( -image.width / 2));
+		var mask:Pixelmask = new Pixelmask("gfx/masks/bullet_0_mask.png", Std.int( -image.width / 2), Std.int( -image.width / 2));
 		this.mask = mask;
 		
 		this.damagePoints = damagePoints;
