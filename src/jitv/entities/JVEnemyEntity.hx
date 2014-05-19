@@ -14,6 +14,8 @@ import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
 import jitv.datamodel.staticdata.JVEnemyPattern;
 import jitv.entities.components.JVPatternComponent;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * JVEnemyEntity
@@ -31,6 +33,7 @@ class JVEnemyEntity extends JVEntity
 		var imagePath:String = "gfx/entities/" + _enemyData.enemyClass.imageName + ".png";
 		var image:Image = new Image(imagePath);
 		image.centerOrigin();
+		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_ENEMY_SHIP_1).webColor;
 		this.graphic = image;
 		
 		var mask:Pixelmask = new Pixelmask(imagePath, Std.int(-image.width / 2), Std.int(-image.height / 2));

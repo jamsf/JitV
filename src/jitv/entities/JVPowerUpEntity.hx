@@ -5,6 +5,9 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
+
 /**
  * JVPowerUpEntity.hx
  * Class represents power-up entities that spawn during gameplay.
@@ -27,6 +30,7 @@ class JVPowerUpEntity extends JVEntity
 		
 		var image:Image = new Image("gfx/entities/pwrup_0_entity.png");
 		image.centerOrigin();
+		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_PLAYER_SHIP_1).webColor;
 		this.graphic = image;
 		
 		var mask:Pixelmask = new Pixelmask("gfx/entities/pwrup_0_entity.png", Std.int(-image.width / 2), Std.int(-image.width / 2));

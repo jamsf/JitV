@@ -3,6 +3,8 @@ package jitv.effects;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * ...
@@ -26,7 +28,7 @@ class JVStar extends Entity
 		var image:Image = new Image("gfx/entities/particle_entity.png");
 		
 		// Calculate greyscale for star
-		image.color = 0x2E2E2E;
+		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
 		var greyScale : Int = Std.int(ran * 125);
 		image.color = (greyScale << 16) | (greyScale << 8) | greyScale;
 		

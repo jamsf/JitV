@@ -19,6 +19,8 @@ import jitv.datamodel.persistentdata.JVShipWeapon;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
 import jitv.ui.JVHudView;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * JVPlayerShipEntity
@@ -33,6 +35,7 @@ class JVPlayerShipEntity extends JVEntity
 		
 		var image:Image = new Image("gfx/entities/player_ship_entity.png");
 		image.centerOrigin();
+		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_PLAYER_SHIP_1).webColor;
 		this.graphic = image;
 		
 		this.mask = new Pixelmask("gfx/masks/player_ship_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));

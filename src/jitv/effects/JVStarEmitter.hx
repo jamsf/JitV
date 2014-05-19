@@ -3,8 +3,9 @@ package jitv.effects;
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.HXP;
-
 import jitv.effects.JVStar;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * ...
@@ -27,7 +28,7 @@ class JVStarEmitter extends Entity
 		var image:Image = new Image("gfx/entities/particle_entity.png");
 		image.scaledWidth = HXP.screen.width;
 		image.scaledHeight = HXP.screen.height;
-		image.color = 0xB3B3B3;
+		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_1).webColor;
 		
 		graphic = image;
 	}
