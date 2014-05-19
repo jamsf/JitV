@@ -6,6 +6,7 @@ import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.math.Vector;
+import extendedhxpunk.ext.EXTColor;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
 import jitv.local.JVLocalData;
@@ -22,13 +23,13 @@ class JVBulletEntity extends JVEntity
 	var movementMagnitude:Float;
 	var damagePoints:Int;
 	
-	public function new(x:Float, y:Float, type:String, angle:Float, velocity:Float, damagePoints:Int) 
+	public function new(x:Float, y:Float, type:String, angle:Float, velocity:Float, damagePoints:Int, color:EXTColor) 
 	{
 		super();
 		
 		var image:Image = new Image("gfx/entities/bullet_0_entity.png");
 		image.centerOrigin();
-		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_PLAYER_SHIP_1).webColor;
+		image.color = color.webColor;
 		this.graphic = image;
 		
 		var mask:Pixelmask = new Pixelmask("gfx/masks/bullet_0_mask.png", Std.int( -image.width / 2), Std.int( -image.width / 2));

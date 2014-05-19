@@ -26,11 +26,7 @@ class JVStar extends Entity
 		layer = BACKGROUND_LAYER;
 		
 		var image:Image = new Image("gfx/entities/particle_entity.png");
-		
-		// Calculate greyscale for star
 		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
-		var greyScale : Int = Std.int(ran * 125);
-		image.color = (greyScale << 16) | (greyScale << 8) | greyScale;
 		
 		// Set size and velocity
 		image.scale = ran * SIZE_MULTIPLIER;

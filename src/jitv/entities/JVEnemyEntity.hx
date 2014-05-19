@@ -102,7 +102,7 @@ class JVEnemyEntity extends JVEntity
 
 	public function fireBullet(timer:EXTTimer):Void
 	{
-		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type, .5, 6.0, 100);
+		var bullet:JVBulletEntity = new JVBulletEntity(this.x, this.y, this.type, .5, 6.0, 100, JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_ENEMY_SHIP_1));
 		HXP.scene.add(bullet);
 	}
 	
