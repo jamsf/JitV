@@ -47,7 +47,8 @@ class JVMainMenuScene extends EXTScene
 		//var titleDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(250, 60));
 		var titleDialog:UIView = new UIView(new Point(0, -80), new Point(250, 60));
 		titleDialog.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
-		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : 19, "color" : 0x000000 });
+		var titleColor:UInt = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
+		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : 19, "color" : titleColor });
 		var titleLabel:UILabel = new UILabel(EXTUtility.ZERO_POINT, titleText);
 		titleDialog.addSubview(titleLabel);
 		
