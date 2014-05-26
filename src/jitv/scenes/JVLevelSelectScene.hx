@@ -2,11 +2,14 @@ package jitv.scenes;
 
 import flash.geom.Point;
 import com.haxepunk.HXP;
+import com.haxepunk.graphics.Image;
 import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
 import jitv.ui.JVExampleMenuButton;
 import jitv.datamodel.proceduraldata.JVLevel;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * JVLevelSelectWorld
@@ -22,7 +25,14 @@ class JVLevelSelectScene extends EXTScene
 	
 	override public function begin():Void
 	{
-		HXP.screen.color = 0xff7777;
+		// Background Image
+		var screenSize:Point = this.worldCamera.currentViewSize();
+		var backgroundImage:Image = new Image("gfx/entities/particle_entity.png");
+		backgroundImage.scaledWidth = screenSize.x;
+		backgroundImage.scaledHeight = screenSize.y;
+		backgroundImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_1).webColor;
+		
+		this.addGraphic(backgroundImage);
 		
 		var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, -10), "start level", buttonCallback, [START_LEVEL_NAME]);
 		startLevelButton.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
