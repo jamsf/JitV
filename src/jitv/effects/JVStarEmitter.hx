@@ -31,6 +31,7 @@ class JVStarEmitter extends Entity
 		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_1).webColor;
 		
 		graphic = image;
+		this.layer = this.layer + 2;
 	}
 	
 	override public function update():Void 
@@ -51,6 +52,7 @@ class JVStarEmitter extends Entity
 	private function addStar()
 	{
 		var star : JVStar = new JVStar();
+		star.layer = star.layer + 1;
 		HXP.scene.add(star);
 		_starArray.push(star);
 	}
