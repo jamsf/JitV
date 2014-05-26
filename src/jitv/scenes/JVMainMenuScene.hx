@@ -10,6 +10,8 @@ import extendedhxpunk.ui.*;
 import jitv.ui.JVExampleDialog;
 import jitv.ui.JVExampleMenuButton;
 import jitv.scenes.JVSceneManager;
+import jitv.local.JVLocalData;
+import jitv.local.JVColorPalette;
 
 /**
  * JVMainMenuScene
@@ -29,20 +31,28 @@ class JVMainMenuScene extends EXTScene
 		
 		// Background Image
 		var screenSize:Point = this.worldCamera.currentViewSize();
-		var backgroundImage:Image = new Image("gfx/backgrounds/menu_background_1.png");
-		backgroundImage.x = screenSize.x / 2;
-		backgroundImage.y = screenSize.y / 2;
-		backgroundImage.centerOrigin();
+		//var backgroundImage:Image = new Image("gfx/backgrounds/menu_background_1.png");
+		//backgroundImage.x = screenSize.x / 2;
+		//backgroundImage.y = screenSize.y / 2;
+		//backgroundImage.centerOrigin();
+		
+		var backgroundImage:Image = new Image("gfx/entities/particle_entity.png");
+		backgroundImage.scaledWidth = screenSize.x;
+		backgroundImage.scaledHeight = screenSize.y;
+		backgroundImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_1).webColor;
+		
 		this.addGraphic(backgroundImage);
 		
 		// UI
-		var titleDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(250, 60));
+		//var titleDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(250, 60));
+		var titleDialog:UIView = new UIView(new Point(0, -80), new Point(250, 60));
 		titleDialog.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
-		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : 19, "color" : 0xEEEEEE });
+		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : 19, "color" : 0x000000 });
 		var titleLabel:UILabel = new UILabel(EXTUtility.ZERO_POINT, titleText);
 		titleDialog.addSubview(titleLabel);
 		
-		var menuDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(200, 220));
+		//var menuDialog:JVExampleDialog = new JVExampleDialog(new Point(0, -80), new Point(200, 220));
+		var menuDialog:UIView = new UIView(new Point(0, -80), new Point(200, 220));
 		menuDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
 		// Toggle button
