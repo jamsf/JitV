@@ -33,7 +33,7 @@ class JVPowerUpEntity extends JVEntity
 		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_PLAYER_SHIP_1).webColor;
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/entities/pwrup_0_entity.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
+		var mask:Pixelmask = new Pixelmask("gfx/masks/pwrup_0_mask.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
 		this.mask = mask;
 		
 		this.type = "pwrup";
