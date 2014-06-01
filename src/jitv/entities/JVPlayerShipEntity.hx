@@ -73,13 +73,10 @@ class JVPlayerShipEntity extends JVEntity
 		clampVertical(0, JVConstants.PLAY_SPACE_HEIGHT);
 		
 		//This is the logic that handles collision with a powerup.
-		var collidedPwrup:Entity = this.collide("pwrup", this.x, this.y);
+		var collidedPwrup:JVPowerUpEntity = cast this.collide("pwrup", this.x, this.y);
 		if (collidedPwrup != null)
 		{
-			//Call pwrup logic here.
-			++_lifeCount;
-			_hud.updateLivesCount(_lifeCount);
-			HXP.scene.remove(collidedPwrup);		
+			collidedPwrup.initiateConsumption(this, consumePowerup);
 		}
 	}
 	
@@ -114,6 +111,15 @@ class JVPlayerShipEntity extends JVEntity
 	public function isInvincible():Bool
 	{
 		return _invincible;
+	}
+	
+	public function consumePowerup(collided:JVEntity):Void
+	{
+		HXP.scene.remove(collided);
+		
+		// Call powerup logic here.
+		++_lifeCount;
+		_hud.updateLivesCount(_lifeCount);
 	}
 	
 	/**

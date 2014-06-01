@@ -3,6 +3,7 @@ package jitv.entities;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
+import jitv.entities.components.JVFollowComponent;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
 import jitv.local.JVLocalData;
@@ -33,7 +34,7 @@ class JVPowerUpEntity extends JVEntity
 		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_PLAYER_SHIP_1).webColor;
 		this.graphic = image;
 		
-		var mask:Pixelmask = new Pixelmask("gfx/masks/pwrup_0_mask.png", Std.int(-image.width / 2), Std.int(-image.width / 2));
+		var mask:Pixelmask = new Pixelmask("gfx/masks/pwrup_0_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.mask = mask;
 		
 		this.type = "pwrup";
@@ -52,15 +53,34 @@ class JVPowerUpEntity extends JVEntity
 	{
 		super.update();
 		
-		var movementMagnitude:Float = 3.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
-		
-		this.y += movementMagnitude;
-		
-		if (this.x < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
-			HXP.scene.remove(this);
+		if (_followComponent == null || !_followComponent.enabled)
+		{
+			var movementMagnitude:Float = 3.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+			
+			this.y += movementMagnitude;
+			
+			if (this.x < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+				this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+				this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
+				this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
+				HXP.scene.remove(this);
+		}
+		else
+		{
+			_followComponent.force += 0.1 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+		}
 	}
 	
+	public function initiateConsumption(consumer:JVEntity, completion:JVEntity->Void):Void
+	{
+		this.type = "pwrup_disabled";
+		this.mask = new Pixelmask("gfx/masks/pwrup_0_stage_2_mask.png", Std.int( -this.width / 2), Std.int( -this.height / 2));
+		_followComponent = new JVFollowComponent(this, consumer, completion, 2.0, 0.4, 9.0);
+		this.components.push(_followComponent);
+	}
+	
+	/**
+	 * Private
+	 */
+	private var _followComponent:JVFollowComponent;
 }

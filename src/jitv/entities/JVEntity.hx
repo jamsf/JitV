@@ -12,6 +12,7 @@ import jitv.entities.components.JVEntityComponent;
 class JVEntity extends Entity
 {
 	public var components:Array<JVEntityComponent>;
+	public var enabled(default, null):Bool;
 	
 	public function new() 
 	{
@@ -52,12 +53,15 @@ class JVEntity extends Entity
 	
 	override public function added():Void
 	{
+		this.enabled = true;
+		
 		for (component in this.components)
 			component.prepare();
 	}
 	
 	override public function removed():Void
 	{
+		this.enabled = false;
 		for (component in this.components)
 			component.cleanup();
 	}

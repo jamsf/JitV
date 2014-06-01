@@ -56,8 +56,11 @@ class JVWeaponComponent implements JVEntityComponent
 	
 	public function cleanup():Void 
 	{
-		_cooldownTimer.invalidate();
-		_cooldownTimer = null;
+		if (_cooldownTimer != null)
+		{
+			_cooldownTimer.invalidate();
+			_cooldownTimer = null;
+		}
 	}
 	
 	/**
