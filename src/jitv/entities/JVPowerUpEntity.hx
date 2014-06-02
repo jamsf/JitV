@@ -3,6 +3,7 @@ package jitv.entities;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
+import com.haxepunk.math.Vector;
 import jitv.entities.components.JVFollowComponent;
 import jitv.JVConstants;
 import jitv.entities.JVEntity;
@@ -55,6 +56,7 @@ class JVPowerUpEntity extends JVEntity
 		
 		if (_followComponent == null || !_followComponent.enabled)
 		{
+			// this.type = "pwrup";
 			var movementMagnitude:Float = 3.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 			
 			this.y += movementMagnitude;
@@ -75,7 +77,7 @@ class JVPowerUpEntity extends JVEntity
 	{
 		this.type = "pwrup_disabled";
 		this.mask = new Pixelmask("gfx/masks/pwrup_0_stage_2_mask.png", Std.int( -this.width / 2), Std.int( -this.height / 2));
-		_followComponent = new JVFollowComponent(this, consumer, completion, 2.0, 0.4, 9.0);
+		_followComponent = new JVFollowComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.4, 9.0);
 		this.components.push(_followComponent);
 	}
 	
