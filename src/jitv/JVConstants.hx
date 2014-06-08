@@ -17,7 +17,7 @@ class JVConstants
 	public static inline var BULLET_OFFSCREEN_DELETION_BUFFER:Int = 32;
 	
 	public static inline var BASE_SHIP_MOVEMENT_SPEED:Float = 5.0;
-	public static inline var BASE_POWERUP_SPEED:Float = 3.0f;
+	public static inline var BASE_POWERUP_SPEED:Float = 3.0;
 	public static inline var POWERUP_ATTRACTION_DISTANCE:Float = 64.0;
 	
 	//TODO - fcole - Figure out how we're gonna handle different screen sizes
