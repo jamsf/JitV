@@ -72,10 +72,13 @@ class JVPlayerShipEntity extends JVEntity
 		clampHorizontal(0, JVConstants.PLAY_SPACE_WIDTH);
 		clampVertical(0, JVConstants.PLAY_SPACE_HEIGHT);
 		
-		//This is the logic that handles collision with a powerup.
-		var collidedPwrup:JVPowerUpEntity = cast this.collide("pwrup", this.x, this.y);
-		if (collidedPwrup != null)
+		// If powerups are within range, start to suck them up
+		var inRangePowerups:Array<Entity> = new Array();
+		HXP.scene.collideCircleInto("pwrup", this.x, this.y, JVConstants.POWERUP_ATTRACTION_DISTANCE, inRangePowerups);
+		
+		for (i in 0...inRangePowerups.length)
 		{
+			var collidedPwrup:JVPowerUpEntity = cast inRangePowerups[i];
 			collidedPwrup.initiateConsumption(this, consumePowerup);
 		}
 	}

@@ -38,6 +38,7 @@ class JVPowerUpEntity extends JVEntity
 		var mask:Pixelmask = new Pixelmask("gfx/masks/pwrup_0_mask.png", Std.int(-image.width / 2), Std.int(-image.height / 2));
 		this.mask = mask;
 		
+		_following = false;
 		this.type = "pwrup";
 		this.width = image.width;
 		this.height = image.height;
@@ -56,8 +57,14 @@ class JVPowerUpEntity extends JVEntity
 		
 		if (_followComponent == null || !_followComponent.enabled)
 		{
-			// this.type = "pwrup";
-			var movementMagnitude:Float = 3.0 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+			if (_following)
+			{
+				this.type = "pwrup";
+				_following = false;
+				_followComponent = null;
+			}
+			
+			var movementMagnitude:Float = JVConstants.BASE_POWERUP_SPEED * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 			
 			this.y += movementMagnitude;
 			
@@ -76,7 +83,7 @@ class JVPowerUpEntity extends JVEntity
 	public function initiateConsumption(consumer:JVEntity, completion:JVEntity->Void):Void
 	{
 		this.type = "pwrup_disabled";
-		this.mask = new Pixelmask("gfx/masks/pwrup_0_stage_2_mask.png", Std.int( -this.width / 2), Std.int( -this.height / 2));
+		_following = true;
 		_followComponent = new JVFollowComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.4, 9.0);
 		this.components.push(_followComponent);
 	}
@@ -85,4 +92,5 @@ class JVPowerUpEntity extends JVEntity
 	 * Private
 	 */
 	private var _followComponent:JVFollowComponent;
+	private var _following:Bool;
 }
