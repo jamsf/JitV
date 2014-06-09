@@ -4,6 +4,8 @@ import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.HXP;
 import jitv.effects.JVStar;
+import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.local.JVLocalData;
 import jitv.local.JVColorPalette;
 
@@ -20,14 +22,15 @@ class JVStarEmitter extends Entity
 	public function new() 
 	{
 		super();
-		x = 0; y = 0;
+		x = JVGlobals.PLAY_SPACE_OFFSET.x; 
+		y = JVGlobals.PLAY_SPACE_OFFSET.y;
 		_starArray = new Array<JVStar>();
 		_starTimer = 0;
 		
 		// Set background image
 		var image:Image = new Image("gfx/entities/particle_entity.png");
-		image.scaledWidth = HXP.screen.width;
-		image.scaledHeight = HXP.screen.height;
+		image.scaledWidth = JVConstants.PLAY_SPACE_WIDTH;
+		image.scaledHeight = JVConstants.PLAY_SPACE_HEIGHT;
 		image.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_1).webColor;
 		
 		graphic = image;

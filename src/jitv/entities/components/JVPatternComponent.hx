@@ -6,6 +6,7 @@ import com.haxepunk.Tween;
 import extendedhxpunk.ext.EXTTimer;
 import extendedhxpunk.ext.EXTOffsetType;
 import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.entities.JVEntity;
 import jitv.datamodel.staticdata.JVEnemyPattern;
 
@@ -136,8 +137,8 @@ class JVPatternComponent implements JVEntityComponent
 	
 	private function patternPointToScreenPoint(point:Point):Point
 	{
-		var scaledX:Int = cast ((point.x * _gridSpaceWidth) + (_gridSpaceWidth / 2));
-		var scaledY:Int = cast ((point.y * _gridSpaceHeight) + (_gridSpaceHeight / 2));
+		var scaledX:Int = cast ((point.x * _gridSpaceWidth) + (_gridSpaceWidth / 2) + JVGlobals.PLAY_SPACE_OFFSET.x);
+		var scaledY:Int = cast ((point.y * _gridSpaceHeight) + (_gridSpaceHeight / 2) + JVGlobals.PLAY_SPACE_OFFSET.y);
 		
 		if (_pattern.spawnAnchor == EXTOffsetType.TOP_CENTER)
 		{

@@ -1,6 +1,8 @@
 package jitv.scenes;
 
+import flash.system.Capabilities;
 import flash.geom.Point;
+import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import extendedhxpunk.ext.EXTScene;
@@ -12,6 +14,7 @@ import jitv.ui.JVExampleMenuButton;
 import jitv.scenes.JVSceneManager;
 import jitv.local.JVLocalData;
 import jitv.local.JVColorPalette;
+import jitv.JVGlobals;
 
 /**
  * JVMainMenuScene
@@ -48,7 +51,8 @@ class JVMainMenuScene extends EXTScene
 		var titleDialog:UIView = new UIView(new Point(0, -80), new Point(250, 60));
 		titleDialog.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
 		var titleColor:UInt = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
-		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : 19, "color" : titleColor });
+		var titlePointSize:Int = cast (19 * JVGlobals.TOTAL_GAME_SCALE);
+		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : titlePointSize, "color" : titleColor });
 		var titleLabel:UILabel = new UILabel(EXTUtility.ZERO_POINT, titleText);
 		titleDialog.addSubview(titleLabel);
 		
@@ -71,16 +75,24 @@ class JVMainMenuScene extends EXTScene
 		menuDialog.addSubview(_playButton);
 		
 		// Configure button
-		_configureButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "configure", configureButtonCallback);
-		_configureButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
-		_configureButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-		menuDialog.addSubview(_configureButton);
+		//_configureButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "configure", configureButtonCallback);
+		//_configureButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		//_configureButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		//menuDialog.addSubview(_configureButton);
+		
+		// Fullscreen button
+		var fullscreenButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "fullscreen", fullscreenButtonCallback);
+		fullscreenButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		fullscreenButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		fullscreenButton.selected = HXP.fullscreen;
+		menuDialog.addSubview(fullscreenButton);
 
 		// Editor button
 #if !flash
-		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _configureButton.position.y + _configureButton.size.y + 15), "editor", editorButtonCallback);
+		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, fullscreenButton.position.y + fullscreenButton.size.y + 15), "editor", editorButtonCallback);
 		editorButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		editorButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		editorButton.enabled = !HXP.fullscreen;
 		menuDialog.addSubview(editorButton);
 #end
 		
@@ -102,6 +114,16 @@ class JVMainMenuScene extends EXTScene
 	{
 		JVSceneManager.sharedInstance().goToButonSelectScene();
 	}
+	
+	public function fullscreenButtonCallback(args:Array<Dynamic>):Void
+	{
+		if (HXP.fullscreen)
+			goWindowed();
+		else
+			goFullscreen();
+		
+		JVSceneManager.sharedInstance().goToMainMenuScene();
+	}
 
 	public function editorButtonCallback(args:Array<Dynamic>):Void
 	{
@@ -114,4 +136,54 @@ class JVMainMenuScene extends EXTScene
 	private var _toggleButton:JVExampleMenuButton;
 	private var _playButton:JVExampleMenuButton;
 	private var _configureButton:JVExampleMenuButton;
+	
+	private function goFullscreen():Void
+	{
+		var widthRatio:Float = Capabilities.screenResolutionX / JVConstants.PLAY_SPACE_WIDTH;
+		var heightRatio:Float = Capabilities.screenResolutionY / JVConstants.PLAY_SPACE_HEIGHT;
+		
+		if (heightRatio > widthRatio)
+		{
+			// We need black bars on top and bottom
+			JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
+			JVGlobals.TOTAL_GAME_HEIGHT = cast (JVConstants.PLAY_SPACE_HEIGHT * heightRatio / widthRatio);
+			JVGlobals.TOTAL_GAME_SCALE = widthRatio;
+			HXP.resize(JVConstants.PLAY_SPACE_WIDTH, JVGlobals.TOTAL_GAME_HEIGHT);
+		}
+		else if (widthRatio > heightRatio)
+		{
+			// We need black bars on the left and right
+			JVGlobals.TOTAL_GAME_WIDTH = cast (JVConstants.PLAY_SPACE_WIDTH * widthRatio / heightRatio);
+			JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+			JVGlobals.TOTAL_GAME_SCALE = heightRatio;
+			HXP.resize(JVGlobals.TOTAL_GAME_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
+		}
+		else
+		{
+			// No black bars needed!
+			JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
+			JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+			JVGlobals.TOTAL_GAME_SCALE = widthRatio;
+			HXP.resize(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
+		}
+		
+		JVGlobals.PLAY_SPACE_OFFSET = new Point((JVGlobals.TOTAL_GAME_WIDTH - JVConstants.PLAY_SPACE_WIDTH) / 2.0,
+												(JVGlobals.TOTAL_GAME_HEIGHT - JVConstants.PLAY_SPACE_HEIGHT) / 2.0);
+		HXP.fullscreen = true;
+	}
+	
+	private function goWindowed():Void
+	{
+		JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
+		JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+		JVGlobals.TOTAL_GAME_SCALE = 1.0;
+		
+		JVGlobals.PLAY_SPACE_OFFSET = new Point((JVGlobals.TOTAL_GAME_WIDTH - JVConstants.PLAY_SPACE_WIDTH) / 2.0,
+												(JVGlobals.TOTAL_GAME_HEIGHT - JVConstants.PLAY_SPACE_HEIGHT) / 2.0);
+		
+		HXP.fullscreen = false;
+		HXP.width = JVConstants.PLAY_SPACE_WIDTH;
+		HXP.height = JVConstants.PLAY_SPACE_HEIGHT;
+		HXP.screen.resize();
+	}
 }

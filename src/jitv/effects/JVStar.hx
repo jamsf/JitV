@@ -3,6 +3,8 @@ package jitv.effects;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.local.JVLocalData;
 import jitv.local.JVColorPalette;
 
@@ -39,7 +41,7 @@ class JVStar extends Entity
 	
 	public function resetPos()
 	{
-		x = Math.random() * HXP.screen.width;
+		x = JVGlobals.PLAY_SPACE_OFFSET.x + (Math.random() * JVConstants.PLAY_SPACE_WIDTH);
 		y = -6;
 	}
 	

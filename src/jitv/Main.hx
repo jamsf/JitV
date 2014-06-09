@@ -1,5 +1,6 @@
 package jitv;
 
+import flash.geom.Point;
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
 import extendedhxpunk.ext.EXTConsole;
@@ -12,21 +13,22 @@ import jitv.datamodel.JVDataObject;
  */
 class Main extends Engine 
 {
-	public static inline var kClearColor:Int = 0xff7777;
 	public static inline var kProjectName:String = "JitV";
 
 	function new()
 	{
 		super(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT, JVConstants.FPS, false);
+		JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
+		JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+		JVGlobals.TOTAL_GAME_SCALE = 1.0;
+		JVGlobals.PLAY_SPACE_OFFSET = new Point(0.0, 0.0);
+		
 		JVDataObject.setupDB();
 	}
 
 	override public function init()
 	{
 		EXTConsole.initializeConsole();
-		HXP.screen.color = kClearColor;
-		HXP.screen.scale = 1;
-		
 		JVSceneManager.sharedInstance().goToMainMenuScene();
 	}
 	

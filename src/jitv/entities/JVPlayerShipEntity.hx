@@ -17,6 +17,7 @@ import jitv.entities.components.JVMovementComponent;
 import jitv.entities.components.JVWeaponComponent;
 import jitv.datamodel.persistentdata.JVShipWeapon;
 import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.entities.JVEntity;
 import jitv.ui.JVHudView;
 import jitv.local.JVLocalData;
@@ -69,8 +70,9 @@ class JVPlayerShipEntity extends JVEntity
 	{
 		super.update();
 		
-		clampHorizontal(0, JVConstants.PLAY_SPACE_WIDTH);
-		clampVertical(0, JVConstants.PLAY_SPACE_HEIGHT);
+		var playSpaceOffset:Point = JVGlobals.PLAY_SPACE_OFFSET;
+		clampHorizontal(playSpaceOffset.x, playSpaceOffset.x + JVConstants.PLAY_SPACE_WIDTH);
+		clampVertical(playSpaceOffset.y, playSpaceOffset.y + JVConstants.PLAY_SPACE_HEIGHT);
 		
 		// If powerups are within range, start to suck them up
 		var inRangePowerups:Array<Entity> = new Array();

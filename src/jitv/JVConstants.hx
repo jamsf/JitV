@@ -20,8 +20,9 @@ class JVConstants
 	public static inline var BASE_POWERUP_SPEED:Float = 3.0;
 	public static inline var POWERUP_ATTRACTION_DISTANCE:Float = 64.0;
 	
-	//TODO - fcole - Figure out how we're gonna handle different screen sizes
-	//NOTE - Screen size is set in application.xml
+	//NOTE - Initial screen size is set in application.xml (and should probably match these values)
+	//NOTE - These values represent the width and height of the actual interactable area.
+	//       For values regarding the total screen dimensions, see JVGlobals.
 	public static inline var PLAY_SPACE_WIDTH:Int = 640;
 	public static inline var PLAY_SPACE_HEIGHT:Int = 380;
 

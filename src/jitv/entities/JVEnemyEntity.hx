@@ -9,6 +9,7 @@ import com.haxepunk.Tween;
 import com.haxepunk.tweens.motion.*;
 import extendedhxpunk.ext.EXTTimer;
 import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.entities.JVEntity;
 import jitv.datamodel.proceduraldata.JVEnemy;
 import jitv.datamodel.staticdata.JVEnemyClass;
@@ -93,10 +94,10 @@ class JVEnemyEntity extends JVEntity
 		}
 		
 		// Check if offscreen and remove
-		if (this.x < 0 - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
-			this.y < 0 - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
-			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
-			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER)
+		if (this.x < JVGlobals.PLAY_SPACE_OFFSET.x - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y < JVGlobals.PLAY_SPACE_OFFSET.y - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.x > JVGlobals.PLAY_SPACE_OFFSET.x + JVConstants.PLAY_SPACE_WIDTH + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y > JVGlobals.PLAY_SPACE_OFFSET.y + JVConstants.PLAY_SPACE_HEIGHT + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER)
 			HXP.scene.remove(this); //TODO: Account for things that might be going on with the ship if it hits this point.
 	}
 

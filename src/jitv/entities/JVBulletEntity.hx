@@ -8,6 +8,7 @@ import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.math.Vector;
 import extendedhxpunk.ext.EXTColor;
 import jitv.JVConstants;
+import jitv.JVGlobals;
 import jitv.entities.JVEntity;
 import jitv.local.JVLocalData;
 import jitv.local.JVColorPalette;
@@ -53,10 +54,10 @@ class JVBulletEntity extends JVEntity
 		this.x += vel.x * movementMagnitude;
 		this.y += vel.y * movementMagnitude;
 		
-		if (this.x < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.y < 0 - JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.x > JVConstants.PLAY_SPACE_WIDTH + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER ||
-			this.y > JVConstants.PLAY_SPACE_HEIGHT + JVConstants.BULLET_OFFSCREEN_DELETION_BUFFER)
+		if (this.x < JVGlobals.PLAY_SPACE_OFFSET.x - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y < JVGlobals.PLAY_SPACE_OFFSET.y - JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.x > JVGlobals.PLAY_SPACE_OFFSET.x + JVConstants.PLAY_SPACE_WIDTH + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER ||
+			this.y > JVGlobals.PLAY_SPACE_OFFSET.y + JVConstants.PLAY_SPACE_HEIGHT + JVConstants.ENEMY_OFFSCREEN_DELETION_BUFFER)
 			HXP.scene.remove(this);
 	}
 	

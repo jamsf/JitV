@@ -11,6 +11,7 @@ import extendedhxpunk.ext.EXTUtility;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTCamera;
 import jitv.scenes.JVSceneManager;
+import jitv.JVGlobals;
 
 /**
  * JVHudView
@@ -25,24 +26,25 @@ class JVHudView extends UIView
 		
 		_camera = camera;
 		
-		var backButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10, 10), "abort level", backButtonCallback);
+		var backButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10 + JVGlobals.PLAY_SPACE_OFFSET.x, 10), "abort level", backButtonCallback);
 		backButton.offsetAlignmentForSelf = EXTOffsetType.TOP_LEFT;
 		backButton.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
 		
-		var zoomInButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10, 10), "zoom in", zoomInButtonCallback);
+		var zoomInButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 10), "zoom in", zoomInButtonCallback);
 		zoomInButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		zoomInButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		
-		var zoomOutButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10, 50), "zoom out", zoomOutButtonCallback);
+		var zoomOutButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 50), "zoom out", zoomOutButtonCallback);
 		zoomOutButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		zoomOutButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		
 		var livesIcon:Image = new Image("gfx/ui/player_life_icon.png");
-		var livesDisplay:UIImageView = new UIImageView(new Point( -45, 90), livesIcon);
+		var livesDisplay:UIImageView = new UIImageView(new Point(-45 - JVGlobals.PLAY_SPACE_OFFSET.x, 90), livesIcon);
 		livesDisplay.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		livesDisplay.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
-		//todo update the livescount to player lives
-		_livesCount = new UILabel(new Point(-10, 90), new Text("x 5"));
+		
+		var livesPointSize:Int = cast (16 * JVGlobals.TOTAL_GAME_SCALE);
+		_livesCount = new UILabel(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 90), new Text("x 5", 0, 0, { "size" : livesPointSize }));
 		_livesCount.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		_livesCount.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		
@@ -51,8 +53,6 @@ class JVHudView extends UIView
 		this.addSubview(zoomOutButton);
 		this.addSubview(livesDisplay);
 		this.addSubview(_livesCount);
-		
-		//updateLivesCount(1);
 	}
 	
 	public function backButtonCallback(args:Array<Dynamic>):Void
@@ -72,7 +72,7 @@ class JVHudView extends UIView
 	
 	public function updateLivesCount(lives:Int):Void
 	{
-		_livesCount.text = new Text("x " + lives);
+		_livesCount.text.text = "x " + lives;
 	}
 	
 	/**
