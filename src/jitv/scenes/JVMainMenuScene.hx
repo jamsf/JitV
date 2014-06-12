@@ -147,7 +147,9 @@ class JVMainMenuScene extends EXTScene
 			// We need black bars on top and bottom
 			JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
 			JVGlobals.TOTAL_GAME_HEIGHT = cast (JVConstants.PLAY_SPACE_HEIGHT * heightRatio / widthRatio);
+#if !flash
 			JVGlobals.TOTAL_GAME_SCALE = widthRatio;
+#end
 			HXP.resize(JVConstants.PLAY_SPACE_WIDTH, JVGlobals.TOTAL_GAME_HEIGHT);
 		}
 		else if (widthRatio > heightRatio)
@@ -155,7 +157,9 @@ class JVMainMenuScene extends EXTScene
 			// We need black bars on the left and right
 			JVGlobals.TOTAL_GAME_WIDTH = cast (JVConstants.PLAY_SPACE_WIDTH * widthRatio / heightRatio);
 			JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+#if !flash
 			JVGlobals.TOTAL_GAME_SCALE = heightRatio;
+#end
 			HXP.resize(JVGlobals.TOTAL_GAME_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 		}
 		else
@@ -163,7 +167,9 @@ class JVMainMenuScene extends EXTScene
 			// No black bars needed!
 			JVGlobals.TOTAL_GAME_WIDTH = JVConstants.PLAY_SPACE_WIDTH;
 			JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
+#if !flash
 			JVGlobals.TOTAL_GAME_SCALE = widthRatio;
+#end
 			HXP.resize(JVConstants.PLAY_SPACE_WIDTH, JVConstants.PLAY_SPACE_HEIGHT);
 		}
 		
