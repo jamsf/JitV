@@ -1,7 +1,8 @@
 package jitv.scenes;
 
-import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import com.haxepunk.Entity;
+import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
@@ -15,6 +16,7 @@ import jitv.entities.JVEnemyEntity;
 import jitv.entities.JVPlayerShipEntity;
 import jitv.ui.JVHudView;
 import jitv.JVConstants;
+import jitv.JVGlobals;
 
 /**
  * JVCombatScene
@@ -62,6 +64,9 @@ class JVCombatScene extends EXTScene
 		_levelEndsTimer.paused = true;
 		
 		_gameover = false;
+
+		if (HXP.fullscreen)
+			addBlackBars();
 	}
 	
 	override public function update():Void
@@ -168,6 +173,44 @@ class JVCombatScene extends EXTScene
 		_playerShip.y = 240;
 		this.add(_playerShip);
 		_playerShip.activateInvincibility();
+	}
+
+	private function addBlackBars():Void
+	{
+		var significantXOffset:Bool = JVGlobals.PLAY_SPACE_OFFSET.x >= 0.5;
+		var significantYOffset:Bool = JVGlobals.PLAY_SPACE_OFFSET.y >= 0.5;
+
+		if (significantXOffset)
+		{
+			var barImage:Image = new Image("gfx/entities/particle_entity.png");
+			barImage.scaledWidth = JVGlobals.PLAY_SPACE_OFFSET.x;
+			barImage.scaledHeight = JVConstants.PLAY_SPACE_HEIGHT;
+			barImage.color = 0x000000;
+			this.addGraphic(barImage).layer -= 5;
+
+			barImage = new Image("gfx/entities/particle_entity.png");
+			barImage.x = JVGlobals.PLAY_SPACE_OFFSET.x + JVConstants.PLAY_SPACE_WIDTH;
+			barImage.scaledWidth = JVGlobals.PLAY_SPACE_OFFSET.x;
+			barImage.scaledHeight = JVConstants.PLAY_SPACE_HEIGHT;
+			barImage.color = 0x000000;
+			this.addGraphic(barImage).layer -= 5;
+		}
+
+		if (significantYOffset)
+		{
+			var barImage:Image = new Image("gfx/entities/particle_entity.png");
+			barImage.scaledWidth = JVConstants.PLAY_SPACE_WIDTH;
+			barImage.scaledHeight = JVGlobals.PLAY_SPACE_OFFSET.y;
+			barImage.color = 0x000000;
+			this.addGraphic(barImage).layer -= 5;
+
+			barImage = new Image("gfx/entities/particle_entity.png");
+			barImage.y = JVGlobals.PLAY_SPACE_OFFSET.y + JVConstants.PLAY_SPACE_HEIGHT;
+			barImage.scaledWidth = JVConstants.PLAY_SPACE_WIDTH;
+			barImage.scaledHeight = JVGlobals.PLAY_SPACE_OFFSET.y;
+			barImage.color = 0x000000;
+			this.addGraphic(barImage).layer -= 5;
+		}
 	}
 
 	
