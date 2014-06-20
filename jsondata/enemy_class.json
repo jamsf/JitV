@@ -23,8 +23,7 @@
 			y: 2
 		},
 		attackType : 'standard',
-		imageName : 'enemy_0_entity',
-		lootDropChance : 0.0
+		imageName : 'enemy_0_entity'
 	},
 	
 	{
@@ -51,8 +50,7 @@
 			y: 2
 		},
 		attackType : 'standard',
-		imageName : 'enemy_0_entity',
-		lootDropChance : 0.0
+		imageName : 'enemy_0_entity'
 	},
 	
 	{
@@ -79,8 +77,7 @@
 			y: 1
 		},
 		attackType : 'standard',
-		imageName : 'enemy_0_entity',
-		lootDropChance : 0.0
+		imageName : 'enemy_0_entity'
 	},
 	
 	{
@@ -107,8 +104,7 @@
 			y: 0
 		},
 		attackType : 'standard',
-		imageName : 'enemy_1_entity',
-		lootDropChance : 1.0
+		imageName : 'enemy_1_entity'
 	},
 	
 	{
@@ -135,7 +131,6 @@
 			y: 0
 		},
 		attackType : 'standard',
-		imageName : 'enemy_1_entity',
-		lootDropChance : 1.0
+		imageName : 'enemy_1_entity'
 	}
 ]
