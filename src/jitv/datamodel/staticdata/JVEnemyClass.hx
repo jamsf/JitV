@@ -23,6 +23,7 @@ class JVEnemyClass extends JVDataObject
 	public var speedAfterPattern:Point;  // Speed to use after the pattern is complete (if it's not a looping pattern)
 	public var attackType:String;
 	public var imageName:String;
+	public var lootDropChance:Float; // Value 0 to 1 representing likelyhood to drop loot upon death
 	
 	// Data info
 	public static var ENEMY_CLASS_IDS:Int = 0;
