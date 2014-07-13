@@ -1,0 +1,3 @@
+Some fonts might require payment for commercial use - put info in here so if we end up using one we'll remember to ask the author about payment upon release:
+
++ "Lowvetica" - http://www.fontspace.com/mario-arturo/lowvetica - Free for personal use, Donationware for commercial use.
