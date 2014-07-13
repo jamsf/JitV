@@ -190,7 +190,7 @@ class JVCombatScene extends EXTScene
 
 			barImage = new Image("gfx/entities/particle_entity.png");
 			barImage.x = JVGlobals.PLAY_SPACE_OFFSET.x + JVConstants.PLAY_SPACE_WIDTH;
-			barImage.scaledWidth = JVGlobals.PLAY_SPACE_OFFSET.x;
+			barImage.scaledWidth = JVGlobals.PLAY_SPACE_OFFSET.x + 1;
 			barImage.scaledHeight = JVConstants.PLAY_SPACE_HEIGHT;
 			barImage.color = 0x000000;
 			this.addGraphic(barImage).layer -= 5;
@@ -207,7 +207,7 @@ class JVCombatScene extends EXTScene
 			barImage = new Image("gfx/entities/particle_entity.png");
 			barImage.y = JVGlobals.PLAY_SPACE_OFFSET.y + JVConstants.PLAY_SPACE_HEIGHT;
 			barImage.scaledWidth = JVConstants.PLAY_SPACE_WIDTH;
-			barImage.scaledHeight = JVGlobals.PLAY_SPACE_OFFSET.y;
+			barImage.scaledHeight = JVGlobals.PLAY_SPACE_OFFSET.y + 1;
 			barImage.color = 0x000000;
 			this.addGraphic(barImage).layer -= 5;
 		}
