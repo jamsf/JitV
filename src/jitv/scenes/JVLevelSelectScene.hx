@@ -34,9 +34,9 @@ class JVLevelSelectScene extends EXTScene
 		
 		this.addGraphic(backgroundImage);
 		
-		var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, -10), "start level", buttonCallback, [START_LEVEL_NAME]);
+		var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, -10), "START LEVEL", buttonCallback, [START_LEVEL_NAME]);
 		startLevelButton.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
-		var goBackButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 10), "go back", buttonCallback, [BACK_BUTTON_NAME]);
+		var goBackButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, 10), "GO BACK", buttonCallback, [BACK_BUTTON_NAME]);
 		goBackButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
 		this.staticUiController.rootView.addSubview(startLevelButton);

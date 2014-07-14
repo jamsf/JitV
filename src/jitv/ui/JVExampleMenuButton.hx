@@ -17,7 +17,7 @@ class JVExampleMenuButton extends UISmartStretchButton
 {
 	public function new(position:Point, textString:String = null, cb:Array<Dynamic>->Void = null, cbArgs:Array<Dynamic> = null, colorFill:EXTColor = null) 
 	{
-		var basicSize:Point = new Point(110, 42);
+		var basicSize:Point = new Point(130, 42);
 		var pointSize:Int = cast (16 * JVGlobals.TOTAL_GAME_SCALE);
 		var enabledText:Text = new Text(textString, 0, 0, { "size" : pointSize }); //, "color" : 0x101010
 		super(position, basicSize, 

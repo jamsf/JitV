@@ -26,15 +26,15 @@ class JVHudView extends UIView
 		
 		_camera = camera;
 		
-		var backButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10 + JVGlobals.PLAY_SPACE_OFFSET.x, 10), "abort level", backButtonCallback);
+		var backButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10 + JVGlobals.PLAY_SPACE_OFFSET.x, 10), "ABORT LEVEL", backButtonCallback);
 		backButton.offsetAlignmentForSelf = EXTOffsetType.TOP_LEFT;
 		backButton.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
 		
-		var zoomInButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 10), "zoom in", zoomInButtonCallback);
+		var zoomInButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 10), "ZOOM IN", zoomInButtonCallback);
 		zoomInButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		zoomInButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		
-		var zoomOutButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 50), "zoom out", zoomOutButtonCallback);
+		var zoomOutButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(-10 - JVGlobals.PLAY_SPACE_OFFSET.x, 50), "ZOOM OUT", zoomOutButtonCallback);
 		zoomOutButton.offsetAlignmentForSelf = EXTOffsetType.TOP_RIGHT;
 		zoomOutButton.offsetAlignmentInParent = EXTOffsetType.TOP_RIGHT;
 		

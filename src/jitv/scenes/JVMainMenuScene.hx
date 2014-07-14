@@ -51,8 +51,8 @@ class JVMainMenuScene extends EXTScene
 		var titleDialog:UIView = new UIView(new Point(0, -80), new Point(250, 60));
 		titleDialog.offsetAlignmentForSelf = EXTOffsetType.BOTTOM_CENTER;
 		var titleColor:UInt = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
-		var titlePointSize:Int = cast (19 * JVGlobals.TOTAL_GAME_SCALE);
-		var titleText:Text = new Text("Journey into the Void", 0, 0, { "size" : titlePointSize, "color" : titleColor });
+		var titlePointSize:Int = cast (24 * JVGlobals.TOTAL_GAME_SCALE);
+		var titleText:Text = new Text("JOURNEY INTO THE VOID", 0, 0, { "size" : titlePointSize, "color" : titleColor });
 		var titleLabel:UILabel = new UILabel(EXTUtility.ZERO_POINT, titleText);
 		titleDialog.addSubview(titleLabel);
 		
@@ -61,17 +61,17 @@ class JVMainMenuScene extends EXTScene
 		menuDialog.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		
 		// Toggle button
-		_toggleButton = new JVExampleMenuButton(new Point(0, 35), "toggle", toggleButtonCallback);
-		_toggleButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
-		_toggleButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-		_toggleButton.selectable = true;
-		menuDialog.addSubview(_toggleButton);
+		//_toggleButton = new JVExampleMenuButton(new Point(0, 35), "toggle", toggleButtonCallback);
+		//_toggleButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
+		//_toggleButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
+		//_toggleButton.selectable = true;
+		//menuDialog.addSubview(_toggleButton);
 		
 		// Play button
-		_playButton = new JVExampleMenuButton(new Point(0, _toggleButton.position.y + _toggleButton.size.y + 15), "play", playButtonCallback);
+		_playButton = new JVExampleMenuButton(new Point(0, 35), "PLAY", playButtonCallback);
 		_playButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		_playButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
-		_playButton.enabled = false;
+		//_playButton.enabled = false;
 		menuDialog.addSubview(_playButton);
 		
 		// Configure button
@@ -81,15 +81,15 @@ class JVMainMenuScene extends EXTScene
 		//menuDialog.addSubview(_configureButton);
 		
 		// Fullscreen button
-		var fullscreenButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "fullscreen", fullscreenButtonCallback);
+#if !flash
+		var fullscreenButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, _playButton.position.y + _playButton.size.y + 15), "FULLSCREEN", fullscreenButtonCallback);
 		fullscreenButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		fullscreenButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		fullscreenButton.selected = HXP.fullscreen;
 		menuDialog.addSubview(fullscreenButton);
 
 		// Editor button
-#if !flash
-		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, fullscreenButton.position.y + fullscreenButton.size.y + 15), "editor", editorButtonCallback);
+		var editorButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(0, fullscreenButton.position.y + fullscreenButton.size.y + 15), "EDITOR", editorButtonCallback);
 		editorButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		editorButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		editorButton.enabled = !HXP.fullscreen;
@@ -100,10 +100,10 @@ class JVMainMenuScene extends EXTScene
 		this.staticUiController.rootView.addSubview(menuDialog);
 	}
 	
-	public function toggleButtonCallback(args:Array<Dynamic>):Void
-	{
-		_playButton.enabled = !_playButton.enabled;
-	}
+	//public function toggleButtonCallback(args:Array<Dynamic>):Void
+	//{
+		//_playButton.enabled = !_playButton.enabled;
+	//}
 	
 	public function playButtonCallback(args:Array<Dynamic>):Void
 	{
@@ -133,7 +133,7 @@ class JVMainMenuScene extends EXTScene
 	/**
 	 * Private
 	 */
-	private var _toggleButton:JVExampleMenuButton;
+	//private var _toggleButton:JVExampleMenuButton;
 	private var _playButton:JVExampleMenuButton;
 	private var _configureButton:JVExampleMenuButton;
 	
