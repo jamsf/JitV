@@ -28,4 +28,6 @@ class JVConstants
 
 	//Player Constants
 	public static inline var START_LIVES:Int = 3;
+	
+	public static inline var STANDARD_FONT:String = "font/RegencieLightAlt.ttf";
 }

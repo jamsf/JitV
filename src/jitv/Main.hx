@@ -22,6 +22,7 @@ class Main extends Engine
 		JVGlobals.TOTAL_GAME_HEIGHT = JVConstants.PLAY_SPACE_HEIGHT;
 		JVGlobals.TOTAL_GAME_SCALE = 1.0;
 		JVGlobals.PLAY_SPACE_OFFSET = new Point(0.0, 0.0);
+		HXP.defaultFont = JVConstants.STANDARD_FONT;
 		
 		JVDataObject.setupDB();
 	}
