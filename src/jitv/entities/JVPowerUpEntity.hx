@@ -77,7 +77,8 @@ class JVPowerUpEntity extends JVEntity
 		}
 		else
 		{
-			_followComponent.force += 0.1 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
+			if (_followComponent.force <= 2.0)
+				_followComponent.force += 0.2 * HXP.elapsed * JVConstants.ASSUMED_FPS_FOR_PHYSICS;
 		}
 	}
 	
@@ -85,7 +86,7 @@ class JVPowerUpEntity extends JVEntity
 	{
 		this.type = "pwrup_disabled";
 		_following = true;
-		_followComponent = new JVFollowComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.4, 9.0);
+		_followComponent = new JVFollowComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.5, 9.0);
 		this.components.push(_followComponent);
 	}
 	
