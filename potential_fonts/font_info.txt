@@ -1,3 +1,6 @@
 Some fonts might require payment for commercial use - put info in here so if we end up using one we'll remember to ask the author about payment upon release:
 
 + "Lowvetica" - http://www.fontspace.com/mario-arturo/lowvetica - Free for personal use, Donationware for commercial use.
++ "Aspergit" - http://www.fontspace.com/paulo-r/aspergit - Free for personal and commercial use, can hit creator up on his facebook (see info txt in folder)
++ "Liberation Sans" - http://www.fontspace.com/red-hat-inc/liberation-sans - Commercial use allowed
++ "Regencie" - http://www.fontspace.com/%C3%A1lvaro-thom%C3%A1z/regencie - Commercial use allowed
