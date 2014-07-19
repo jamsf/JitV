@@ -30,4 +30,7 @@ class JVConstants
 	public static inline var START_LIVES:Int = 3;
 	
 	public static inline var STANDARD_FONT:String = "font/RegencieLightAlt.ttf";
+	
+	public static inline var LEVEL_SELECT_ICON_DISTANCE = 30;
+	public static inline var LEVEL_QUANTITY_TIER = 5; // Should be odd number
 }
