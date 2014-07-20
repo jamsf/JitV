@@ -40,7 +40,7 @@ class JVLevelSelectScene extends EXTScene
 		
 		var containerView = new UIView(EXTUtility.ZERO_POINT, screenSize);
 		
-		var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10, 10), "START LEVEL", buttonCallback, [START_LEVEL_NAME]);
+		var startLevelButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10, 10), "TEST LEVEL", buttonCallback, [START_LEVEL_NAME]);
 		startLevelButton.offsetAlignmentInParent = EXTOffsetType.TOP_LEFT;
 		startLevelButton.offsetAlignmentForSelf = EXTOffsetType.TOP_LEFT;
 		var goBackButton:JVExampleMenuButton = new JVExampleMenuButton(new Point(10, 20 + startLevelButton.size.y), "GO BACK", buttonCallback, [BACK_BUTTON_NAME]);

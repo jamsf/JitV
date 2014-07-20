@@ -68,7 +68,7 @@ class JVMainMenuScene extends EXTScene
 		//menuDialog.addSubview(_toggleButton);
 		
 		// Play button
-		_playButton = new JVExampleMenuButton(new Point(0, 35), "PLAY", playButtonCallback);
+		_playButton = new JVExampleMenuButton(new Point(0, 35), "NEW GAME", playButtonCallback);
 		_playButton.offsetAlignmentForSelf = EXTOffsetType.TOP_CENTER;
 		_playButton.offsetAlignmentInParent = EXTOffsetType.TOP_CENTER;
 		//_playButton.enabled = false;
