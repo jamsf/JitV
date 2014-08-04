@@ -5,6 +5,7 @@ import com.haxepunk.HXP;
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import extendedhxpunk.ext.EXTScene;
+import extendedhxpunk.ext.EXTOffsetType;
 import jitv.datamodel.staticdata.JVEnemyPattern;
 import jitv.entities.JVEntity;
 import jitv.JVConstants;
@@ -78,8 +79,10 @@ class JVEditorScene extends EXTScene
 		var gridSpaceImage:Image = new Image("gfx/editor/editor_grid_space.png");
 		gridSpaceImage.scaledWidth = pattern.totalWidth / columns;
 		gridSpaceImage.scaledHeight = pattern.totalHeight / rows;
-		var initialX:Int = cast (JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_X + (JVConstants.PLAY_SPACE_WIDTH / 2) - (pattern.totalWidth / 2));
-		var initialY:Int = cast (JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_Y + (JVConstants.PLAY_SPACE_HEIGHT / 2) - (pattern.totalHeight / 2));
+		
+		var initialPoint:Point = getInitialGridPoint(pattern);
+		var initialX:Int = cast initialPoint.x;
+		var initialY:Int = cast initialPoint.y;
 		
 		// Setup the grid
 		for (x in 0...columns)
@@ -141,4 +144,48 @@ class JVEditorScene extends EXTScene
 	private var _dataHandler:JVEditorDataHandler;
 	private var _grid:Array<Entity>;
 	private var _keyFrameLocationEntities:Array<Entity>;
+	
+	private function getInitialGridPoint(pattern:JVEnemyPattern):Point
+	{
+		var x:Float = JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_X;
+		var y:Float = JVEditorConstants.EDITOR_PREVIEW_SPACE_OFFSET_Y;
+		
+		if (pattern.spawnAnchor == EXTOffsetType.CENTER)
+		{
+			x += (JVConstants.PLAY_SPACE_WIDTH / 2) - (pattern.totalWidth / 2);
+			y += (JVConstants.PLAY_SPACE_HEIGHT / 2) - (pattern.totalHeight / 2);
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.TOP_LEFT)
+		{
+			// No x change
+			// No y change
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.TOP_CENTER)
+		{
+			x += (JVConstants.PLAY_SPACE_WIDTH / 2) - (pattern.totalWidth / 2);
+			// No y change
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.TOP_RIGHT)
+		{
+			x += JVConstants.PLAY_SPACE_WIDTH - pattern.totalWidth;
+			// No y change
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.BOTTOM_LEFT)
+		{
+			// No x change
+			y += JVConstants.PLAY_SPACE_HEIGHT - pattern.totalHeight;
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.BOTTOM_CENTER)
+		{
+			x += (JVConstants.PLAY_SPACE_WIDTH / 2) - (pattern.totalWidth / 2);
+			y += JVConstants.PLAY_SPACE_HEIGHT - pattern.totalHeight;
+		}
+		else if (pattern.spawnAnchor == EXTOffsetType.BOTTOM_RIGHT)
+		{
+			x += JVConstants.PLAY_SPACE_WIDTH - pattern.totalWidth;
+			y += JVConstants.PLAY_SPACE_HEIGHT - pattern.totalHeight;
+		}
+		
+		return new Point(x, y);
+	}
 }
