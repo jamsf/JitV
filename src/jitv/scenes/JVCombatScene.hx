@@ -56,8 +56,8 @@ class JVCombatScene extends EXTScene
 		this.add(_starEmitter);
 		
 		_playerShip = new JVPlayerShipEntity(_hudView);
-		_playerShip.x = 320;
-		_playerShip.y = 240;
+		_playerShip.x = HXP.screen.width / 2;
+		_playerShip.y = HXP.screen.height / 2;
 		this.add(_playerShip);
 		
 		_levelEndsTimer = EXTTimer.createTimer(8, false, goToLevelSelectScene);
