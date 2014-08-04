@@ -23,8 +23,8 @@ class JVConstants
 	//NOTE - Initial screen size is set in application.xml (and should probably match these values)
 	//NOTE - These values represent the width and height of the actual interactable area.
 	//       For values regarding the total screen dimensions, see JVGlobals.
-	public static inline var PLAY_SPACE_WIDTH:Int = 640;
-	public static inline var PLAY_SPACE_HEIGHT:Int = 380;
+	public static inline var PLAY_SPACE_WIDTH:Int = 1024;
+	public static inline var PLAY_SPACE_HEIGHT:Int = 640;
 
 	//Player Constants
 	public static inline var START_LIVES:Int = 3;
