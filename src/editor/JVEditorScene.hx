@@ -11,6 +11,7 @@ import jitv.entities.JVEntity;
 import jitv.JVConstants;
 import editor.ui.JVEditorMainView;
 import editor.entities.components.JVEditorKeyFrameLocationComponent;
+import editor.entities.JVEditorGridSpaceEntity;
 
 class JVEditorScene extends EXTScene
 {	
@@ -76,9 +77,11 @@ class JVEditorScene extends EXTScene
 		// Gather data for this pattern
 		var columns:Int = pattern.gridColumns;
 		var rows:Int = pattern.gridRows;
-		var gridSpaceImage:Image = new Image("gfx/editor/editor_grid_space.png");
-		gridSpaceImage.scaledWidth = pattern.totalWidth / columns;
-		gridSpaceImage.scaledHeight = pattern.totalHeight / rows;
+		var columnWidth:Int = cast(pattern.totalWidth / columns);
+		var rowHeight:Int = cast(pattern.totalHeight / rows);
+		//var gridSpaceImage:Image = new Image("gfx/editor/editor_grid_space.png");
+		//gridSpaceImage.scaledWidth = columnWidth;
+		//gridSpaceImage.scaledHeight = rowHeight;
 		
 		var initialPoint:Point = getInitialGridPoint(pattern);
 		var initialX:Int = cast initialPoint.x;
@@ -89,9 +92,13 @@ class JVEditorScene extends EXTScene
 		{
 			for (y in 0...rows)
 			{
-				var entity:Entity = new Entity(initialX + x * gridSpaceImage.scaledWidth, 
-											   initialY + y * gridSpaceImage.scaledHeight, 
-											   gridSpaceImage);
+				//var entity:Entity = new Entity(initialX + x * gridSpaceImage.scaledWidth, 
+											   //initialY + y * gridSpaceImage.scaledHeight, 
+											   //gridSpaceImage);
+				var entity:Entity = new JVEditorGridSpaceEntity(initialX + x * columnWidth, 
+																initialY + y * rowHeight,
+																columnWidth,
+																rowHeight);
 				this.add(entity);
 				_grid.push(entity);
 			}
@@ -99,15 +106,15 @@ class JVEditorScene extends EXTScene
 		
 		// Setup the keyframe location images
 		var shipLocationImage:Image = new Image("gfx/editor/editor_key_frame_location.png");
-		if (gridSpaceImage.scaledWidth < gridSpaceImage.scaledHeight)
+		if (columnWidth < rowHeight)
 		{
-			shipLocationImage.scaledWidth = gridSpaceImage.scaledWidth - 4;
-			shipLocationImage.scaledHeight = gridSpaceImage.scaledWidth - 4;
+			shipLocationImage.scaledWidth = columnWidth - 4;
+			shipLocationImage.scaledHeight = columnWidth - 4;
 		}
 		else
 		{
-			shipLocationImage.scaledWidth = gridSpaceImage.scaledHeight - 4;
-			shipLocationImage.scaledHeight = gridSpaceImage.scaledHeight - 4;
+			shipLocationImage.scaledWidth = rowHeight - 4;
+			shipLocationImage.scaledHeight = rowHeight - 4;
 		}
 		shipLocationImage.centerOrigin();
 		
@@ -120,8 +127,8 @@ class JVEditorScene extends EXTScene
 				var keyframe:Point = keyframesForShip[j];
 				var gridSpaceEntity:Entity = this.gridSpaceEntityForLocation(cast keyframe.x, cast keyframe.y);
 				var keyFrameLocationEntity:JVEntity = new JVEntity();
-				keyFrameLocationEntity.x = gridSpaceEntity.x + (gridSpaceImage.scaledWidth / 2);
-				keyFrameLocationEntity.y = gridSpaceEntity.y + (gridSpaceImage.scaledHeight / 2);
+				keyFrameLocationEntity.x = gridSpaceEntity.x + (columnWidth / 2);
+				keyFrameLocationEntity.y = gridSpaceEntity.y + (rowHeight / 2);
 				keyFrameLocationEntity.graphic = shipLocationImage;
 				keyFrameLocationEntity.components.push(new JVEditorKeyFrameLocationComponent(keyFrameLocationEntity, _stateHandler, i, j));
 				keyFrameLocationEntity.type = "key_frame_location";
