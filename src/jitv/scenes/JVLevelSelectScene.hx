@@ -5,10 +5,12 @@ import extendedhxpunk.ui.UIView;
 import flash.geom.Point;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.utils.Draw;
 import extendedhxpunk.ext.EXTScene;
 import extendedhxpunk.ext.EXTOffsetType;
 import extendedhxpunk.ext.EXTUtility;
 import jitv.entities.JVEntity;
+import jitv.entities.JVLevelSelectEntity;
 import jitv.ui.JVExampleMenuButton;
 import jitv.datamodel.proceduraldata.JVLevel;
 import jitv.local.JVLocalData;
@@ -52,9 +54,9 @@ class JVLevelSelectScene extends EXTScene
 		this.staticUiController.rootView.addSubview(containerView);
 		
 		// Set up level select grid
-		_levelIconImage = new Image("gfx/ui/level_select_icon_32x32.png");
-		_levelIconImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
-		_levelIconImage.centerOrigin();
+		//_levelIconImage = new Image("gfx/ui/level_select_icon_32x32.png");
+		//_levelIconImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
+		//_levelIconImage.centerOrigin();
 		
 		var centerX = screenSize.x / 2;
 		var centerY = screenSize.y / 2;
@@ -86,7 +88,7 @@ class JVLevelSelectScene extends EXTScene
 	private static inline var START_LEVEL_NAME:String = "start_level";
 	private static inline var BACK_BUTTON_NAME:String = "back_button";
 	
-	private var _levelIconImage:Image;
+	//private var _levelIconImage:Image;
 	
 	private function addLevelQuadrant(initialPoint:Point, horizontal:Bool, negative:Bool)
 	{
@@ -122,11 +124,7 @@ class JVLevelSelectScene extends EXTScene
 	
 	private function addLevelSelectIcon(location:Point)
 	{
-		var levelIconEntity:JVEntity = new JVEntity();
-		levelIconEntity.graphic = _levelIconImage;
-		levelIconEntity.centerOrigin();
-		levelIconEntity.x = location.x;
-		levelIconEntity.y = location.y;
+		var levelIconEntity:JVLevelSelectEntity = new JVLevelSelectEntity(location.x, location.y, 32, 32);
 		this.add(levelIconEntity);
 	}
 }
