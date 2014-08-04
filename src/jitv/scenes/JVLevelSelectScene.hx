@@ -54,9 +54,17 @@ class JVLevelSelectScene extends EXTScene
 		this.staticUiController.rootView.addSubview(containerView);
 		
 		// Set up level select grid
-		//_levelIconImage = new Image("gfx/ui/level_select_icon_32x32.png");
-		//_levelIconImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
-		//_levelIconImage.centerOrigin();
+		if (HXP.fullscreen)
+		{
+			_levelIconImage = new Image("gfx/ui/level_select_icon_64x64.png");
+			_levelIconImage.scale = 0.5;
+		}
+		else
+		{
+			_levelIconImage = new Image("gfx/ui/level_select_icon_32x32.png");
+		}
+		_levelIconImage.color = JVLocalData.sharedInstance().currentColorPalette.colorForIndex(JVColorPalette.INDEX_BACKGROUND_2).webColor;
+		_levelIconImage.centerOrigin();
 		
 		var centerX = screenSize.x / 2;
 		var centerY = screenSize.y / 2;
@@ -88,7 +96,7 @@ class JVLevelSelectScene extends EXTScene
 	private static inline var START_LEVEL_NAME:String = "start_level";
 	private static inline var BACK_BUTTON_NAME:String = "back_button";
 	
-	//private var _levelIconImage:Image;
+	private var _levelIconImage:Image;
 	
 	private function addLevelQuadrant(initialPoint:Point, horizontal:Bool, negative:Bool)
 	{
@@ -124,7 +132,12 @@ class JVLevelSelectScene extends EXTScene
 	
 	private function addLevelSelectIcon(location:Point)
 	{
-		var levelIconEntity:JVLevelSelectEntity = new JVLevelSelectEntity(location.x, location.y, 32, 32);
+		var levelIconEntity:JVEntity = new JVEntity();
+		levelIconEntity.graphic = _levelIconImage;
+		levelIconEntity.centerOrigin();
+		levelIconEntity.x = location.x;
+		levelIconEntity.y = location.y;
+		//var levelIconEntity:JVLevelSelectEntity = new JVLevelSelectEntity(location.x, location.y, 32, 32);
 		this.add(levelIconEntity);
 	}
 }
