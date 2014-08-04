@@ -176,6 +176,7 @@ class JVMainMenuScene extends EXTScene
 		JVGlobals.PLAY_SPACE_OFFSET = new Point((JVGlobals.TOTAL_GAME_WIDTH - JVConstants.PLAY_SPACE_WIDTH) / 2.0,
 												(JVGlobals.TOTAL_GAME_HEIGHT - JVConstants.PLAY_SPACE_HEIGHT) / 2.0);
 		HXP.fullscreen = true;
+		HXP.screen.smoothing = true;
 	}
 	
 	private function goWindowed():Void
@@ -187,6 +188,7 @@ class JVMainMenuScene extends EXTScene
 		JVGlobals.PLAY_SPACE_OFFSET = new Point((JVGlobals.TOTAL_GAME_WIDTH - JVConstants.PLAY_SPACE_WIDTH) / 2.0,
 												(JVGlobals.TOTAL_GAME_HEIGHT - JVConstants.PLAY_SPACE_HEIGHT) / 2.0);
 		
+		HXP.screen.smoothing = false;
 		HXP.fullscreen = false;
 		HXP.width = JVConstants.PLAY_SPACE_WIDTH;
 		HXP.height = JVConstants.PLAY_SPACE_HEIGHT;
