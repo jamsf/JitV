@@ -1,0 +1,28 @@
+[
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVBossClass',
+		id : 0,
+		name : 'The Exile',
+		componentImageNames : [ ],
+		projectileImageNames : [ ],
+		unlockCondition : '',
+		unlockParameters : '',
+		behaviorName : '',
+		favoredEnemyIds : [ ],
+		favoredWeaponDropIds : [ ],
+		specialTraits : [ ]
+	},
+	{
+		_explicitType : 'jitv.datamodel.staticdata.JVBossClass',
+		id : 1,
+		name : 'The Spy',
+		componentImageNames : [ ],
+		projectileImageNames : [ ],
+		unlockCondition : '',
+		unlockParameters : '',
+		behaviorName : '',
+		favoredEnemyIds : [ ],
+		favoredWeaponDropIds : [ ],
+		specialTraits : [ ]
+	}
+]

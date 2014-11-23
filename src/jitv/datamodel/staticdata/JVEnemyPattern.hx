@@ -1,11 +1,11 @@
 package jitv.datamodel.staticdata;
 
 import flash.geom.Point;
-import haxe.Resource;
 import extendedhxpunk.ext.EXTJsonSerialization;
 import extendedhxpunk.ext.EXTOffsetType;
 import jitv.datamodel.JVDataObject;
 import jitv.JVJsonMappings;
+import jitv.JVConstants;
 
 /**
  * JVEnemyPattern
@@ -22,8 +22,8 @@ class JVEnemyPattern extends JVDataObject
 	public var loopIndex:Int; 				// Which keyframe to loop back to if this pattern loops
 	public var spawnAnchor(get, never):EXTOffsetType; 	// How to anchor this pattern in the screen
 	public var initialPositionOffset:Point; // Position offset from the anchor
-	public var totalWidth:Int;				// Pixel width of the entire pattern
-	public var totalHeight:Int;				// Pixel height of the entire pattern
+	public var totalWidth:Int;	// Pixel width of the entire pattern
+	public var totalHeight:Int;	// Pixel height of the entire pattern
 	public var gridColumns:Int;				// Number of columns in the pattern grid
 	public var gridRows:Int;				// Number of rows in the column grid
 	public var rawSpawnAnchor:String;
@@ -34,19 +34,23 @@ class JVEnemyPattern extends JVDataObject
 		var offset:EXTOffsetType = Type.createEnum(EXTOffsetType, rawSpawnAnchor);
 		return offset;
 	}
+	
+	//public function set_totalWidth(w:Int):Int
+	//{
+		//return totalWidth = w < 0 ? JVConstants.PLAY_SPACE_WIDTH : w;
+	//}
+	//
+	//public function set_totalHeight(h:Int):Int
+	//{
+		//return totalHeight = h < 0 ? JVConstants.PLAY_SPACE_HEIGHT : h;
+	//}
+	
 	public static inline var DATA_TYPE_NAME:String = "enemy_pattern";
 	public function new() { }
 
 	// Fake database setup
 	public static function setupDB():Void
 	{
-		var dataDictionary:Map<Int, JVDataObject> = new Map();
-		JVDataObject.DB[DATA_TYPE_NAME] = dataDictionary;
-		
-		var fileContent:String = Resource.getString(DATA_TYPE_NAME);
-		var dataArray:Array<JVEnemyPattern> = EXTJsonSerialization.decode(fileContent, Array);
-		
-		for (i in 0...dataArray.length)
-			dataDictionary[i] = cast dataArray[i];
+		JVDataObject.setupDbForDataType(DATA_TYPE_NAME);
 	}
 }

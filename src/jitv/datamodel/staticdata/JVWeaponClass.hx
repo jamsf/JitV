@@ -1,6 +1,5 @@
 package jitv.datamodel.staticdata;
 
-import haxe.Resource;
 import flash.geom.Point;
 import jitv.datamodel.JVDataObject;
 import extendedhxpunk.ext.EXTJsonSerialization;
@@ -28,15 +27,6 @@ class JVWeaponClass extends JVDataObject
 	// Fake database setup
 	public static function setupDB():Void
 	{
-		var dataDictionary:Map<Int, JVDataObject> = new Map();
-		JVDataObject.DB[DATA_TYPE_NAME] = dataDictionary;
-		
-		var fileContent:String = Resource.getString(DATA_TYPE_NAME);
-		var dataArray:Array<JVWeaponClass> = EXTJsonSerialization.decode(fileContent, Array);
-		
-		for (i in 0...dataArray.length)
-			dataDictionary[i] = cast dataArray[i];
-		
-		WEAPON_CLASS_IDS = dataArray.length;
+		WEAPON_CLASS_IDS = JVDataObject.setupDbForDataType(DATA_TYPE_NAME);
 	}
 }
