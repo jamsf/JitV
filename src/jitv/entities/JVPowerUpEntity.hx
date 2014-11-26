@@ -4,7 +4,7 @@ import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.masks.Pixelmask;
 import com.haxepunk.math.Vector;
-import jitv.entities.components.JVFollowComponent;
+import jitv.entities.components.JVGravitateComponent;
 import jitv.JVConstants;
 import jitv.JVGlobals;
 import jitv.entities.JVEntity;
@@ -86,13 +86,13 @@ class JVPowerUpEntity extends JVEntity
 	{
 		this.type = "pwrup_disabled";
 		_following = true;
-		_followComponent = new JVFollowComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.5, 9.0);
+		_followComponent = new JVGravitateComponent(this, consumer, completion, 3.0, new Vector(0, 1.0), 0.5, 9.0);
 		this.components.push(_followComponent);
 	}
 	
 	/**
 	 * Private
 	 */
-	private var _followComponent:JVFollowComponent;
+	private var _followComponent:JVGravitateComponent;
 	private var _following:Bool;
 }

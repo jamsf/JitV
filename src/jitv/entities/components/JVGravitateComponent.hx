@@ -12,7 +12,7 @@ import jitv.JVConstants;
  * Entity component which moves the parent entity toward a target entity
  * Created by Fletcher, 5/25/2014
  */
-class JVFollowComponent implements JVEntityComponent
+class JVGravitateComponent implements JVEntityComponent
 {
 	public var target:JVEntity;
 	public var force:Float;
